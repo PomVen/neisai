@@ -60,7 +60,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/WEB-INF/jsp/login/index.jsp</welcome-file>
+        <welcome-file>/WEB-INF/jsp/login/login.jsp</welcome-file>
     </welcome-file-list>
 
     <!-- session配置 -->

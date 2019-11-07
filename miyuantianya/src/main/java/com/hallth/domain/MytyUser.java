@@ -128,4 +128,24 @@ public class MytyUser {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+
+    @Override
+    public String toString() {
+        return "MytyUser{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userRole='" + userRole + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                '}';
+    }
+
+    public MytyUser(String userId, String userName, String userRole, String userPassword) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userRole = userRole;
+        this.userPassword = userPassword;
+    }
+
+    public MytyUser() {
+    }
 }
