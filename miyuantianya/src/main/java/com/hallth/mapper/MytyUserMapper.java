@@ -52,4 +52,8 @@ public interface MytyUserMapper {
     int updateByPrimaryKey(MytyUser record);
 
     MytyUser loginCheck(MytyUser user);
+
+    MytyUser getUserInfo(MytyUser user);
+
+    int changePassword(MytyUser user);
 }

@@ -17,4 +17,20 @@ public class MytyUserServiceImpl implements MytyUserService {
         MytyUser userCheck = userMapper.loginCheck(user);
         return userCheck == null ? false : true;
     }
+
+    @Override
+    public MytyUser getUserInfo(MytyUser user) {
+        MytyUser userCheck = userMapper.getUserInfo(user);
+        return userCheck;
+    }
+
+    @Override
+    public int insert(MytyUser user) {
+        return userMapper.insert(user);
+    }
+
+    @Override
+    public int changePassword(MytyUser user) {
+        return userMapper.changePassword(user);
+    }
 }

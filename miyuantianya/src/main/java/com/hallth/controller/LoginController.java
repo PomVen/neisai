@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,14 +29,21 @@ public class LoginController {
     private MytyAgendaServiceImpl agendaService;
 
     @RequestMapping(value="/loginPage", method = {RequestMethod.GET, RequestMethod.POST})
-    public String loginPage(){
-        return "login/login";
+    public String loginPage(HttpServletRequest request){
+        String loginName = (String)request.getSession().getAttribute("loginUserName");
+        if(loginName == null || "".equals(loginName)){
+            return "login/login";
+        } else {
+            return "login/login";
+        }
     }
 
 
     @RequestMapping(value="/loginCheck", method = {RequestMethod.GET, RequestMethod.POST})
-    public String addUser(@RequestParam("userName")String userName, @RequestParam("userPassword")String userPassword, Model model){
+    public String addUser(@RequestParam("userName")String userName, @RequestParam("userPassword")String userPassword,
+                          HttpServletRequest request, Model model){
         logger.info("用户【" + userName + "】登录校验");
+        MytyAgenda agenda = agendaService.getNewAgenda();
         if(userName.trim().isEmpty() || userPassword.trim().isEmpty()){
             logger.info("用户名或密码为空");
             model.addAttribute("errMsg","用户名或密码为空！");
@@ -44,6 +53,9 @@ public class LoginController {
         boolean loginCheckRes = userService.loginCheck(user);
         if(loginCheckRes){
             logger.info("用户【" + userName + "】登录校验通过！");
+            model.addAttribute("roundNo", agenda.getRoundNo());
+            HttpSession session = request.getSession();
+            session.setAttribute("loginUserName", userName);
             return "baseFunction/home";
         } else {
             logger.info("用户【" + userName + "】不存在或密码错误！");
@@ -53,35 +65,38 @@ public class LoginController {
     }
 
     @RequestMapping(value="/agendaDetail", method = {RequestMethod.GET, RequestMethod.POST})
-    public String agendaDetail(Model model){
+    public String agendaDetail(HttpServletRequest request, Model model){
         logger.info("查询内赛日程安排\n获取最新一轮的轮次号");
         MytyAgenda newAgenda = agendaService.getNewAgenda();
-        Date date = newAgenda.getProgressDate();
+        Date date = newAgenda.getEndTime();
         String startTime = "已结束";
         String doTime = "已结束";
         String judgeTime = "已结束";
         String endTime = "已结束";
         if(date.getTime() > System.currentTimeMillis()){
-            int roundNo = newAgenda.getRoundNo();
-            logger.info("获取最新一轮的日程安排");
-            List<MytyAgenda> agendaDetail = agendaService.getNewAgendaDetail(roundNo);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            for(MytyAgenda agenda : agendaDetail){
-                if(agenda.getProgressPoint().equals("开始时间")){
-                    startTime = sdf.format(agenda.getProgressDate());
-                } else if(agenda.getProgressPoint().equals("猜射时间")){
-                    doTime = sdf.format(agenda.getProgressDate());
-                } else if(agenda.getProgressPoint().equals("评分列中时间")){
-                    judgeTime = sdf.format(agenda.getProgressDate());
-                } else {
-                    endTime = sdf.format(agenda.getProgressDate());
-                }
-            }
+            startTime = sdf.format(newAgenda.getStartTime());
+            doTime = sdf.format(newAgenda.getDoTime());
+            judgeTime = sdf.format(newAgenda.getJudgeTime());
+            endTime = sdf.format(newAgenda.getEndTime());
         }
         model.addAttribute("startTime",startTime);
         model.addAttribute("doTime",doTime);
         model.addAttribute("judgeTime",judgeTime);
         model.addAttribute("endTime",endTime);
-        return "baseFunction/agendaDetail";
+        String loginName = (String)request.getSession().getAttribute("loginUserName");
+        if(loginName == null || "".equals(loginName)){
+            return "baseFunction/agendaDetail";
+        } else {
+            return "baseFunction/agenda";
+        }
     }
+
+    @RequestMapping(value="/loginOut", method = {RequestMethod.GET, RequestMethod.POST})
+    public String loginOut(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();//删除session
+        return "login/login";
+    }
+
 }

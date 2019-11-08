@@ -5,7 +5,7 @@
   Time: 17:28
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <html>
 <head>
     <title>Title</title>
@@ -19,10 +19,13 @@
 <div class="layui-row">
     <div class="topDiv">
         <div class="layui-row topWord bottom">
-            <div class="layui-col-md6 left">
-                【第73轮】
+            <div class="layui-col-md4 left">
+                【第${roundNo}轮】
             </div>
-            <div class="layui-col-md6 right">
+            <div class="layui-col-md4 center">
+                <a href="/login/loginOut">退出登录</a>
+            </div>
+            <div class="layui-col-md4 right">
                 <span id="showTime"></span>
             </div>
         </div>

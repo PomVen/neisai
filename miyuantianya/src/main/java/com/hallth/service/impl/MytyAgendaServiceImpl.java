@@ -15,14 +15,12 @@ public class MytyAgendaServiceImpl implements MytyAgendaService {
     private MytyAgendaMapper agendaMapper;
 
     @Override
-    public List<MytyAgenda> getNewAgendaDetail(int roundNo) {
-        MytyAgenda agenda = new MytyAgenda();
-        agenda.setRoundNo(roundNo);
-        return agendaMapper.getNewAgendaDetail(agenda);
+    public MytyAgenda getNewAgenda() {
+        return agendaMapper.getNewRoundNo();
     }
 
     @Override
-    public MytyAgenda getNewAgenda() {
-        return agendaMapper.getNewRoundNo();
+    public int insert(MytyAgenda agenda) {
+        return agendaMapper.insert(agenda);
     }
 }

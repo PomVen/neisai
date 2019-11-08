@@ -19,7 +19,6 @@
 <body>
 <jsp:include page="../frame/topUnlogin.jsp"></jsp:include>
 <jsp:include page="../baseFunction/agenda.jsp"></jsp:include>
-<jsp:include page="../frame/bottom.jsp"></jsp:include>
 </body>
 <script>
     function show() {

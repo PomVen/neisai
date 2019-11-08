@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="../frame/topLogin.jsp"></jsp:include>
 <div class="layui-row">
-    <div class="borderColor loginDiv height-260">
+    <div class="loginDiv">
         <div class="layui-tab layui-tab-brief">
             <ul class="layui-tab-title">
                 <li class="layui-this">输入猜射</li>
@@ -19,7 +19,8 @@
                 <li>我的谜题</li>
                 <li>查看日程</li>
                 <li>修改密码</li>
-                <li>退出登录</li>
+                <li>新增用户</li>
+                <li>发起比赛</li>
             </ul>
             <div class="layui-tab-content" style="height: 100px;">
                 <div class="layui-tab-item layui-show">
@@ -32,16 +33,21 @@
                     <jsp:include page="../baseFunction/mySubject.jsp"></jsp:include>
                 </div>
                 <div class="layui-tab-item">
-                    <jsp:include page="../baseFunction/agenda.jsp"></jsp:include>
+                    <jsp:include page="/login/agendaDetail"></jsp:include>
                 </div>
                 <div class="layui-tab-item">
-                    <jsp:include page="../baseFunction/changePassword.jsp"></jsp:include>
+                    <jsp:include page="/user/toChangePassword"></jsp:include>
+                </div>
+                <div class="layui-tab-item">
+                    <jsp:include page="/user/toAddUser"></jsp:include>
+                </div>
+                <div class="layui-tab-item">
+                    <jsp:include page="/agenda/toNewAgenda"></jsp:include>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<jsp:include page="../frame/bottom.jsp"></jsp:include>
 <script>
     layui.use('element', function(){
         // var $ = layui.jquery

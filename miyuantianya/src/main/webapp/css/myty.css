@@ -29,6 +29,7 @@
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
+    padding-bottom: 50px;
 }
 
 .height-100{
@@ -39,12 +40,27 @@
     height: 120px;
 }
 
+.height-230{
+    height: 230px;
+}
+
 .height-260{
     height: 260px;
 }
 
 .height-300{
     height: 300px;
+}
+.height-350{
+    height: 350px;
+}
+
+.height-380{
+    height: 380px;
+}
+
+.height-500{
+    height: 500px;
 }
 
 .left{
@@ -81,5 +97,9 @@ a{
 }
 
 td a {
+    color: black;
+}
+
+li a{
     color: black;
 }
