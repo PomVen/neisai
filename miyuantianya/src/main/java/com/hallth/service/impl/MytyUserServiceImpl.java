@@ -13,9 +13,9 @@ public class MytyUserServiceImpl implements MytyUserService {
     @Resource
     private MytyUserMapper userMapper;
     @Override
-    public boolean loginCheck(MytyUser user) {
+    public MytyUser loginCheck(MytyUser user) {
         MytyUser userCheck = userMapper.loginCheck(user);
-        return userCheck == null ? false : true;
+        return userCheck;
     }
 
     @Override

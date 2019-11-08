@@ -15,6 +15,9 @@
         <div class="layui-tab layui-tab-brief">
             <ul class="layui-tab-title">
                 <li class="layui-this">输入猜射</li>
+                <li>输入谜题</li>
+                <li>评分</li>
+                <li>列中</li>
                 <li>当前赛况</li>
                 <li>我的谜题</li>
                 <li>查看日程</li>
@@ -24,13 +27,22 @@
             </ul>
             <div class="layui-tab-content" style="height: 100px;">
                 <div class="layui-tab-item layui-show">
+                    <jsp:include page="/dengmiTemp/toInputAnswer"></jsp:include>
+                </div>
+                <div class="layui-tab-item">
+                    <jsp:include page="/page/toInputMySubject"></jsp:include>
+                </div>
+                <div class="layui-tab-item">
+                    <jsp:include page="../baseFunction/inputAnswer.jsp"></jsp:include>
+                </div>
+                <div class="layui-tab-item">
                     <jsp:include page="../baseFunction/inputAnswer.jsp"></jsp:include>
                 </div>
                 <div class="layui-tab-item">
                     <jsp:include page="../baseFunction/situationDetail.jsp"></jsp:include>
                 </div>
                 <div class="layui-tab-item">
-                    <jsp:include page="../baseFunction/mySubject.jsp"></jsp:include>
+                    <jsp:include page="/dengmiTemp/toMySubject"></jsp:include>
                 </div>
                 <div class="layui-tab-item">
                     <jsp:include page="/login/agendaDetail"></jsp:include>

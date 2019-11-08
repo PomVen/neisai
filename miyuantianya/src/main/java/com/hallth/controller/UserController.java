@@ -65,11 +65,11 @@ public class UserController {
     public String changePassword(@RequestParam("userName")String userName, @RequestParam("userPassword")String userPassword,
                                @RequestParam("comfirmPassword")String comfirmPassword, @RequestParam("newPassword")String newPassword, Model model){
         MytyUser user = new MytyUser("",userName,"",userPassword);
-        boolean loginCheckRes = userService.loginCheck(user);
+        MytyUser loginUser = userService.loginCheck(user);
         if(!comfirmPassword.trim().equals(newPassword.trim())){
             model.addAttribute("errMsg", "两次输入的密码不一致！");
         } else {
-            if(loginCheckRes){
+            if(loginUser != null){
                 user = new MytyUser("",userName,"",newPassword);
                 int i = userService.changePassword(user);
                 if(i > 0){

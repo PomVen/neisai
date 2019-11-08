@@ -50,12 +50,13 @@ public class LoginController {
             return "login/login";
         }
         MytyUser user = new MytyUser("",userName,"",userPassword);
-        boolean loginCheckRes = userService.loginCheck(user);
-        if(loginCheckRes){
+        MytyUser loginUser = userService.loginCheck(user);
+        if(loginUser != null){
             logger.info("用户【" + userName + "】登录校验通过！");
             model.addAttribute("roundNo", agenda.getRoundNo());
             HttpSession session = request.getSession();
             session.setAttribute("loginUserName", userName);
+            session.setAttribute("loginUserInfo", loginUser);
             return "baseFunction/home";
         } else {
             logger.info("用户【" + userName + "】不存在或密码错误！");
