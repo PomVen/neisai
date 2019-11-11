@@ -21,23 +21,5 @@ public class MytyDengmiTempController {
     @Resource
     private MytyDengmiTempServiceImpl dengmiTempService;
 
-    @RequestMapping(value="/toMySubject", method = {RequestMethod.GET, RequestMethod.POST})
-    public String toMySubject(HttpServletRequest request, Model model){
-        MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
-        String loginUserId = userInfo.getUserId();
-        List<MytyDengmiTemp> list = dengmiTempService.selectByUserId(loginUserId);
-        model.addAttribute("list", list);
-        return "baseFunction/mySubject";
-    }
-
-
-    @RequestMapping(value="/toInputAnswer", method = {RequestMethod.GET, RequestMethod.POST})
-    public String toInputAnswer(HttpServletRequest request, Model model){
-        MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
-        String loginUserId = userInfo.getUserId();
-        List<MytyDengmiTemp> list = dengmiTempService.selectNoAnswers(loginUserId);
-        model.addAttribute("list", list);
-        return "baseFunction/inputAnswer";
-    }
 
 }

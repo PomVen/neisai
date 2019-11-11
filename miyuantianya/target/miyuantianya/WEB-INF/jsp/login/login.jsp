@@ -46,7 +46,7 @@
         });
         //监听提交,也就是在点击按钮，提交到后台之前的操作
         form.on('submit(login)', function(data){
-            console.log(data);
+            layer.msg(data);
         });
     });
 

@@ -1,8 +1,10 @@
 package com.hallth.controller;
 
 import com.hallth.domain.MytyAgenda;
+import com.hallth.domain.MytyMenu;
 import com.hallth.domain.MytyUser;
 import com.hallth.service.impl.MytyAgendaServiceImpl;
+import com.hallth.service.impl.MytyMenuServiceImpl;
 import com.hallth.service.impl.MytyUserServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ public class LoginController {
     private MytyUserServiceImpl userService;
     @Resource
     private MytyAgendaServiceImpl agendaService;
+    @Resource
+    private MytyMenuServiceImpl menuService;
 
     @RequestMapping(value="/loginPage", method = {RequestMethod.GET, RequestMethod.POST})
     public String loginPage(HttpServletRequest request){
@@ -53,10 +57,15 @@ public class LoginController {
         MytyUser loginUser = userService.loginCheck(user);
         if(loginUser != null){
             logger.info("用户【" + userName + "】登录校验通过！");
-            model.addAttribute("roundNo", agenda.getRoundNo());
+            model.addAttribute("roundNo", agenda == null ? 1 : agenda.getRoundNo());
             HttpSession session = request.getSession();
             session.setAttribute("loginUserName", userName);
             session.setAttribute("loginUserInfo", loginUser);
+            //获取菜单
+            List<MytyMenu> menuList = menuService.getMenuListByUserRole(loginUser);
+            session.setAttribute("userMenuList", menuList);
+            model.addAttribute("menu", menuList);
+            model.addAttribute("actived", 0);
             return "baseFunction/home";
         } else {
             logger.info("用户【" + userName + "】不存在或密码错误！");

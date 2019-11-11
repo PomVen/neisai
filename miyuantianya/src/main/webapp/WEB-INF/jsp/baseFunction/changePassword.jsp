@@ -15,7 +15,7 @@
     <div class="layui-row">
         <div class="borderColor loginDiv height-300">
             <div class="centerDiv height-300">
-                <form id="loginForm" class="layui-form layui-form-pane"  action="/user/changePassword" method="post">
+                <form id="changePasswordForm" class="layui-form layui-form-pane">
                     <div class="layui-form-item">
                         <label class="layui-form-label">用户名</label>
                         <div class="layui-input-block">
@@ -41,9 +41,8 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <button  class="layui-btn layui-btn-fluid" lay-submit>修改密码</button>
+                        <input type="button" value="修改密码" class="layui-btn layui-btn-fluid" onclick="changePassword()" />
                     </div>
-                    <span style="color: #FF5722">${errMsg}</span>
                 </form>
             </div>
         </div>
@@ -51,4 +50,24 @@
 </div>
 <jsp:include page="../frame/bottom.jsp"></jsp:include>
 </body>
+<script>
+    function changePassword(){
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/user/changePassword",//url
+            data: $('#changePasswordForm').serialize(),
+            success: function (result) {
+                layer.open({
+                    title: '密码修改结果'
+                    , content: result.msg
+                });
+            },
+            error: function (res) {
+                alert("异常！" +res);
+            }
+        })
+    }
+</script>
 </html>

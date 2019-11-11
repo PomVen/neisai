@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false"%>
 <html>
 <head>
@@ -14,52 +15,33 @@
     <div class="loginDiv">
         <div class="layui-tab layui-tab-brief">
             <ul class="layui-tab-title">
-                <li class="layui-this">输入猜射</li>
-                <li>输入谜题</li>
-                <li>评分</li>
-                <li>列中</li>
-                <li>当前赛况</li>
-                <li>我的谜题</li>
-                <li>查看日程</li>
-                <li>修改密码</li>
-                <li>新增用户</li>
-                <li>发起比赛</li>
+                <c:forEach items="${menu}" var="item" varStatus="status">
+                    <c:if test="${status.index == actived}">
+                        <li class="layui-this">${item.menuName}</li>
+                    </c:if>
+                    <c:if test="${status.index != actived}">
+                        <li>${item.menuName}</li>
+                    </c:if>
+                </c:forEach>
             </ul>
             <div class="layui-tab-content" style="height: 100px;">
-                <div class="layui-tab-item layui-show">
-                    <jsp:include page="/dengmiTemp/toInputAnswer"></jsp:include>
-                </div>
-                <div class="layui-tab-item">
-                    <jsp:include page="/page/toInputMySubject"></jsp:include>
-                </div>
-                <div class="layui-tab-item">
-                    <jsp:include page="../baseFunction/inputAnswer.jsp"></jsp:include>
-                </div>
-                <div class="layui-tab-item">
-                    <jsp:include page="../baseFunction/inputAnswer.jsp"></jsp:include>
-                </div>
-                <div class="layui-tab-item">
-                    <jsp:include page="../baseFunction/situationDetail.jsp"></jsp:include>
-                </div>
-                <div class="layui-tab-item">
-                    <jsp:include page="/dengmiTemp/toMySubject"></jsp:include>
-                </div>
-                <div class="layui-tab-item">
-                    <jsp:include page="/login/agendaDetail"></jsp:include>
-                </div>
-                <div class="layui-tab-item">
-                    <jsp:include page="/user/toChangePassword"></jsp:include>
-                </div>
-                <div class="layui-tab-item">
-                    <jsp:include page="/user/toAddUser"></jsp:include>
-                </div>
-                <div class="layui-tab-item">
-                    <jsp:include page="/agenda/toNewAgenda"></jsp:include>
-                </div>
+                <c:forEach items="${menu}" var="item" varStatus="status">
+                    <c:if test="${status.index == actived}">
+                        <div class="layui-tab-item layui-show">
+                            <jsp:include page="${item.menuPath}"></jsp:include>
+                        </div>
+                    </c:if>
+                    <c:if test="${status.index != actived}">
+                        <div class="layui-tab-item">
+                            <jsp:include page="${item.menuPath}"></jsp:include>
+                        </div>
+                    </c:if>
+                </c:forEach>
             </div>
         </div>
     </div>
 </div>
+</body>
 <script>
     layui.use('element', function(){
         // var $ = layui.jquery
@@ -105,6 +87,4 @@
     //每间隔1000毫秒执行一次程序，保证时间动态显示
     setInterval("show()",1000);
 </script>
-
-</body>
 </html>
