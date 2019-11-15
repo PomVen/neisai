@@ -2,9 +2,12 @@ package com.hallth.controller;
 
 import com.hallth.domain.MytyAgenda;
 import com.hallth.domain.MytyDengmiTemp;
+import com.hallth.domain.MytySeq;
 import com.hallth.domain.MytyUser;
 import com.hallth.service.impl.MytyAgendaServiceImpl;
 import com.hallth.service.impl.MytyDengmiTempServiceImpl;
+import com.hallth.service.impl.MytySeqServiceImpl;
+import com.hallth.utils.SeqCreate;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +29,8 @@ public class MytyDengmiTempController {
     private MytyDengmiTempServiceImpl dengmiTempService;
     @Resource
     private MytyAgendaServiceImpl agendaService;
+    @Resource
+    private SeqCreate seqCreate;
 
     @RequestMapping(value="/toMySubject", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> toMySubject( HttpServletRequest request, Model model){
@@ -67,9 +72,41 @@ public class MytyDengmiTempController {
     }
 
     @RequestMapping(value="/submitMySubject", method = {RequestMethod.GET, RequestMethod.POST})
-    public Map<String, Object> submitMySubject(@RequestParam("list")List<MytyDengmiTemp> list, HttpServletRequest request, Model model){
+    public Map<String, Object> submitMySubject( HttpServletRequest request, Model model){
         logger.info("添加我的谜题,");
+        MytyAgenda agenda = agendaService.getNewAgenda();
         Map<String, Object> map = new HashMap<>();
+        int inputCount = agenda.getInputCount();
+        MytyUser loginUserInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
+        for(int i = 0; i < inputCount; i ++){
+            int dengmiTempId = Integer.parseInt(request.getParameter("dmTempId"+i));
+            String mimian = request.getParameter("dmMimian"+i);
+            String mimu = request.getParameter("dmMimu"+i);
+            String midi = request.getParameter("dmMidi"+i);
+            String mimianzhu = request.getParameter("dmMimianzhu"+i);
+            String midizhu = request.getParameter("dmMidizhu"+i);
+            MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
+            dengmiTemp.setDmMimian(mimian);
+            dengmiTemp.setDmMimu(mimu);
+            dengmiTemp.setDmMidi(midi);
+            dengmiTemp.setDmMimianzhu(mimianzhu);
+            dengmiTemp.setDmMidizhu(midizhu);
+            dengmiTemp.setDmAuthor(loginUserInfo.getUserId());
+            dengmiTemp.setDmTempId(dengmiTempId);
+            //是否存在
+            MytyDengmiTemp dengmiTemp2 = dengmiTempService.selectDengmiByTempId(dengmiTemp);
+            int a = -999;
+            try{
+                if(dengmiTemp2 == null){
+                    a = dengmiTempService.insertSingle(dengmiTemp);
+                } else {
+                    a = dengmiTempService.update(dengmiTemp);
+                }
+            } catch (Exception e){
+                logger.info("添加失败！请刷新页面重试！" + e.getMessage());
+                map.put("msg", "添加失败！请刷新页面重试！" + e.getMessage());
+            }
+        }
         map.put("msg", "添加成功！");
         return map;
     }

@@ -14,6 +14,14 @@ public interface MytyDengmiTempService {
 
     Map<String, Object> selectNoAnswersPageQuery(String loginUserId, int currentPage, int pageSize);
 
+    int insertByList(List<MytyDengmiTemp> mySubjectList);
+
+    MytyDengmiTemp selectDengmiByTempId(MytyDengmiTemp dengmiTemp);
+
+    int insertSingle(MytyDengmiTemp dengmiTemp);
+
+    int update(MytyDengmiTemp dengmiTemp);
+
 //    List<MytyDengmiTemp> getUnjudgedSubject(String userId, int currentPage, int pageSize);
 //
 //    int countUnjudgedSubject(String userId);

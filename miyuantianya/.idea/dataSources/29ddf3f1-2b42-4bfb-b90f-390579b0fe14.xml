@@ -1327,84 +1327,99 @@
       <Position>7</Position>
       <Comment>临时ID</Comment>
       <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="321" parent="285" name="menu_id">
+    <index id="321" parent="284" name="myty_dengmi_temp_dm_temp_id_uindex">
+      <ColNames>dm_temp_id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="322" parent="284" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>dm_temp_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="323" parent="284" name="myty_dengmi_temp_dm_temp_id_uindex">
+      <ColNames>dm_temp_id</ColNames>
+      <UnderlyingIndexName>myty_dengmi_temp_dm_temp_id_uindex</UnderlyingIndexName>
+    </key>
+    <column id="324" parent="285" name="menu_id">
       <Position>1</Position>
       <Comment>菜单ID</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="322" parent="285" name="menu_name">
+    <column id="325" parent="285" name="menu_name">
       <Position>2</Position>
       <Comment>菜单名称</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="323" parent="285" name="menu_path">
+    <column id="326" parent="285" name="menu_path">
       <Position>3</Position>
       <Comment>菜单指向路径</Comment>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="324" parent="285" name="menu_role">
+    <column id="327" parent="285" name="menu_role">
       <Position>4</Position>
       <Comment>菜单权限</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="325" parent="285" name="menu_type">
+    <column id="328" parent="285" name="menu_type">
       <Position>5</Position>
       <Comment>类型：1-功能菜单；2-友情链接</Comment>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="326" parent="286" name="role_id">
+    <column id="329" parent="286" name="role_id">
       <Position>1</Position>
       <Comment>角色ID</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="327" parent="286" name="role_name">
+    <column id="330" parent="286" name="role_name">
       <Position>2</Position>
       <Comment>角色名</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="328" parent="286" name="myty_role_role_id_uindex">
+    <index id="331" parent="286" name="myty_role_role_id_uindex">
       <ColNames>role_id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="329" parent="286" name="PRIMARY">
+    <key id="332" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>role_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="330" parent="286" name="myty_role_role_id_uindex">
+    <key id="333" parent="286" name="myty_role_role_id_uindex">
       <ColNames>role_id</ColNames>
       <UnderlyingIndexName>myty_role_role_id_uindex</UnderlyingIndexName>
     </key>
-    <column id="331" parent="287" name="user_id">
+    <column id="334" parent="287" name="user_id">
       <Position>1</Position>
       <Comment>用户ID</Comment>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="332" parent="287" name="role_id">
+    <column id="335" parent="287" name="role_id">
       <Position>2</Position>
       <Comment>角色ID</Comment>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="333" parent="288" name="seq_name">
+    <column id="336" parent="288" name="seq_name">
       <Position>1</Position>
       <Comment>ID类型
 </Comment>
@@ -1412,66 +1427,66 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="334" parent="288" name="next_id">
+    <column id="337" parent="288" name="next_id">
       <Position>2</Position>
       <Comment>下一个ID号</Comment>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="335" parent="289" name="user_id">
+    <column id="338" parent="289" name="user_id">
       <Position>1</Position>
       <Comment>用户ID</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="336" parent="289" name="user_name">
+    <column id="339" parent="289" name="user_name">
       <Position>2</Position>
       <Comment>用户名称</Comment>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="337" parent="289" name="user_role">
+    <column id="340" parent="289" name="user_role">
       <Position>3</Position>
       <Comment>用户角色：1-普通用户；0-管理员</Comment>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="338" parent="289" name="user_password">
+    <column id="341" parent="289" name="user_password">
       <Position>4</Position>
       <Comment>用户密码</Comment>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="339" parent="289" name="user_id_UNIQUE">
+    <index id="342" parent="289" name="user_id_UNIQUE">
       <ColNames>user_id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="340" parent="289" name="PRIMARY">
+    <key id="343" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="341" parent="289" name="user_id_UNIQUE">
+    <key id="344" parent="289" name="user_id_UNIQUE">
       <ColNames>user_id</ColNames>
       <UnderlyingIndexName>user_id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="342" parent="290" name="id">
+    <column id="345" parent="290" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="343" parent="290" name="name">
+    <column id="346" parent="290" name="name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="344" parent="290" name="age">
+    <column id="347" parent="290" name="age">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>

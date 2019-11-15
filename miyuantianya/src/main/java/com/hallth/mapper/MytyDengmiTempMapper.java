@@ -36,4 +36,10 @@ public interface MytyDengmiTempMapper {
     List<MytyDengmiTemp> getUnjudgedSubject(MytyDengmiTemp dengmiTemp);
 
     int getUnjudgedSubjectCount(MytyDengmiTemp dengmiTemp);
+
+    int insertByList(List<MytyDengmiTemp> mySubjectList);
+
+    MytyDengmiTemp selectById(MytyDengmiTemp dengmiTemp);
+
+    int update(MytyDengmiTemp dengmiTemp);
 }

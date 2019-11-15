@@ -29,4 +29,13 @@ public class SeqCreate {
         seqService.updateNextId(seq);
         return userIdStr;
     }
+
+    public int getNextDengmiTempId(){
+        MytySeq seq = new MytySeq();
+        seq.setSeqName("dengmi_temp_id");
+        int nextUserId = seqService.getNextId(seq);
+        seq.setNextId(nextUserId+1);
+        seqService.updateNextId(seq);
+        return nextUserId;
+    }
 }

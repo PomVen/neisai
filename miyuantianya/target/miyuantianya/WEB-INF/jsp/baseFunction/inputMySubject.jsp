@@ -39,7 +39,48 @@
 <div style="padding: 15px;">
     <form id="mySubjectForm" class="layui-form layui-form-pane">
         <div class="layui-form-item">
-            <table name="list" id="demo" lay-filter="test"></table>
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th style="display:none">ID</th>
+                    <th>谜面</th>
+                    <th>谜目/谜格</th>
+                    <th>谜底</th>
+                    <th>谜面注解</th>
+                    <th>谜底注解</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${list}" varStatus="status" var="item">
+                    <tr>
+                        <td style="display:none">
+                            <input type="text" name="dmTempId${status.index}" lay-verify="required"
+                                   value="${item.dmTempId}" autocomplete="off" class="layui-input">
+                        </td>
+                        <td>
+                            <input type="text" name="dmMimian${status.index}" lay-verify="required"
+                                   value="${item.dmMimian}" autocomplete="off" class="layui-input">
+                        </td>
+                        <td>
+                            <input type="text" name="dmMimu${status.index}" lay-verify="required"
+                                   value="${item.dmMimu}" autocomplete="off" class="layui-input">
+                        </td>
+                        <td>
+                            <input type="text" name="dmMidi${status.index}" lay-verify="required"
+                                   value="${item.dmMidi}" autocomplete="off" class="layui-input">
+                        </td>
+                        <td>
+                            <input type="text" name="dmMimianzhu${status.index}" lay-verify="required"
+                                   value="${item.dmMimianzhu}" autocomplete="off" class="layui-input">
+                        </td>
+                        <td>
+                            <input type="text" name="dmMidizhu${status.index}" lay-verify="required"
+                                   value="${item.dmMidizhu}" autocomplete="off" class="layui-input">
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
         <div class="layui-form-item">
             <input class="layui-btn layui-btn-fluid" type="button" value="保存" onclick="submitMySubject()">
@@ -73,16 +114,16 @@
     });
 
     function submitMySubject() {
-        console.log($('#mySubjectForm').serializeArray());
+        var mySubject = $('#mySubjectForm').serialize();
         $.ajax({
             //几个参数需要注意一下
             type: "POST",//方法类型
             dataType: "json",//预期服务器返回的数据类型
             url: "/dengmiTemp/submitMySubject",//url
-            data: $('#mySubjectForm').serializeArray(),
+            data: mySubject,
             success: function (result) {
                 layer.open({
-                    title: '用户新增结果'
+                    title: '灯谜新增'
                     , content: result.msg
                 });
             },
@@ -90,6 +131,22 @@
                 alert("异常！");
             }
         });
+    }
+
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
     }
 </script>
 </html>

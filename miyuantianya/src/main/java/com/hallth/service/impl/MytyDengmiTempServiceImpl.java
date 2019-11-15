@@ -5,8 +5,10 @@ import com.hallth.mapper.MytyDengmiTempMapper;
 import com.hallth.service.MytyDengmiTempService;
 import com.hallth.utils.DatabaseUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,11 +44,6 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         List<MytyDengmiTemp> list = dengmiTempMapper.selectByUserIdPageQuery(dengmiTemp);
         int total = dengmiTempMapper.selectByUserIdPageQueryCount(dengmiTemp);
         Map<String, Object> map = new HashMap<String, Object>();
-//        map.put("total", total);
-//        map.put("list", list);
-//        map.put("pageCount", pageCount);
-//        map.put("pageSize", pageSize);
-//        map.put("currentPage", currentPage);
         map.put("code", 0);
         map.put("msg", "");
         map.put("count",total);
@@ -69,6 +66,29 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         map.put("data",list);
         return map;
     }
+
+    @Override
+    public int insertByList(List<MytyDengmiTemp> mySubjectList) {
+        int i = dengmiTempMapper.insertByList(mySubjectList);
+        return i;
+    }
+
+    @Override
+    @Transactional()
+    public MytyDengmiTemp selectDengmiByTempId(MytyDengmiTemp dengmiTemp) {
+        return dengmiTempMapper.selectById(dengmiTemp);
+    }
+
+    @Override
+    public int insertSingle(MytyDengmiTemp dengmiTemp) {
+        return dengmiTempMapper.insert(dengmiTemp);
+    }
+
+    @Override
+    public int update(MytyDengmiTemp dengmiTemp) {
+        return dengmiTempMapper.update(dengmiTemp);
+    }
+
 
 //    @Override
 //    public List<MytyDengmiTemp> getUnjudgedSubject(String userId, int currentPage, int pageSize) {

@@ -5,6 +5,7 @@ import com.hallth.domain.MytyDengmiTemp;
 import com.hallth.domain.MytyUser;
 import com.hallth.service.impl.MytyAgendaServiceImpl;
 import com.hallth.service.impl.MytyDengmiTempServiceImpl;
+import com.hallth.utils.SeqCreate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +26,37 @@ public class PageController {
     private MytyAgendaServiceImpl agendaService;
     @Resource
     private MytyDengmiTempServiceImpl dengmiTempService;
+    @Resource
+    private SeqCreate seqCreate;
 
     @RequestMapping(value="/toInputMySubject", method = {RequestMethod.GET, RequestMethod.POST})
     public String toInputMySubject(HttpServletRequest request, Model model){
         MytyAgenda agenda = agendaService.getNewAgenda();
         int inputCount = agenda.getInputCount();
-        List<MytyDengmiTemp> list = new ArrayList<>(inputCount);
-        for(int i = 0; i < inputCount; i ++){
-            list.add(new MytyDengmiTemp());
+        MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
+        String loginUserId = userInfo.getUserId();
+        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(loginUserId, 1, Integer.MAX_VALUE);
+        List<MytyDengmiTemp> list = (List<MytyDengmiTemp>)map.get("data");
+        if(list == null || list.size() == 0){
+            for(int i = 0; i < inputCount; i ++){
+                MytyDengmiTemp dengmi = createDengmiTemp();
+                list.add(dengmi);
+            }
+        } else {
+            for(int i = 0; i < inputCount - list.size(); i ++){
+                MytyDengmiTemp dengmi = createDengmiTemp();
+                list.add(dengmi);
+            }
         }
         model.addAttribute("list", list);
         return "baseFunction/inputMySubject";
+    }
+
+    public MytyDengmiTemp createDengmiTemp(){
+        int dengmiTempId = seqCreate.getNextDengmiTempId();
+        MytyDengmiTemp dengmi = new MytyDengmiTemp();
+        dengmi.setDmTempId(dengmiTempId);
+        return dengmi;
     }
 
     @RequestMapping(value = "/toChangePassword", method = {RequestMethod.GET, RequestMethod.POST})

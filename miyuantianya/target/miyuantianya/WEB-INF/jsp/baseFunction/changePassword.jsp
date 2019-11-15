@@ -63,6 +63,7 @@
     });
 
     function addUser() {
+        console.log($('#changePasswordForm').serialize());
         $.ajax({
             //几个参数需要注意一下
             type: "POST",//方法类型
