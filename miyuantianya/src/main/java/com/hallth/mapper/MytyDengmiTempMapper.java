@@ -1,5 +1,6 @@
 package com.hallth.mapper;
 
+import com.hallth.domain.MytyAnswerQueryBean;
 import com.hallth.domain.MytyDengmiTemp;
 
 import java.util.List;
@@ -42,4 +43,8 @@ public interface MytyDengmiTempMapper {
     MytyDengmiTemp selectById(MytyDengmiTemp dengmiTemp);
 
     int update(MytyDengmiTemp dengmiTemp);
+
+    List<MytyAnswerQueryBean> selectNoJudgePageQuery(MytyDengmiTemp dengmiTemp);
+
+    int selectNoJudgePageQueryCount(MytyDengmiTemp dengmiTemp);
 }

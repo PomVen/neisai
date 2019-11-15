@@ -1,5 +1,6 @@
 package com.hallth.service.impl;
 
+import com.hallth.domain.MytyAnswerQueryBean;
 import com.hallth.domain.MytyDengmiTemp;
 import com.hallth.mapper.MytyDengmiTempMapper;
 import com.hallth.service.MytyDengmiTempService;
@@ -90,21 +91,19 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
     }
 
 
-//    @Override
-//    public List<MytyDengmiTemp> getUnjudgedSubject(String userId, int currentPage, int pageSize) {
-//        MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
-//        dengmiTemp.setDmAuthor(userId);
-//        dengmiTemp.setPageSize(pageSize);
-//        dengmiTemp.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
-//        List<MytyDengmiTemp> list = dengmiTempMapper.getUnjudgedSubject(dengmiTemp);
-//        return list;
-//    }
-//
-//    @Override
-//    public int countUnjudgedSubject(String userId) {
-//        MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
-//        dengmiTemp.setDmAuthor(userId);
-//        int total = dengmiTempMapper.getUnjudgedSubjectCount(dengmiTemp);
-//        return total;
-//    }
+    @Override
+    public Map<String, Object> selectNoJudgePageQuery(String userId, int currentPage, int pageSize) {
+        MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
+        dengmiTemp.setDmAuthor(userId);
+        dengmiTemp.setPageSize(pageSize);
+        dengmiTemp.setStartRow(DatabaseUtils.getStartRow(currentPage,pageSize));
+        List<MytyAnswerQueryBean> list = dengmiTempMapper.selectNoJudgePageQuery(dengmiTemp);
+        int total = dengmiTempMapper.selectNoJudgePageQueryCount(dengmiTemp);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count",total);
+        map.put("data",list);
+        return map;
+    }
 }

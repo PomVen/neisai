@@ -45,6 +45,31 @@ public class AnswerController {
             map.put("msg", "操作失败，请刷新页面重试");
         }
         return  map;
+    }
+
+    @RequestMapping(value="/saveMyJudge", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> saveMyJudge(@RequestParam("dmTempId")int dmTempId, @RequestParam("judge")int judge, HttpServletRequest request){
+        MytyUser loginUser = (MytyUser)request.getSession().getAttribute("loginUserInfo");
+        Map map = new HashMap();
+        MytyAnswer answer = new MytyAnswer();
+        answer.setDmId(dmTempId);
+        answer.setUserJudge(judge);
+        answer.setUserId(loginUser.getUserId());
+        //是否已回答
+        MytyAnswer temp = answerService.getMyAnswer(answer);
+        try{
+            if(temp == null){
+                answerService.saveMyAnswer(answer, "I");
+            } else {
+                answerService.saveMyAnswer(answer, "UJ");
+            }
+            map.put("result", true);
+            map.put("msg", "操作成功！");
+        } catch (Exception e){
+            map.put("result", false);
+            map.put("msg", "操作失败，请刷新页面重试");
+        }
+        return  map;
 
     }
 

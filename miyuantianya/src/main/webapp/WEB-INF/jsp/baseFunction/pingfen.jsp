@@ -34,14 +34,25 @@
             ,limits: [5,10,20,50]
             ,limit: 10
             ,cols: [[ //表头
-                {field: 'dmMimian', title: '谜面',fixed: 'left'}
-                ,{field: 'dmMimu', title: '谜目'}
-                ,{field: 'dmMimianzhu', title: '谜面注解'}
-                ,{field: 'dmMidizhu', title: '谜底注解'}
-                ,{field: 'dmMidi', title: '谜底'}
-                ,{field: 'userAnswer', title: '我的谜底'}
-                ,{field: 'userJudge',edit: 'text', title: '评分'}
+                {field: 'dm_mimian', title: '谜面',fixed: 'left'}
+                ,{field: 'dm_mimu', title: '谜目'}
+                ,{field: 'dm_mimianzhu', title: '谜面注解'}
+                ,{field: 'dm_midizhu', title: '谜底注解'}
+                ,{field: 'dm_midi', title: '谜底'}
+                ,{field: 'user_answer', title: '我的谜底'}
+                ,{field: 'user_judge',edit: 'text', title: '评分'}
             ]]
+        });
+
+        table.on('edit(test)', function (obj) { //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var value = obj.value //得到修改后的值
+                , data = obj.data //得到所在行所有键值
+                , field = obj.field; //得到字段
+            $.post("/answer/saveMyJudge", {dmTempId: data.dm_temp_id, judge: value}, function (data) {
+                if (!data.result) {
+                    layer.msg(data.msg);
+                }
+            });
         });
     });
 </script>

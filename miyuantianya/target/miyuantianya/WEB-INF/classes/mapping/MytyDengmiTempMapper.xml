@@ -141,6 +141,21 @@
         where dm_author != #{dmAuthor,jdbcType=VARCHAR}
     </select>
 
+    <select id="selectNoJudgePageQuery" parameterType="com.hallth.domain.MytyDengmiTemp" resultType="com.hallth.domain.MytyAnswerQueryBean">
+        select a.dm_temp_id, a.dm_mimian, a.dm_mimu, a.dm_midi, a.dm_mimianzhu, a.dm_midizhu, b.user_answer, b.user_id, b.user_judge
+        from myty_dengmi_temp a
+        left join myty_answer b on a.dm_temp_id = b.dm_id and b.user_id = #{dmAuthor,jdbcType=VARCHAR}
+        where a.dm_author != #{dmAuthor,jdbcType=VARCHAR}
+        limit #{startRow}, #{pageSize}
+    </select>
+
+    <select id="selectNoJudgePageQueryCount" parameterType="com.hallth.domain.MytyDengmiTemp" resultType="java.lang.Integer">
+        select count(*)
+        from myty_dengmi_temp a
+        left join myty_answer b on a.dm_temp_id = b.dm_id and b.user_id = #{dmAuthor,jdbcType=VARCHAR}
+        where dm_author != #{dmAuthor,jdbcType=VARCHAR}
+    </select>
+
     <!-- 批量插入 -->
     <insert id ="insertByList" parameterType="java.util.List">
         insert into myty_dengmi_temp
