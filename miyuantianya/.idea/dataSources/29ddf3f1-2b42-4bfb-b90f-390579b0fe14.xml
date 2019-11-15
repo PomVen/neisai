@@ -1188,7 +1188,7 @@
     <column id="297" parent="282" name="dm_id">
       <Position>1</Position>
       <Comment>灯谜ID</Comment>
-      <DataType>varchar(20)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>

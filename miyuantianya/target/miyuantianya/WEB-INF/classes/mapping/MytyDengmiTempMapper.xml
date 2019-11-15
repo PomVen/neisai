@@ -126,18 +126,18 @@
         where dm_author != #{dmAuthor,jdbcType=VARCHAR}
     </select>
 
-    <select id="selectNoAnswersPageQuery" parameterType="com.hallth.domain.MytyDengmiTemp" resultMap="BaseResultMap">
-        select
-        dm_mimian, dm_mimu, dm_mimianzhu
-        from myty_dengmi_temp
-        where dm_author != #{dmAuthor,jdbcType=VARCHAR}
+    <select id="selectNoAnswersPageQuery" parameterType="com.hallth.domain.MytyDengmiTemp" resultType="com.hallth.domain.MytyAnswerQueryBean">
+        select a.dm_temp_id, a.dm_mimian, a.dm_mimu, a.dm_mimianzhu, b.user_answer, b.user_id
+        from myty_dengmi_temp a
+        left join myty_answer b on a.dm_temp_id = b.dm_id and b.user_id = #{dmAuthor,jdbcType=VARCHAR}
+        where a.dm_author != #{dmAuthor,jdbcType=VARCHAR}
         limit #{startRow}, #{pageSize}
     </select>
 
     <select id="selectNoAnswersPageQueryCount" parameterType="com.hallth.domain.MytyDengmiTemp" resultType="java.lang.Integer">
-        select
-        count(*)
-        from myty_dengmi_temp
+        select count(*)
+        from myty_dengmi_temp a
+        left join myty_answer b on a.dm_temp_id = b.dm_id and b.user_id = #{dmAuthor,jdbcType=VARCHAR}
         where dm_author != #{dmAuthor,jdbcType=VARCHAR}
     </select>
 
