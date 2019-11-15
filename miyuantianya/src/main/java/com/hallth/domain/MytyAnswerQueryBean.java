@@ -10,6 +10,15 @@ public class MytyAnswerQueryBean {
     private String user_id;
     private String user_answer;
     private int user_judge;
+    private int is_right;
+
+    public int getIs_right() {
+        return is_right;
+    }
+
+    public void setIs_right(int is_right) {
+        this.is_right = is_right;
+    }
 
     public int getDm_temp_id() {
         return dm_temp_id;

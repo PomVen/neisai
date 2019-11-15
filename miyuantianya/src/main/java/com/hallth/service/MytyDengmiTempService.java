@@ -24,6 +24,8 @@ public interface MytyDengmiTempService {
 
     Map<String, Object> selectNoJudgePageQuery(String loginUserId, int currentPage, int pageSize);
 
+    Map<String, Object> selectYidi(String loginUserId, int currentPage, int pageSize);
+
 //    List<MytyDengmiTemp> getUnjudgedSubject(String userId, int currentPage, int pageSize);
 //
 //    int countUnjudgedSubject(String userId);

@@ -106,4 +106,20 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         map.put("data",list);
         return map;
     }
+
+    @Override
+    public Map<String, Object> selectYidi(String loginUserId, int currentPage, int pageSize) {
+        MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
+        dengmiTemp.setDmAuthor(loginUserId);
+        dengmiTemp.setPageSize(pageSize);
+        dengmiTemp.setStartRow(DatabaseUtils.getStartRow(currentPage,pageSize));
+        List<MytyAnswerQueryBean> list = dengmiTempMapper.selectYidi(dengmiTemp);
+        int total = dengmiTempMapper.countYidi(dengmiTemp);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count",total);
+        map.put("data",list);
+        return map;
+    }
 }

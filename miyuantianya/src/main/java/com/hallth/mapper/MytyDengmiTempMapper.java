@@ -47,4 +47,8 @@ public interface MytyDengmiTempMapper {
     List<MytyAnswerQueryBean> selectNoJudgePageQuery(MytyDengmiTemp dengmiTemp);
 
     int selectNoJudgePageQueryCount(MytyDengmiTemp dengmiTemp);
+
+    List<MytyAnswerQueryBean> selectYidi(MytyDengmiTemp dengmiTemp);
+
+    int countYidi(MytyDengmiTemp dengmiTemp);
 }
