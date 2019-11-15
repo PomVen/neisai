@@ -21,5 +21,6 @@ public interface MytyAnswerMapper {
 
     MytyAnswer selectAnswer(MytyAnswer answer);
 
-    int update(MytyAnswer answer);
+    int updateMyAnswer(MytyAnswer answer);
+    int updateMyJudge(MytyAnswer answer);
 }

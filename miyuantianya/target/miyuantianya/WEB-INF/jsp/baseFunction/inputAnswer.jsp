@@ -46,7 +46,9 @@
                     , data = obj.data //得到所在行所有键值
                     , field = obj.field; //得到字段
                 $.post("/answer/saveMyAnswer", { dmTempId: data.dm_temp_id, dmMidi: value }, function (data) {
-                    console.log(data)
+                    if(!data.result){
+                        layer.msg(data.msg);
+                    }
                 });
         });
     });

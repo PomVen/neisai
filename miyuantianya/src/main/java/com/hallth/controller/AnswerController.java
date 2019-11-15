@@ -38,12 +38,12 @@ public class AnswerController {
             } else {
                 answerService.saveMyAnswer(answer, "U");
             }
+            map.put("result", true);
+            map.put("msg", "操作成功！");
         } catch (Exception e){
             map.put("result", false);
             map.put("msg", "操作失败，请刷新页面重试");
         }
-        map.put("result", true);
-        map.put("msg", "操作成功！");
         return  map;
 
     }

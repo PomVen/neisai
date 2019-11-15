@@ -21,7 +21,7 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
         if("I".equals(flag)){
             answerMapper.insert(answer);
         } else if("U".equals(flag)){
-            answerMapper.update(answer);
+            answerMapper.updateMyAnswer(answer);
         }
         return 0;
     }
