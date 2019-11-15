@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/page")
@@ -63,20 +65,39 @@ public class PageController {
 
     @RequestMapping(value="/toMySubject", method = {RequestMethod.GET, RequestMethod.POST})
     public String toMySubject(HttpServletRequest request, Model model){
-        MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
-        String loginUserId = userInfo.getUserId();
-        List<MytyDengmiTemp> list = dengmiTempService.selectByUserId(loginUserId);
-        model.addAttribute("list", list);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("total", 0);
+        map.put("list", null);
+        map.put("currentPage",1);
+        map.put("pageSize", 10);
+        map.put("pageCount", 1);
+        model.addAttribute("data", map);
         return "baseFunction/mySubject";
     }
 
 
     @RequestMapping(value="/toInputAnswer", method = {RequestMethod.GET, RequestMethod.POST})
     public String toInputAnswer(HttpServletRequest request, Model model){
-        MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
-        String loginUserId = userInfo.getUserId();
-        List<MytyDengmiTemp> list = dengmiTempService.selectNoAnswers(loginUserId);
-        model.addAttribute("list", list);
         return "baseFunction/inputAnswer";
+    }
+
+    @RequestMapping(value="/toPingfen", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toPingfen(HttpServletRequest request, Model model){
+        return "baseFunction/pingfen";
+    }
+
+    @RequestMapping(value="/toLiezhong", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toLiezhong(HttpServletRequest request, Model model){
+        return "baseFunction/liezhong";
+    }
+
+    @RequestMapping(value="/toSaikuang", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toSaikuang(HttpServletRequest request, Model model){
+        return "baseFunction/saikuang";
+    }
+
+    @RequestMapping(value="/toResult", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toResult(HttpServletRequest request, Model model){
+        return "baseFunction/result";
     }
 }

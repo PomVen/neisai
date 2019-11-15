@@ -96,8 +96,10 @@ public class LoginController {
         model.addAttribute("endTime",endTime);
         String loginName = (String)request.getSession().getAttribute("loginUserName");
         if(loginName == null || "".equals(loginName)){
+            model.addAttribute("isLogined", false);
             return "baseFunction/agendaDetail";
         } else {
+            model.addAttribute("isLogined", true);
             return "baseFunction/agenda";
         }
     }

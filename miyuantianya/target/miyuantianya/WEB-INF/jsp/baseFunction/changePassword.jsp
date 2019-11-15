@@ -1,58 +1,68 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: YowYouth
-  Date: 2019/11/7
-  Time: 17:44
+  Date: 2019/11/8
+  Time: 8:18
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
-    <title>谜苑天涯-修改密码</title>
+    <title>谜苑天涯-用户新增</title>
+    <link rel="stylesheet" href="/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/css/myty.css"/>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.pure.tooltips.js"></script>
+    <script type="text/javascript" src="/js/myty.js"></script>
+    <script type="text/javascript" src="/layui/layui.js"></script>
 </head>
 <body>
-<div class="layui-row">
-    <div class="layui-row">
-        <div class="borderColor loginDiv height-300">
-            <div class="centerDiv height-300">
-                <form id="changePasswordForm" class="layui-form layui-form-pane">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">用户名</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="userName" lay-verify="required" readonly value="${loginUserName}" class="layui-input" />
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">旧密码</label>
-                        <div class="layui-input-block">
-                            <input type="password" name="userPassword"  lay-verify="required" placeholder="请输入旧密码" autocomplete="off" class="layui-input" />
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">新密码</label>
-                        <div class="layui-input-block">
-                            <input type="password" name="newPassword"  lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input" />
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">确认新密码</label>
-                        <div class="layui-input-block">
-                            <input type="password" name="comfirmPassword"  lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input" />
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <input type="button"  class="layui-btn layui-btn-fluid" onclick="changePassword()" >修改密码</input>
-                    </div>
-                    <span style="color: #FF5722">${errMsg}</span>
-                </form>
+<div class="centerDiv height-100">
+    <form id="changePasswordForm" class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="userName" lay-verify="required" value="${loginUserName}" autocomplete="off" readonly class="layui-input"/>
             </div>
         </div>
-    </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">旧密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="userPassword" lay-verify="required" placeholder="请输入旧密码"
+                       autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="newPassword" lay-verify="required" placeholder="请输入新密码"
+                       autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">确认新密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="comfirmPassword" lay-verify="required" placeholder="确认新密码"
+                       autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <input class="layui-btn layui-btn-fluid" type="button" value="新增" onclick="addUser()">
+        </div>
+    </form>
 </div>
-<jsp:include page="../frame/bottom.jsp"></jsp:include>
 </body>
 <script>
-    function changePassword(){
+    // layUI获取元素值：var pvalue = $("input[name='password']").val(); name属性为password的input的值
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form;
+        //监听提交,也就是在点击按钮，提交到后台之前的操作
+        form.on('submit(addUserForm)', function (data) {
+        });
+    });
+
+    function addUser() {
         $.ajax({
             //几个参数需要注意一下
             type: "POST",//方法类型
@@ -60,15 +70,18 @@
             url: "/user/changePassword",//url
             data: $('#changePasswordForm').serialize(),
             success: function (result) {
-                layer.open({
-                    title: '密码修改结果'
-                    , content: result.msg
+                layui.use('layer',function () {
+                    layer.confirm('密码修改成功，请重新登录！', {
+                        btn : [ '确定' ]//按钮
+                    }, function(index) {
+                        window.location.href='/login/loginOut';
+                    });
                 });
             },
-            error: function (res) {
-                alert("异常！" +res);
+            error: function () {
+                alert("异常！");
             }
-        })
+        });
     }
 </script>
 </html>

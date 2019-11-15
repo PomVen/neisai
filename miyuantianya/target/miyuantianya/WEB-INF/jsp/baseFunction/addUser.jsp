@@ -18,32 +18,27 @@
     <script type="text/javascript" src="/layui/layui.js"></script>
 </head>
 <body>
-<div class="layui-row">
-    <div class="borderColor loginDiv height-230">
-        <div class="centerDiv height-100">
-            <form id="addUserForm"  class="layui-form layui-form-pane">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">用户名</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="userName" lay-verify="required" placeholder="请输入" autocomplete="off"
-                               class="layui-input"/>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">密码</label>
-                    <div class="layui-input-block">
-                        <input type="password" name="userPassword" lay-verify="required" placeholder="请输入密码"
-                               autocomplete="off" class="layui-input"/>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <input class="layui-btn layui-btn-fluid" type="button" value="新增" onclick="addUser()">
-                </div>
-            </form>
+<div class="centerDiv height-100">
+    <form id="addUserForm" class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="userName" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       class="layui-input"/>
+            </div>
         </div>
-    </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="userPassword" lay-verify="required" placeholder="请输入密码"
+                       autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <input class="layui-btn layui-btn-fluid" type="button" value="新增" onclick="addUser()">
+        </div>
+    </form>
 </div>
-<jsp:include page="../frame/bottom.jsp"></jsp:include>
 </body>
 <script>
     // layUI获取元素值：var pvalue = $("input[name='password']").val(); name属性为password的input的值

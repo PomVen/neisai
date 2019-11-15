@@ -24,4 +24,16 @@ public interface MytyDengmiTempMapper {
     List<MytyDengmiTemp> selectByUserId(MytyDengmiTemp dengmiTemp);
 
     List<MytyDengmiTemp> selectNoAnswers(MytyDengmiTemp dengmiTemp);
+
+    List<MytyDengmiTemp> selectByUserIdPageQuery(MytyDengmiTemp dengmiTemp);
+    int selectByUserIdPageQueryCount(MytyDengmiTemp dengmiTemp);
+
+
+    List<MytyDengmiTemp> selectNoAnswersPageQuery(MytyDengmiTemp dengmiTemp);
+
+    int selectNoAnswersPageQueryCount(MytyDengmiTemp dengmiTemp);
+
+    List<MytyDengmiTemp> getUnjudgedSubject(MytyDengmiTemp dengmiTemp);
+
+    int getUnjudgedSubjectCount(MytyDengmiTemp dengmiTemp);
 }

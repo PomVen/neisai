@@ -1,9 +1,10 @@
- <%--
-  Created by IntelliJ IDEA.
-  User: YowYouth
-  Date: 2019/11/7
-  Time: 17:42
-  To change this template use File | Settings | File Templates.
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+ Created by IntelliJ IDEA.
+ User: YowYouth
+ Date: 2019/11/7
+ Time: 17:42
+ To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
@@ -44,14 +45,39 @@
                     <td><span>结束时间</span></td>
                     <td>${endTime}</td>
                 </tr>
-                <tr>
-                    <td lay-data="{align:'center'}" colspan="2"><a href="/login/loginPage">返回首页</a></td>
-                </tr>
+                <c:if test="${!isLogined}">
+                    <tr>
+                        <td lay-data="{align:'center'}" colspan="2"><a href="/login/loginPage">返回首页</a></td>
+                    </tr>
+                </c:if>
             </table>
         </div>
     </div>
 </div>
 <jsp:include page="../frame/bottom.jsp"></jsp:include>
-
+<%--<div style="padding: 15px;">--%>
+    <%--<table id="demo" lay-filter="test"></table>--%>
+<%--</div>--%>
 </body>
+<script>
+    // layui.use('table', function(){
+    //     var table = layui.table;
+    //
+    //     //第一个实例
+    //     table.render({
+    //         elem: '#demo'
+    //         ,url: '/dengmiTemp/toMySubject' //数据接口
+    //         ,page: true //开启分页
+    //         ,limits: [5,10,20,50]
+    //         ,limit: 10
+    //         ,cols: [[ //表头
+    //             {field: 'startTime', title: '开始时间', fixed: 'left'}
+    //             ,{field: 'doTime', title: '猜射时间'}
+    //             ,{field: 'judgeTime', title: '评分列中时间'}
+    //             ,{field: 'endTime', title: '结束时间'}
+    //         ]]
+    //     });
+    //
+    // });
+</script>
 </html>

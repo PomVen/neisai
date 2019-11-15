@@ -18,29 +18,28 @@
     <script type="text/javascript" src="/layui/layui.js"></script>
 </head>
 <body>
-<div class="layui-row">
-    <div class="layui-row">
-        <div class="borderColor loginDiv height-230">
-            <table class="layui-table">
-                <tr>
-                    <th lay-data="{align:'center'}" colspan="5">本轮我输入的谜题</th>
-                </tr>
-                <tr>
-                    <th><span>谜面</span></th>
-                    <th><span>谜目</span></th>
-                    <th><span>谜底</span></th>
-                </tr>
-                <c:forEach items="${list}" var="item" varStatus="status">
-                    <tr class="${status.index%2 == 0 ? 'cell-background-color-0' : 'cell-background-color-1'}">
-                        <td>${item.dmMimian}</td>
-                        <td>${item.dmMimu}</td>
-                        <td><input type="text" class="layui-input" name="midi"/></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-    </div>
+<div style="padding: 15px;">
+    <table id="demo" lay-filter="test"></table>
 </div>
-<jsp:include page="../frame/bottom.jsp"></jsp:include>
 </body>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,url: '/dengmiTemp/noAnswerSubject' //数据接口
+            ,page: true //开启分页
+            ,limits: [5,10,20,50]
+            ,limit: 10
+            ,cols: [[ //表头
+                {field: 'dmMimian', title: '谜面',fixed: 'left'}
+                ,{field: 'dmMimu', title: '谜目'}
+                ,{field: 'dmMimianzhu', title: '谜面注解'}
+                ,{field: 'dmMidi',edit: 'text', title: '谜底'}
+            ]]
+        });
+    });
+</script>
 </html>
