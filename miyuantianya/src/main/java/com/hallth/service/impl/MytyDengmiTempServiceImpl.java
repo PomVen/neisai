@@ -2,6 +2,7 @@ package com.hallth.service.impl;
 
 import com.hallth.domain.MytyAnswerQueryBean;
 import com.hallth.domain.MytyDengmiTemp;
+import com.hallth.domain.SaikuangBean;
 import com.hallth.mapper.MytyDengmiTempMapper;
 import com.hallth.service.MytyDengmiTempService;
 import com.hallth.utils.DatabaseUtils;
@@ -119,6 +120,17 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         map.put("code", 0);
         map.put("msg", "");
         map.put("count",total);
+        map.put("data",list);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> getInputSubjectCounts() {
+        List<SaikuangBean> list = dengmiTempMapper.getInputSubjectCounts();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count",0);
         map.put("data",list);
         return map;
     }

@@ -40,7 +40,6 @@ public class MytyDengmiTempController {
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
         Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(loginUserId, currentPage, pageSize);
-        model.addAttribute("data", map);
         return map;
     }
 
@@ -51,7 +50,6 @@ public class MytyDengmiTempController {
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
         Map<String, Object> map = dengmiTempService.selectNoAnswersPageQuery(loginUserId, currentPage, pageSize);
-        model.addAttribute("data", map);
         return map;
     }
 
@@ -118,7 +116,6 @@ public class MytyDengmiTempController {
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
         Map<String, Object> map = dengmiTempService.selectNoJudgePageQuery(loginUserId, currentPage, pageSize);
-        model.addAttribute("data", map);
         return map;
     }
 
@@ -129,7 +126,6 @@ public class MytyDengmiTempController {
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
         Map<String, Object> map = dengmiTempService.selectYidi(loginUserId, currentPage, pageSize);
-        model.addAttribute("data", map);
         return map;
     }
 

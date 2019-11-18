@@ -1,6 +1,9 @@
 package com.hallth.mapper;
 
 import com.hallth.domain.MytyAnswer;
+import com.hallth.domain.SaikuangBean;
+
+import java.util.List;
 
 public interface MytyAnswerMapper {
     /**
@@ -25,4 +28,8 @@ public interface MytyAnswerMapper {
     int updateMyJudge(MytyAnswer answer);
 
     int updateIsRight(MytyAnswer answer);
+
+    List<SaikuangBean> getInputAnswerCounts();
+
+    List<SaikuangBean> getJudgeCounts();
 }

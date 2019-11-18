@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("answer")
+@RequestMapping("/answer")
 public class AnswerController {
     private static Logger logger = Logger.getLogger(AnswerController.class.getName());
     @Resource

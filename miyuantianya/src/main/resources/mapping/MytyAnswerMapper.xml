@@ -86,4 +86,16 @@
         from myty_answer
         where user_id = #{userId,jdbcType=INTEGER} and dm_id = #{dmId,jdbcType=INTEGER}
     </select>
+
+    <select id="getInputAnswerCounts" resultType="com.hallth.domain.SaikuangBean">
+        select A.user_id, B.user_name, count(A.user_answer) as count from myty_answer A
+        left join myty_user B on A.user_id = B.user_id
+        group by A.user_id
+    </select>
+
+    <select id="getJudgeCounts" resultType="com.hallth.domain.SaikuangBean">
+        select A.user_id, B.user_name, count(A.user_judge) as count from myty_answer A
+        left join myty_user B on A.user_id = B.user_id
+        group by A.user_id
+    </select>
 </mapper>

@@ -2,6 +2,7 @@ package com.hallth.mapper;
 
 import com.hallth.domain.MytyAnswerQueryBean;
 import com.hallth.domain.MytyDengmiTemp;
+import com.hallth.domain.SaikuangBean;
 
 import java.util.List;
 
@@ -51,4 +52,7 @@ public interface MytyDengmiTempMapper {
     List<MytyAnswerQueryBean> selectYidi(MytyDengmiTemp dengmiTemp);
 
     int countYidi(MytyDengmiTemp dengmiTemp);
+
+    List<SaikuangBean> getInputSubjectCounts();
+
 }
