@@ -35,6 +35,36 @@ public class MytyMenu {
 
     private int menuType;
 
+    private String parentMenu;
+
+    private int hasChildren;
+
+    private String menuOrder;
+
+    public String getMenuOrder() {
+        return menuOrder;
+    }
+
+    public void setMenuOrder(String menuOrder) {
+        this.menuOrder = menuOrder;
+    }
+
+    public String getParentMenu() {
+        return parentMenu;
+    }
+
+    public void setParentMenu(String parentMenu) {
+        this.parentMenu = parentMenu;
+    }
+
+    public int getHasChildren() {
+        return hasChildren;
+    }
+
+    public void setHasChildren(int hasChildren) {
+        this.hasChildren = hasChildren;
+    }
+
     public int getMenuType() {
         return menuType;
     }

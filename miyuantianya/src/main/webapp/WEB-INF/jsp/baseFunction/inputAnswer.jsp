@@ -33,6 +33,7 @@
             , page: true //开启分页
             , limits: [5, 10, 20, 50]
             , limit: 10
+            // , toolbar: true
             , cols: [[ //表头
                 {field: 'dm_mimian', title: '谜面', fixed: 'left'}
                 , {field: 'dm_mimu', title: '谜目'}

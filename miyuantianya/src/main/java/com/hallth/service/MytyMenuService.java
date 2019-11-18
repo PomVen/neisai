@@ -6,5 +6,5 @@ import com.hallth.domain.MytyUser;
 import java.util.List;
 
 public interface MytyMenuService {
-    List<MytyMenu> getMenuListByUserRole(MytyUser user);
+    List<MytyMenu> getMenuListByUserRole(MytyMenu menu);
 }

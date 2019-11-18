@@ -62,7 +62,20 @@ public class LoginController {
             session.setAttribute("loginUserName", userName);
             session.setAttribute("loginUserInfo", loginUser);
             //获取菜单
-            List<MytyMenu> menuList = menuService.getMenuListByUserRole(loginUser);
+            MytyMenu mytyMenu = new MytyMenu();
+            mytyMenu.setMenuRole(loginUser.getUserRole());
+            if(System.currentTimeMillis() > agenda.getEndTime().getTime() || System.currentTimeMillis() < agenda.getStartTime().getTime()){
+                mytyMenu.setMenuOrder("1000");
+            } else if(System.currentTimeMillis() > agenda.getStartTime().getTime() || System.currentTimeMillis() < agenda.getDoTime().getTime()){
+                mytyMenu.setMenuOrder("0001");
+            } else if(System.currentTimeMillis() > agenda.getDoTime().getTime() || System.currentTimeMillis() < agenda.getJudgeTime().getTime()){
+                mytyMenu.setMenuOrder("0010");
+            } else if(System.currentTimeMillis() > agenda.getJudgeTime().getTime() || System.currentTimeMillis() < agenda.getEndTime().getTime()){
+                mytyMenu.setMenuOrder("0100");
+            } else {
+                mytyMenu.setMenuOrder("0000");
+            }
+            List<MytyMenu> menuList = menuService.getMenuListByUserRole(mytyMenu);
             session.setAttribute("userMenuList", menuList);
             model.addAttribute("menu", menuList);
             model.addAttribute("actived", 0);

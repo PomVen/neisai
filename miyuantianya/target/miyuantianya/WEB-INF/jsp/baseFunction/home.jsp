@@ -131,11 +131,33 @@
                     <dl class="layui-nav-child">
                         <c:forEach items="${menu}" var="item" varStatus="status">
                             <c:if test="${item.menuType == 1}">
-                                <dd>
-                                    <a data-url="${item.menuPath}" data-id="${item.menuId}"
-                                       data-title="${item.menuName}" href="#" class="site-demo-active"
-                                       data-type="tabAdd">${item.menuName}</a>
-                                </dd>
+                                <c:choose>
+                                    <c:when test="${item.hasChildren == 0}">
+                                        <c:if test="${item.parentMenu == '0'}">
+                                            <dd>
+                                                <a data-url="${item.menuPath}" data-id="${item.menuId}"
+                                                   data-title="${item.menuName}" href="#" class="site-demo-active"
+                                                   data-type="tabAdd">${item.menuName}</a>
+                                            </dd>
+                                        </c:if>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="layui-nav-item layui-nav-itemed">
+                                            <a class="" href="javascript:;">${item.menuName}</a>
+                                            <dl class="layui-nav-child">
+                                                <c:forEach items="${menu}" var="item2" varStatus="status">
+                                                    <c:if test="${item2.parentMenu == item.menuId}">
+                                                        <dd>
+                                                            <a data-url="${item2.menuPath}" data-id="${item2.menuId}"
+                                                               data-title="${item2.menuName}" href="#" class="site-demo-active"
+                                                               data-type="tabAdd">${item2.menuName}</a>
+                                                        </dd>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </dl>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:if>
                         </c:forEach>
                     </dl>

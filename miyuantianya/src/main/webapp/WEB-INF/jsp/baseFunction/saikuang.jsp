@@ -25,17 +25,6 @@
     layui.use('table', function(){
         var table = layui.table;
 
-        // //第一个实例
-        // table.render({
-        //     elem: '#saikuang'
-        //     ,url: '/saikuang/dangqiansaikuang' //数据接口
-        //     ,page: false //开启分页
-        //     ,cols: [[ //表头
-        //         {field: 'user_name', title: '用户名',fixed: 'left'}
-        //         ,{field: 'count', title: '统计'}
-        //     ]]
-        // });
-
         table.render({
             elem: '#saikuang'
             ,url: '/saikuang/dangqiansaikuang' //数据接口

@@ -22,5 +22,5 @@ public interface MytyMenuMapper {
      */
     int insertSelective(MytyMenu record);
 
-    List<MytyMenu> getListByUserRole(MytyUser user);
+    List<MytyMenu> getListByUserRole(MytyMenu menu);
 }
