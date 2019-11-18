@@ -39,6 +39,17 @@
                 ,{field: 'is_right',edit: 'text', title: '列中'}
             ]]
         });
+
+        table.on('edit(test)', function (obj) { //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var value = obj.value //得到修改后的值
+                , data = obj.data //得到所在行所有键值
+                , field = obj.field; //得到字段
+            $.post("/answer/saveIsright", {dmTempId: data.dm_temp_id, isRight: value, userId: data.user_id}, function (data) {
+                if (!data.result) {
+                    layer.msg(data.msg);
+                }
+            });
+        });
     });
 </script>
 </html>

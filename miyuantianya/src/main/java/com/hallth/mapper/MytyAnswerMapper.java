@@ -23,4 +23,6 @@ public interface MytyAnswerMapper {
 
     int updateMyAnswer(MytyAnswer answer);
     int updateMyJudge(MytyAnswer answer);
+
+    int updateIsRight(MytyAnswer answer);
 }

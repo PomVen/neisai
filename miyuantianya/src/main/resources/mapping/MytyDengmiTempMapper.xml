@@ -158,7 +158,7 @@
 
 
     <select id="selectYidi" parameterType="com.hallth.domain.MytyDengmiTemp" resultType="com.hallth.domain.MytyAnswerQueryBean">
-        select a.dm_temp_id, a.dm_mimian, a.dm_mimu, a.dm_midi,  b.user_answer,  b.is_right
+        select a.dm_temp_id, a.dm_mimian, a.dm_mimu, a.dm_midi,  b.user_answer,  b.is_right, b.user_id
         from myty_dengmi_temp a
         left join myty_answer b on a.dm_temp_id = b.dm_id
         where a.dm_author = #{dmAuthor,jdbcType=VARCHAR} and b.user_id != #{dmAuthor,jdbcType=VARCHAR}
@@ -205,19 +205,4 @@
         where dm_temp_id = #{dmTempId, jdbcType=INTEGER}
     </update>
 
-    <!--<select id="getUnjudgedSubject" parameterType="com.hallth.domain.MytyDengmiTemp" resultMap="com.hallth.domain.MytyDengmiTemp">-->
-        <!--select-->
-        <!--A.dm_mimian, A.dm_mimu, A.dm_midi, A.dm_mimianzhu, A.dm_midizhu, A.dm_author, A.dm_temp_id, B.user_answer, B.user_judge-->
-        <!--from myty_dengmi_temp A-->
-        <!--left join myty_answer B on a.dm_temp_id = B.dm_id-->
-        <!--where A.dm_author != #{dmAuthor,jdbcType=VARCHAR}-->
-    <!--</select>-->
-
-    <!--<select id="getUnjudgedSubjectCount" parameterType="com.hallth.domain.MytyDengmiTemp" resultType="java.lang.Integer">-->
-        <!--select-->
-        <!--count(*)-->
-        <!--from myty_dengmi_temp A-->
-        <!--left join myty_answer B on a.dm_temp_id = B.dm_id-->
-        <!--where A.dm_author != #{dmAuthor,jdbcType=VARCHAR}-->
-    <!--</select>-->
 </mapper>

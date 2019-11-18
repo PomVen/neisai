@@ -74,6 +74,12 @@
         where dm_id = #{dmId,jdbcType=INTEGER} and user_id = #{userId,jdbcType=INTEGER}
     </update>
 
+    <update id="updateIsRight" parameterType="com.hallth.domain.MytyAnswer">
+        update myty_answer
+            set is_right = #{isRight,jdbcType=INTEGER}
+        where dm_id = #{dmId,jdbcType=INTEGER} and user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
     <select id="selectAnswer" parameterType="com.hallth.domain.MytyAnswer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
