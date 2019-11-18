@@ -43,7 +43,7 @@
             ,limits: [5,10,20,50]
             ,limit: 10
             ,cols: [[ //表头
-                ,{field: 'user_name', title: '用户名称'}
+                {field: 'user_name', title: '用户名称'}
                 ,{field: 'count', title: '计数'}
             ]]
         });

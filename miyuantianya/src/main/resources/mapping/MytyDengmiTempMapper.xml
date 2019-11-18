@@ -203,12 +203,26 @@
 
     <update id="update" parameterType="com.hallth.domain.MytyDengmiTemp">
         update myty_dengmi_temp
-        set dm_mimian = #{dmMimian, jdbcType=VARCHAR},
-        dm_mimu = #{dmMimu, jdbcType=VARCHAR},
-        dm_midi = #{dmMidi, jdbcType=VARCHAR},
-        dm_mimianzhu = #{dmMimianzhu, jdbcType=VARCHAR},
-        dm_midizhu = #{dmMidizhu, jdbcType=VARCHAR},
-        dm_author = #{dmAuthor, jdbcType=VARCHAR}
+        <set>
+            <if test="dmMimian != null">
+                dm_mimian = #{dmMimian, jdbcType=VARCHAR},
+            </if>
+            <if test="dmMimu != null">
+                dm_mimu = #{dmMimu, jdbcType=VARCHAR},
+            </if>
+            <if test="dmMidi != null">
+                dm_midi = #{dmMidi, jdbcType=VARCHAR},
+            </if>
+            <if test="dmMimianzhu != null">
+                dm_mimianzhu = #{dmMimianzhu, jdbcType=VARCHAR},
+            </if>
+            <if test="dmMidizhu != null">
+                dm_midizhu = #{dmMidizhu, jdbcType=VARCHAR},
+            </if>
+            <if test="dmAuthor != null">
+                dm_author = #{dmAuthor, jdbcType=VARCHAR},
+            </if>
+        </set>
         where dm_temp_id = #{dmTempId, jdbcType=INTEGER}
     </update>
 

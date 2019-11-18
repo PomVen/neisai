@@ -57,11 +57,21 @@ public class MytyDengmiTempController {
     public Map<String, Object> inputMySubject(HttpServletRequest request, Model model) {
         MytyAgenda agenda = agendaService.getNewAgenda();
         int inputCount = agenda.getInputCount();
-        List<MytyDengmiTemp> list = new ArrayList<>(inputCount);
-        for (int i = 0; i < inputCount; i++) {
-            list.add(new MytyDengmiTemp());
+        MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
+        String loginUserId = userInfo.getUserId();
+        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(loginUserId, 1, Integer.MAX_VALUE);
+        List<MytyDengmiTemp> list = (List<MytyDengmiTemp>)map.get("data");
+        if(list == null || list.size() == 0){
+            for(int i = 0; i < inputCount; i ++){
+                MytyDengmiTemp dengmi = createDengmiTemp();
+                list.add(dengmi);
+            }
+        } else {
+            for(int i = 0; i < inputCount - list.size(); i ++){
+                MytyDengmiTemp dengmi = createDengmiTemp();
+                list.add(dengmi);
+            }
         }
-        Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 0);
         map.put("msg", "");
         map.put("count", inputCount);
@@ -69,28 +79,35 @@ public class MytyDengmiTempController {
         return map;
     }
 
+    public MytyDengmiTemp createDengmiTemp(){
+        int dengmiTempId = seqCreate.getNextDengmiTempId();
+        MytyDengmiTemp dengmi = new MytyDengmiTemp();
+        dengmi.setDmTempId(dengmiTempId);
+        return dengmi;
+    }
+
     @RequestMapping(value = "/submitMySubject", method = {RequestMethod.GET, RequestMethod.POST})
-    public Map<String, Object> submitMySubject(HttpServletRequest request, Model model) {
+    public Map<String, Object> submitMySubject(@RequestParam("dmTempId")int dmTempId, @RequestParam("colName")String colName, @RequestParam("colValue") String colValue,  HttpServletRequest request, Model model) {
         logger.info("添加我的谜题,");
         MytyAgenda agenda = agendaService.getNewAgenda();
         Map<String, Object> map = new HashMap<>();
         int inputCount = agenda.getInputCount();
         MytyUser loginUserInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         for (int i = 0; i < inputCount; i++) {
-            int dengmiTempId = Integer.parseInt(request.getParameter("dmTempId" + i));
-            String mimian = request.getParameter("dmMimian" + i);
-            String mimu = request.getParameter("dmMimu" + i);
-            String midi = request.getParameter("dmMidi" + i);
-            String mimianzhu = request.getParameter("dmMimianzhu" + i);
-            String midizhu = request.getParameter("dmMidizhu" + i);
             MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
-            dengmiTemp.setDmMimian(mimian);
-            dengmiTemp.setDmMimu(mimu);
-            dengmiTemp.setDmMidi(midi);
-            dengmiTemp.setDmMimianzhu(mimianzhu);
-            dengmiTemp.setDmMidizhu(midizhu);
+            if(colName.equals("dmMimian")){
+                dengmiTemp.setDmMimian(colValue);
+            } else if(colName.equals("dmMimu")){
+                dengmiTemp.setDmMimu(colValue);
+            } else if(colName.equals("dmMidi")){
+                dengmiTemp.setDmMidi(colValue);
+            } else if(colName.equals("dmMimianzhu")){
+                dengmiTemp.setDmMimianzhu(colValue);
+            } else if(colName.equals("dmMidizhu")){
+                dengmiTemp.setDmMidizhu(colValue);
+            }
             dengmiTemp.setDmAuthor(loginUserInfo.getUserId());
-            dengmiTemp.setDmTempId(dengmiTempId);
+            dengmiTemp.setDmTempId(dmTempId);
             //是否存在
             MytyDengmiTemp dengmiTemp2 = dengmiTempService.selectDengmiByTempId(dengmiTemp);
             int a = -999;
@@ -100,12 +117,14 @@ public class MytyDengmiTempController {
                 } else {
                     a = dengmiTempService.update(dengmiTemp);
                 }
+                map.put("result", true);
+                map.put("msg", "添加成功！");
             } catch (Exception e) {
                 logger.info("添加失败！请刷新页面重试！" + e.getMessage());
+                map.put("result", false);
                 map.put("msg", "添加失败！请刷新页面重试！" + e.getMessage());
             }
         }
-        map.put("msg", "添加成功！");
         return map;
     }
 
