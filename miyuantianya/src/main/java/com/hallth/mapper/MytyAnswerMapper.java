@@ -1,5 +1,6 @@
 package com.hallth.mapper;
 
+import com.hallth.domain.MytyAgenda;
 import com.hallth.domain.MytyAnswer;
 import com.hallth.domain.SaikuangBean;
 
@@ -29,7 +30,7 @@ public interface MytyAnswerMapper {
 
     int updateIsRight(MytyAnswer answer);
 
-    List<SaikuangBean> getInputAnswerCounts();
+    List<SaikuangBean> getInputAnswerCounts(MytyAgenda agenda);
 
-    List<SaikuangBean> getJudgeCounts();
+    List<SaikuangBean> getJudgeCounts(MytyAgenda agenda);
 }

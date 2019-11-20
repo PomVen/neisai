@@ -4,6 +4,16 @@ public class SaikuangBean {
     private String user_id;
     private String user_name;
     private int count;
+    private int agenda_round_no;
+
+    public int getAgenda_round_no() {
+        return agenda_round_no;
+    }
+
+    public void setAgenda_round_no(int agenda_round_no) {
+        this.agenda_round_no = agenda_round_no;
+    }
+
     public int getCount() {
         return count;
     }

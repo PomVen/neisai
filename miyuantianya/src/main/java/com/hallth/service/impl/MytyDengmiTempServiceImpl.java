@@ -1,5 +1,6 @@
 package com.hallth.service.impl;
 
+import com.hallth.domain.MytyAgenda;
 import com.hallth.domain.MytyAnswerQueryBean;
 import com.hallth.domain.MytyDengmiTemp;
 import com.hallth.domain.SaikuangBean;
@@ -38,11 +39,12 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
     }
 
     @Override
-    public Map<String, Object> selectByUserIdPageQuery(String loginUserId, int currentPage, int pageSize) {
+    public Map<String, Object> selectByUserIdPageQuery(int roundNo, String loginUserId, int currentPage, int pageSize) {
         MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
         dengmiTemp.setDmAuthor(loginUserId);
         dengmiTemp.setPageSize(pageSize);
         dengmiTemp.setStartRow(DatabaseUtils.getStartRow(currentPage,pageSize));
+        dengmiTemp.setAgendaRoundNo(roundNo);
         List<MytyDengmiTemp> list = dengmiTempMapper.selectByUserIdPageQuery(dengmiTemp);
         int total = dengmiTempMapper.selectByUserIdPageQueryCount(dengmiTemp);
         Map<String, Object> map = new HashMap<String, Object>();
@@ -54,11 +56,12 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
     }
 
     @Override
-    public Map<String, Object> selectNoAnswersPageQuery(String loginUserId, int currentPage, int pageSize) {
+    public Map<String, Object> selectNoAnswersPageQuery(int roundNo, String loginUserId, int currentPage, int pageSize) {
         MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
         dengmiTemp.setDmAuthor(loginUserId);
         dengmiTemp.setPageSize(pageSize);
         dengmiTemp.setStartRow(DatabaseUtils.getStartRow(currentPage,pageSize));
+        dengmiTemp.setAgendaRoundNo(roundNo);
         List<MytyDengmiTemp> list = dengmiTempMapper.selectNoAnswersPageQuery(dengmiTemp);
         int total = dengmiTempMapper.selectNoAnswersPageQueryCount(dengmiTemp);
         Map<String, Object> map = new HashMap<String, Object>();
@@ -93,11 +96,12 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
 
 
     @Override
-    public Map<String, Object> selectNoJudgePageQuery(String userId, int currentPage, int pageSize) {
+    public Map<String, Object> selectNoJudgePageQuery(int roundNo, String userId, int currentPage, int pageSize) {
         MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
         dengmiTemp.setDmAuthor(userId);
         dengmiTemp.setPageSize(pageSize);
         dengmiTemp.setStartRow(DatabaseUtils.getStartRow(currentPage,pageSize));
+        dengmiTemp.setAgendaRoundNo(roundNo);
         List<MytyAnswerQueryBean> list = dengmiTempMapper.selectNoJudgePageQuery(dengmiTemp);
         int total = dengmiTempMapper.selectNoJudgePageQueryCount(dengmiTemp);
         Map<String, Object> map = new HashMap<String, Object>();
@@ -109,11 +113,12 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
     }
 
     @Override
-    public Map<String, Object> selectYidi(String loginUserId, int currentPage, int pageSize) {
+    public Map<String, Object> selectYidi(int roundNo, String loginUserId, int currentPage, int pageSize) {
         MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
         dengmiTemp.setDmAuthor(loginUserId);
         dengmiTemp.setPageSize(pageSize);
         dengmiTemp.setStartRow(DatabaseUtils.getStartRow(currentPage,pageSize));
+        dengmiTemp.setAgendaRoundNo(roundNo);
         List<MytyAnswerQueryBean> list = dengmiTempMapper.selectYidi(dengmiTemp);
         int total = dengmiTempMapper.countYidi(dengmiTemp);
         Map<String, Object> map = new HashMap<String, Object>();
@@ -125,8 +130,8 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
     }
 
     @Override
-    public Map<String, Object> getInputSubjectCounts() {
-        List<SaikuangBean> list = dengmiTempMapper.getInputSubjectCounts();
+    public Map<String, Object> getInputSubjectCounts(MytyAgenda agenda) {
+        List<SaikuangBean> list = dengmiTempMapper.getInputSubjectCounts(agenda);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 0);
         map.put("msg", "");

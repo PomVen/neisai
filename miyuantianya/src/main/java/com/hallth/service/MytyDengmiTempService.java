@@ -1,5 +1,6 @@
 package com.hallth.service;
 
+import com.hallth.domain.MytyAgenda;
 import com.hallth.domain.MytyDengmiTemp;
 
 import java.util.List;
@@ -10,9 +11,9 @@ public interface MytyDengmiTempService {
 
     List<MytyDengmiTemp> selectNoAnswers(String loginUserId);
 
-    Map<String, Object> selectByUserIdPageQuery(String loginUserId , int currentPage, int pageSize);
+    Map<String, Object> selectByUserIdPageQuery(int roundNo, String loginUserId , int currentPage, int pageSize);
 
-    Map<String, Object> selectNoAnswersPageQuery(String loginUserId, int currentPage, int pageSize);
+    Map<String, Object> selectNoAnswersPageQuery(int roundNo, String loginUserId, int currentPage, int pageSize);
 
     int insertByList(List<MytyDengmiTemp> mySubjectList);
 
@@ -22,9 +23,9 @@ public interface MytyDengmiTempService {
 
     int update(MytyDengmiTemp dengmiTemp);
 
-    Map<String, Object> selectNoJudgePageQuery(String loginUserId, int currentPage, int pageSize);
+    Map<String, Object> selectNoJudgePageQuery(int roundNo,String loginUserId, int currentPage, int pageSize);
 
-    Map<String, Object> selectYidi(String loginUserId, int currentPage, int pageSize);
+    Map<String, Object> selectYidi(int roundNo, String loginUserId, int currentPage, int pageSize);
 
-    Map<String, Object> getInputSubjectCounts();
+    Map<String, Object> getInputSubjectCounts(MytyAgenda agenda);
 }

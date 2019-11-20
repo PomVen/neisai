@@ -39,6 +39,15 @@ public class MytyAnswer {
      * @mbggenerated
      */
     private Integer isRight;
+    private Integer agendaRoundNo;
+
+    public Integer getAgendaRoundNo() {
+        return agendaRoundNo;
+    }
+
+    public void setAgendaRoundNo(Integer agendaRoundNo) {
+        this.agendaRoundNo = agendaRoundNo;
+    }
 
     public Integer getIsRight() {
         return isRight;

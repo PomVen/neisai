@@ -64,13 +64,18 @@ public class LoginController {
             //获取菜单
             MytyMenu mytyMenu = new MytyMenu();
             mytyMenu.setMenuRole(loginUser.getUserRole());
-            if(System.currentTimeMillis() > agenda.getEndTime().getTime() || System.currentTimeMillis() < agenda.getStartTime().getTime()){
+            long now = System.currentTimeMillis();
+            long startTime = agenda.getStartTime().getTime();
+            long doTime = agenda.getDoTime().getTime();
+            long judgeTime = agenda.getJudgeTime().getTime();
+            long endTime = agenda.getEndTime().getTime();
+            if(now > endTime || now < startTime){
                 mytyMenu.setMenuOrder("1000");
-            } else if(System.currentTimeMillis() > agenda.getStartTime().getTime() || System.currentTimeMillis() < agenda.getDoTime().getTime()){
+            } else if(now > startTime && now < doTime){
                 mytyMenu.setMenuOrder("0001");
-            } else if(System.currentTimeMillis() > agenda.getDoTime().getTime() || System.currentTimeMillis() < agenda.getJudgeTime().getTime()){
+            } else if(now > doTime && now < judgeTime){
                 mytyMenu.setMenuOrder("0010");
-            } else if(System.currentTimeMillis() > agenda.getJudgeTime().getTime() || System.currentTimeMillis() < agenda.getEndTime().getTime()){
+            } else if(now > judgeTime && now < endTime){
                 mytyMenu.setMenuOrder("0100");
             } else {
                 mytyMenu.setMenuOrder("0000");

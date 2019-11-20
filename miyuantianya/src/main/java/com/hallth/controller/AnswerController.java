@@ -1,7 +1,9 @@
 package com.hallth.controller;
 
+import com.hallth.domain.MytyAgenda;
 import com.hallth.domain.MytyAnswer;
 import com.hallth.domain.MytyUser;
+import com.hallth.service.impl.MytyAgendaServiceImpl;
 import com.hallth.service.impl.MytyAnswerServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +22,19 @@ public class AnswerController {
     private static Logger logger = Logger.getLogger(AnswerController.class.getName());
     @Resource
     private MytyAnswerServiceImpl answerService;
+    @Resource
+    private MytyAgendaServiceImpl agendaService;
 
     @RequestMapping(value="/saveMyAnswer", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> saveMyAnswer(@RequestParam("dmTempId")int dmTempId, @RequestParam("dmMidi")String dmMidi, HttpServletRequest request){
         MytyUser loginUser = (MytyUser)request.getSession().getAttribute("loginUserInfo");
+        MytyAgenda agenda = agendaService.getNewAgenda();
         Map map = new HashMap();
         MytyAnswer answer = new MytyAnswer();
         answer.setDmId(dmTempId);
         answer.setUserAnswer(dmMidi);
         answer.setUserId(loginUser.getUserId());
+        answer.setAgendaRoundNo(agenda.getRoundNo());
         //是否已回答
         MytyAnswer temp = answerService.getMyAnswer(answer);
 
@@ -50,11 +56,13 @@ public class AnswerController {
     @RequestMapping(value="/saveMyJudge", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> saveMyJudge(@RequestParam("dmTempId")int dmTempId, @RequestParam("judge")int judge, HttpServletRequest request){
         MytyUser loginUser = (MytyUser)request.getSession().getAttribute("loginUserInfo");
+        MytyAgenda agenda = agendaService.getNewAgenda();
         Map map = new HashMap();
         MytyAnswer answer = new MytyAnswer();
         answer.setDmId(dmTempId);
         answer.setUserJudge(judge);
         answer.setUserId(loginUser.getUserId());
+        answer.setAgendaRoundNo(agenda.getRoundNo());
         //是否已回答
         MytyAnswer temp = answerService.getMyAnswer(answer);
         try{
@@ -74,11 +82,13 @@ public class AnswerController {
 
     @RequestMapping(value="/saveIsright", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> saveIsright(@RequestParam("dmTempId")int dmTempId, @RequestParam("isRight")int isRight, @RequestParam("userId")String userId, HttpServletRequest request){
+        MytyAgenda agenda = agendaService.getNewAgenda();
         Map map = new HashMap();
         MytyAnswer answer = new MytyAnswer();
         answer.setDmId(dmTempId);
         answer.setIsRight(isRight);
         answer.setUserId(userId);
+        answer.setAgendaRoundNo(agenda.getRoundNo());
         //是否已回答
         MytyAnswer temp = answerService.getMyAnswer(answer);
         try{

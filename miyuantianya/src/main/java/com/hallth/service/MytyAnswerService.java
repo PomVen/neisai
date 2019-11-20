@@ -1,5 +1,6 @@
 package com.hallth.service;
 
+import com.hallth.domain.MytyAgenda;
 import com.hallth.domain.MytyAnswer;
 
 import java.util.Map;
@@ -9,7 +10,7 @@ public interface MytyAnswerService {
 
     MytyAnswer getMyAnswer(MytyAnswer answer);
 
-    Map<String, Object> getInputAnswerCounts();
+    Map<String, Object> getInputAnswerCounts(MytyAgenda agenda);
 
-    Map<String, Object> getJudgeCounts();
+    Map<String, Object> getJudgeCounts(MytyAgenda agenda);
 }

@@ -35,7 +35,7 @@ public class PageController {
         int inputCount = agenda.getInputCount();
         MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
-        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(loginUserId, 1, Integer.MAX_VALUE);
+        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(), loginUserId, 1, Integer.MAX_VALUE);
         List<MytyDengmiTemp> list = (List<MytyDengmiTemp>)map.get("data");
         if(list == null || list.size() == 0){
             for(int i = 0; i < inputCount; i ++){

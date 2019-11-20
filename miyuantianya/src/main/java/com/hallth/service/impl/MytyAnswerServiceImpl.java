@@ -40,8 +40,8 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
     }
 
     @Override
-    public Map<String, Object> getInputAnswerCounts() {
-        List<SaikuangBean> list = answerMapper.getInputAnswerCounts();
+    public Map<String, Object> getInputAnswerCounts(MytyAgenda agenda) {
+        List<SaikuangBean> list = answerMapper.getInputAnswerCounts(agenda);
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
         map.put("msg", "");
@@ -51,8 +51,8 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
     }
 
     @Override
-    public Map<String, Object> getJudgeCounts() {
-        List<SaikuangBean> list = answerMapper.getJudgeCounts();
+    public Map<String, Object> getJudgeCounts(MytyAgenda agenda) {
+        List<SaikuangBean> list = answerMapper.getJudgeCounts(agenda);
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
         map.put("msg", "");

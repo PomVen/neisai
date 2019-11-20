@@ -1,5 +1,6 @@
 package com.hallth.mapper;
 
+import com.hallth.domain.MytyAgenda;
 import com.hallth.domain.MytyAnswerQueryBean;
 import com.hallth.domain.MytyDengmiTemp;
 import com.hallth.domain.SaikuangBean;
@@ -53,6 +54,6 @@ public interface MytyDengmiTempMapper {
 
     int countYidi(MytyDengmiTemp dengmiTemp);
 
-    List<SaikuangBean> getInputSubjectCounts();
+    List<SaikuangBean> getInputSubjectCounts(MytyAgenda agenda);
 
 }

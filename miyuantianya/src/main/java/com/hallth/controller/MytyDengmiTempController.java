@@ -39,7 +39,8 @@ public class MytyDengmiTempController {
         int pageSize = Integer.parseInt(request.getParameter("limit"));
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
-        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(loginUserId, currentPage, pageSize);
+        MytyAgenda agenda = agendaService.getNewAgenda();
+        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(), loginUserId, currentPage, pageSize);
         return map;
     }
 
@@ -49,7 +50,8 @@ public class MytyDengmiTempController {
         int pageSize = Integer.parseInt(request.getParameter("limit"));
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
-        Map<String, Object> map = dengmiTempService.selectNoAnswersPageQuery(loginUserId, currentPage, pageSize);
+        MytyAgenda agenda = agendaService.getNewAgenda();
+        Map<String, Object> map = dengmiTempService.selectNoAnswersPageQuery(agenda.getRoundNo(), loginUserId, currentPage, pageSize);
         return map;
     }
 
@@ -59,7 +61,7 @@ public class MytyDengmiTempController {
         int inputCount = agenda.getInputCount();
         MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
-        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(loginUserId, 1, Integer.MAX_VALUE);
+        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(),loginUserId, 1, Integer.MAX_VALUE);
         List<MytyDengmiTemp> list = (List<MytyDengmiTemp>)map.get("data");
         if(list == null || list.size() == 0){
             for(int i = 0; i < inputCount; i ++){
@@ -108,6 +110,7 @@ public class MytyDengmiTempController {
             }
             dengmiTemp.setDmAuthor(loginUserInfo.getUserId());
             dengmiTemp.setDmTempId(dmTempId);
+            dengmiTemp.setAgendaRoundNo(agenda.getRoundNo());
             //是否存在
             MytyDengmiTemp dengmiTemp2 = dengmiTempService.selectDengmiByTempId(dengmiTemp);
             int a = -999;
@@ -130,21 +133,23 @@ public class MytyDengmiTempController {
 
     @RequestMapping(value = "/pingfen", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> pingfen(HttpServletRequest request, Model model) {
+        MytyAgenda agenda = agendaService.getNewAgenda();
         int currentPage = Integer.parseInt(request.getParameter("page"));
         int pageSize = Integer.parseInt(request.getParameter("limit"));
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
-        Map<String, Object> map = dengmiTempService.selectNoJudgePageQuery(loginUserId, currentPage, pageSize);
+        Map<String, Object> map = dengmiTempService.selectNoJudgePageQuery(agenda.getRoundNo(), loginUserId, currentPage, pageSize);
         return map;
     }
 
     @RequestMapping(value = "/liezhong", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> liezhong(HttpServletRequest request, Model model) {
+        MytyAgenda agenda = agendaService.getNewAgenda();
         int currentPage = Integer.parseInt(request.getParameter("page"));
         int pageSize = Integer.parseInt(request.getParameter("limit"));
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
-        Map<String, Object> map = dengmiTempService.selectYidi(loginUserId, currentPage, pageSize);
+        Map<String, Object> map = dengmiTempService.selectYidi(agenda.getRoundNo(), loginUserId, currentPage, pageSize);
         return map;
     }
 

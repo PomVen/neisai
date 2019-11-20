@@ -35,13 +35,13 @@ public class SaiKuangController {
         Map map = new HashMap();
         if(System.currentTimeMillis() > agenda.getStartTime().getTime() && System.currentTimeMillis() < agenda.getDoTime().getTime()){
             //当前时间处于开始时间和猜射时间之间，则统计输入谜题情况
-            map = dengmiTempService.getInputSubjectCounts();
+            map = dengmiTempService.getInputSubjectCounts(agenda);
         } else if(System.currentTimeMillis() > agenda.getDoTime().getTime() && System.currentTimeMillis() < agenda.getJudgeTime().getTime()){
             //当前时间处于猜射时间和评分列中时间之间，则统计输入猜射情况
-            map = answerService.getInputAnswerCounts();
+            map = answerService.getInputAnswerCounts(agenda);
         } else if(System.currentTimeMillis() > agenda.getJudgeTime().getTime() && System.currentTimeMillis() < agenda.getEndTime().getTime()){
             //当前时间处于评分列中时间和结束时间之间，则统计评分情况
-            map = answerService.getJudgeCounts();
+            map = answerService.getJudgeCounts(agenda);
         }
         return map;
     }
