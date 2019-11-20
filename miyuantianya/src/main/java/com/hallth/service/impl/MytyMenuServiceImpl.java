@@ -4,11 +4,14 @@ import com.hallth.domain.MytyMenu;
 import com.hallth.domain.MytyUser;
 import com.hallth.mapper.MytyMenuMapper;
 import com.hallth.service.MytyMenuService;
+import com.hallth.utils.DatabaseUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MytyMenuServiceImpl implements MytyMenuService {
@@ -28,5 +31,20 @@ public class MytyMenuServiceImpl implements MytyMenuService {
             }
         }
         return returnList;
+    }
+
+    @Override
+    public Map getAllMenu(int currentPage, int pageSize) {
+        Map map = new HashMap();
+        MytyMenu menu = new MytyMenu();
+        menu.setPageSize(pageSize);
+        menu.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
+        List<MytyUser> list = menuMapper.getAllMenuInfo(menu);
+        int inputCount = menuMapper.getAllMenuInfoCount(menu);
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", inputCount);
+        map.put("data", list);
+        return map;
     }
 }

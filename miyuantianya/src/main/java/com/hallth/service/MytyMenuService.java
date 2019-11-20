@@ -4,7 +4,10 @@ import com.hallth.domain.MytyMenu;
 import com.hallth.domain.MytyUser;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MytyMenuService {
     List<MytyMenu> getMenuListByUserRole(MytyMenu menu);
+
+    Map getAllMenu(int currentPage, int pageSize);
 }

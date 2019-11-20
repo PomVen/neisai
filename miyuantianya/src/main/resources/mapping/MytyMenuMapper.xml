@@ -96,4 +96,18 @@
     <select id="getListByUserRole" resultMap="BaseResultMap" parameterType="com.hallth.domain.MytyMenu">
         select * from myty_menu where menu_role = #{menuRole, jdbcType=VARCHAR}
     </select>
+
+    <select id="getAllMenuInfo" resultMap="BaseResultMap" parameterType="com.hallth.domain.MytyMenu">
+        select
+          menu_id, menu_name, menu_path, r.role_name as menu_role, menu_type, parent_menu, has_children, menu_order
+         from myty_menu m
+         left join myty_role r on r.role_id = m.menu_role
+         limit #{startRow}, #{pageSize}
+    </select>
+    <select id="getAllMenuInfoCount" resultType="java.lang.Integer" parameterType="com.hallth.domain.MytyMenu">
+        select
+        count(*)
+        from myty_menu
+    </select>
+
 </mapper>
