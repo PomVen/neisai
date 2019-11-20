@@ -175,7 +175,10 @@
         select a.dm_temp_id, a.dm_mimian, a.dm_mimu, a.dm_midi,  b.user_answer,  b.is_right, b.user_id
         from myty_dengmi_temp a
         left join myty_answer b on a.dm_temp_id = b.dm_id
-        where a.dm_author = #{dmAuthor,jdbcType=VARCHAR} and b.user_id != #{dmAuthor,jdbcType=VARCHAR} and a.agenda_round_no = #{agendaRoundNo,jdbcType=INTEGER}
+        where a.dm_author = #{dmAuthor,jdbcType=VARCHAR}
+        and b.user_id != #{dmAuthor,jdbcType=VARCHAR}
+        and a.agenda_round_no = #{agendaRoundNo,jdbcType=INTEGER}
+        and b.user_answer != a.dm_midi
         limit #{startRow}, #{pageSize}
     </select>
 
