@@ -2,6 +2,8 @@ package com.hallth.service;
 
 import com.hallth.domain.MytyUser;
 
+import java.util.Map;
+
 public interface MytyUserService {
     MytyUser loginCheck(MytyUser user);
 
@@ -10,4 +12,7 @@ public interface MytyUserService {
     int insert(MytyUser user);
 
     int changePassword(MytyUser user);
+
+    Map getAllUserInfo(int currentPage, int pageSize);
+
 }

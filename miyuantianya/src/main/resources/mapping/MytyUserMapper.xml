@@ -136,4 +136,19 @@
         from myty_user
         where user_name = #{userName,jdbcType=VARCHAR}
     </select>
+
+
+    <select id="getAllUserInfo" resultMap="BaseResultMap" parameterType="com.hallth.domain.MytyUser" >
+        select
+        u.user_id, u.user_name, r.role_name as user_role, u.user_password
+        from myty_user u
+        left join myty_role r on r.role_id = u.user_role
+    </select>
+
+    <select id="getAllUserInfoCount" resultType="java.lang.Integer" parameterType="com.hallth.domain.MytyUser" >
+        select
+        count(*)
+        from myty_user u
+        left join myty_role r on r.role_id = u.user_role
+    </select>
 </mapper>

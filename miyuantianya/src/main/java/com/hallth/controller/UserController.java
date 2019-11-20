@@ -96,5 +96,11 @@ public class UserController {
         return map;
     }
 
+    @RequestMapping(value = "/getAllUserInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map getAllUserInfo(HttpServletRequest request){
+        int currentPage = Integer.parseInt(request.getParameter("page"));
+        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        return userService.getAllUserInfo(currentPage, pageSize);
+    }
 
 }
