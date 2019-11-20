@@ -121,4 +121,44 @@ public class PageController {
     public String toResult(HttpServletRequest request, Model model){
         return "baseFunction/result";
     }
+
+    @RequestMapping(value="/toThisScore", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toThisScore(HttpServletRequest request, Model model){
+        return "baseFunction/thisScore";
+    }
+
+    @RequestMapping(value="/toHisScore", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toHisScore(HttpServletRequest request, Model model){
+        return "baseFunction/hisScore";
+    }
+
+    @RequestMapping(value="/toAnswerScore", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toAnswerScore(HttpServletRequest request, Model model){
+        return "baseFunction/answerScore";
+    }
+
+    @RequestMapping(value="/toSubjectScore", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toSubjectScore(HttpServletRequest request, Model model){
+        return "baseFunction/subjectScore";
+    }
+
+    @RequestMapping(value="/toGoodSubject", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toGoodSubject(HttpServletRequest request, Model model){
+        return "baseFunction/goodSubject";
+    }
+
+    @RequestMapping(value="/toAllSubject", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toAllSubject(HttpServletRequest request, Model model){
+        return "baseFunction/allSubject";
+    }
+
+    @RequestMapping(value="/userManage", method = {RequestMethod.GET, RequestMethod.POST})
+    public String userManage(HttpServletRequest request, Model model){
+        return "baseFunction/userManage";
+    }
+
+    @RequestMapping(value="/menuManage", method = {RequestMethod.GET, RequestMethod.POST})
+    public String menuManage(HttpServletRequest request, Model model){
+        return "baseFunction/menuManage";
+    }
 }
