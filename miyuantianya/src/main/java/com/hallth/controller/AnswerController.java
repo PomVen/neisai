@@ -6,6 +6,7 @@ import com.hallth.domain.MytyUser;
 import com.hallth.service.impl.MytyAgendaServiceImpl;
 import com.hallth.service.impl.MytyAnswerServiceImpl;
 import org.apache.log4j.Logger;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -104,5 +105,20 @@ public class AnswerController {
             map.put("msg", "操作失败，请刷新页面重试");
         }
         return  map;
+    }
+
+    @RequestMapping(value = "/getAnswerScoreInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> getAnswerScoreInfo(HttpServletRequest request, Model model) {
+        MytyAgenda agenda = agendaService.getNewAgenda();
+        int currentPage = Integer.parseInt(request.getParameter("page"));
+        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int roundNo = agenda.getRoundNo();
+        if(request.getParameter("roundNo") == null || request.getParameter("roundNo").equals("")){
+            roundNo = agenda.getRoundNo();
+        } else {
+            roundNo = Integer.parseInt(request.getParameter("roundNo"));
+        }
+        Map<String, Object> map = answerService.getAnswerScoreInfo(roundNo, currentPage, pageSize);
+        return map;
     }
 }

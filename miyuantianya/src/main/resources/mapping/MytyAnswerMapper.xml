@@ -113,4 +113,34 @@
         where agenda_round_no = #{roundNo, jdbcType=INTEGER}
         group by A.user_id HAVING  count(A.user_judge)  > 0
     </select>
+
+
+    <select id="getAnswerScoreInfo" parameterType="com.hallth.domain.ScoreQueryBean" resultType="com.hallth.domain.ScoreQueryBean">
+        select temp.agenda_round_no, temp.user_name, sum(temp.answer_judge) as right_count, sum(answer_score) as user_answer_score
+        from (select a.agenda_round_no, a.dm_id, u1.user_name as dm_author_name, u2.user_name, a.user_answer, dm.dm_midi,
+         case when (a.user_answer = dm.dm_midi OR a.is_right = 1) then 1 else 0 end answer_judge,
+         case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end answer_score
+        from myty_dengmi_temp dm
+        left join myty_answer a on dm.agenda_round_no = a.agenda_round_no and dm.dm_temp_id = a.dm_id
+        left join myty_user u1 on u1.user_id = dm.dm_author
+        left join myty_user u2 on u2.user_id = a.user_id
+        where dm.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
+        order by a.user_id) temp
+        group by temp.user_name
+        order by user_answer_score desc
+        limit #{startRow}, #{pageSize}
+    </select>
+
+    <select id="getAnswerScoreInfoCount" parameterType="com.hallth.domain.ScoreQueryBean" resultType="java.lang.Integer">
+        select count(distinct temp.user_name)
+        from (select a.agenda_round_no, a.dm_id, u1.user_name as dm_author_name, u2.user_name, a.user_answer, dm.dm_midi,
+         case when (a.user_answer = dm.dm_midi OR a.is_right = 1) then 1 else 0 end answer_judge,
+         case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end answer_score
+        from myty_dengmi_temp dm
+        left join myty_answer a on dm.agenda_round_no = a.agenda_round_no and dm.dm_temp_id = a.dm_id
+        left join myty_user u1 on u1.user_id = dm.dm_author
+        left join myty_user u2 on u2.user_id = a.user_id
+        where dm.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
+        order by a.user_id) temp
+    </select>
 </mapper>

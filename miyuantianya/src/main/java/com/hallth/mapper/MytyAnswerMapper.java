@@ -3,6 +3,7 @@ package com.hallth.mapper;
 import com.hallth.domain.MytyAgenda;
 import com.hallth.domain.MytyAnswer;
 import com.hallth.domain.SaikuangBean;
+import com.hallth.domain.ScoreQueryBean;
 
 import java.util.List;
 
@@ -33,4 +34,8 @@ public interface MytyAnswerMapper {
     List<SaikuangBean> getInputAnswerCounts(MytyAgenda agenda);
 
     List<SaikuangBean> getJudgeCounts(MytyAgenda agenda);
+
+    List<SaikuangBean> getAnswerScoreInfo(ScoreQueryBean scoreQueryBean);
+
+    int getAnswerScoreInfoCount(ScoreQueryBean scoreQueryBean);
 }
