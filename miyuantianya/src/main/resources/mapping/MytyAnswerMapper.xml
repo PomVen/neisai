@@ -143,4 +143,23 @@
         where dm.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
         order by a.user_id) temp
     </select>
+
+    <select id="getSubjectScoreInfo" parameterType="com.hallth.domain.ScoreQueryBean" resultType="com.hallth.domain.ScoreQueryBean">
+        select u2.user_name as dm_author_name, sum(a.user_judge) as user_subject_score
+        from myty_dengmi_temp dm
+        left join myty_answer a on a.agenda_round_no = dm.agenda_round_no and a.dm_id = dm.dm_temp_id
+        left join myty_user u2 on u2.user_id = dm.dm_author
+        where a.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
+        group by dm.dm_author
+        order by user_subject_score desc
+        limit #{startRow}, #{pageSize}
+    </select>
+
+    <select id="getSubjectScoreInfoCount" parameterType="com.hallth.domain.ScoreQueryBean" resultType="java.lang.Integer">
+        select count(distinct u2.user_name)
+        from myty_dengmi_temp dm
+        left join myty_answer a on a.agenda_round_no = dm.agenda_round_no and a.dm_id = dm.dm_temp_id
+        left join myty_user u2 on u2.user_id = dm.dm_author
+        where a.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
+    </select>
 </mapper>

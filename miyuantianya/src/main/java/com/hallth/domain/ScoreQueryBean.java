@@ -6,6 +6,7 @@ public class ScoreQueryBean {
     private String user_name;
     private String dm_author_id;
     private String dm_author_name;
+    private int sum_score;
     private int user_answer_score;
     private int user_subject_score;
     private int dm_id;
@@ -13,6 +14,14 @@ public class ScoreQueryBean {
 
     private int startRow;
     private int pageSize;
+
+    public int getSum_score() {
+        return sum_score;
+    }
+
+    public void setSum_score(int sum_score) {
+        this.sum_score = sum_score;
+    }
 
     public String getDm_author_id() {
         return dm_author_id;

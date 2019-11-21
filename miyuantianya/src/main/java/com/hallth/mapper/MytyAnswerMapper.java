@@ -38,4 +38,8 @@ public interface MytyAnswerMapper {
     List<SaikuangBean> getAnswerScoreInfo(ScoreQueryBean scoreQueryBean);
 
     int getAnswerScoreInfoCount(ScoreQueryBean scoreQueryBean);
+
+    List<SaikuangBean> getSubjectScoreInfo(ScoreQueryBean scoreQueryBean);
+
+    int getSubjectScoreInfoCount(ScoreQueryBean scoreQueryBean);
 }

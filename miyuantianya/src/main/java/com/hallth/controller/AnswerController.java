@@ -121,4 +121,19 @@ public class AnswerController {
         Map<String, Object> map = answerService.getAnswerScoreInfo(roundNo, currentPage, pageSize);
         return map;
     }
+
+    @RequestMapping(value = "/getSubjectScoreInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> getSubjectScoreInfo(HttpServletRequest request, Model model) {
+        MytyAgenda agenda = agendaService.getNewAgenda();
+        int currentPage = Integer.parseInt(request.getParameter("page"));
+        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int roundNo = agenda.getRoundNo();
+        if(request.getParameter("roundNo") == null || request.getParameter("roundNo").equals("")){
+            roundNo = agenda.getRoundNo();
+        } else {
+            roundNo = Integer.parseInt(request.getParameter("roundNo"));
+        }
+        Map<String, Object> map = answerService.getSubjectScoreInfo(roundNo, currentPage, pageSize);
+        return map;
+    }
 }

@@ -79,4 +79,20 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
         return map;
     }
 
+    @Override
+    public Map<String, Object> getSubjectScoreInfo(int roundNo, int currentPage, int pageSize) {
+        ScoreQueryBean scoreQueryBean = new ScoreQueryBean();
+        scoreQueryBean.setAgenda_round_no(roundNo);
+        scoreQueryBean.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
+        scoreQueryBean.setPageSize(pageSize);
+        List<SaikuangBean> list = answerMapper.getSubjectScoreInfo(scoreQueryBean);
+        int total = answerMapper.getSubjectScoreInfoCount(scoreQueryBean);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count",total);
+        map.put("data",list);
+        return map;
+    }
+
 }
