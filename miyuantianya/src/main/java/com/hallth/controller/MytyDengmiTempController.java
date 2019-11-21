@@ -1,9 +1,6 @@
 package com.hallth.controller;
 
-import com.hallth.domain.MytyAgenda;
-import com.hallth.domain.MytyDengmiTemp;
-import com.hallth.domain.MytySeq;
-import com.hallth.domain.MytyUser;
+import com.hallth.domain.*;
 import com.hallth.service.impl.MytyAgendaServiceImpl;
 import com.hallth.service.impl.MytyDengmiTempServiceImpl;
 import com.hallth.service.impl.MytySeqServiceImpl;
@@ -153,4 +150,31 @@ public class MytyDengmiTempController {
         return map;
     }
 
+    @RequestMapping(value = "/getDengmiByRoundNo", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> getDengmiByRoundNo(HttpServletRequest request, Model model) {
+        MytyAgenda agenda = agendaService.getNewAgenda();
+        int currentPage = Integer.parseInt(request.getParameter("page"));
+        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int roundNo = agenda.getRoundNo();
+        if(request.getParameter("roundNo") == null || request.getParameter("roundNo").equals("")){
+            roundNo = agenda.getRoundNo();
+        } else {
+            roundNo = Integer.parseInt(request.getParameter("roundNo"));
+        }
+        Map<String, Object> map = dengmiTempService.getDengmiByRoundNo(roundNo, currentPage, pageSize);
+        return map;
+    }
+
+    @RequestMapping(value = "/goodSubject", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> goodSubject(HttpServletRequest request, Model model) {
+        MytyAgenda agenda = agendaService.getNewAgenda();
+        int roundNo = agenda.getRoundNo();
+        if(request.getParameter("roundNo") == null || request.getParameter("roundNo").equals("")){
+            roundNo = agenda.getRoundNo();
+        } else {
+            roundNo = Integer.parseInt(request.getParameter("roundNo"));
+        }
+        Map<String, Object> map = dengmiTempService.getGoodSubjectByRoundNo(roundNo);
+        return map;
+    }
 }

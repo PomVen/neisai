@@ -1,9 +1,6 @@
 package com.hallth.mapper;
 
-import com.hallth.domain.MytyAgenda;
-import com.hallth.domain.MytyAnswerQueryBean;
-import com.hallth.domain.MytyDengmiTemp;
-import com.hallth.domain.SaikuangBean;
+import com.hallth.domain.*;
 
 import java.util.List;
 
@@ -56,4 +53,11 @@ public interface MytyDengmiTempMapper {
 
     List<SaikuangBean> getInputSubjectCounts(MytyAgenda agenda);
 
+    List<DengmiQueryBean> getDengmiByRoundNo(DengmiQueryBean queryBean);
+
+    int getDengmiByRoundNoCount(DengmiQueryBean queryBean);
+
+    List<DengmiQueryBean> getGoodSubjectByRoundNo(DengmiQueryBean queryBean);
+
+    int getGoodSubjectByRoundNoCount(DengmiQueryBean queryBean);
 }

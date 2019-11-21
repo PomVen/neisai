@@ -227,4 +227,47 @@
         where A.agenda_round_no = #{roundNo,jdbcType=INTEGER}
         group by A.dm_author
     </select>
+
+    <select id="getDengmiByRoundNo" parameterType="com.hallth.domain.DengmiQueryBean" resultType="com.hallth.domain.DengmiQueryBean">
+        select
+        dm.dm_temp_id,dm.dm_mimian, dm.dm_mimu, dm.dm_midi, dm.dm_mimianzhu, dm.dm_midizhu,
+        u.user_name, sum(a.user_judge) as user_judge
+        from myty_dengmi_temp dm
+        left join myty_user u on u.user_id = dm.dm_author
+        left join myty_answer a on a.dm_id = dm.dm_temp_id
+        where dm.agenda_round_no = #{agenda_round_no}
+        group by dm.dm_temp_id
+        limit #{startRow}, #{pageSize}
+    </select>
+    <select id="getDengmiByRoundNoCount" parameterType="com.hallth.domain.DengmiQueryBean" resultType="java.lang.Integer">
+        select
+        count(distinct dm.dm_temp_id)
+        from myty_dengmi_temp dm
+        left join myty_user u on u.user_id = dm.dm_author
+        left join myty_answer a on a.dm_id = dm.dm_temp_id
+        where dm.agenda_round_no = #{agenda_round_no}
+    </select>
+
+    <select id="getGoodSubjectByRoundNo" parameterType="com.hallth.domain.DengmiQueryBean" resultType="com.hallth.domain.DengmiQueryBean">
+        select
+        dm.dm_temp_id,dm.dm_mimian, dm.dm_mimu, dm.dm_midi, dm.dm_mimianzhu, dm.dm_midizhu,
+        u.user_name, sum(a.user_judge) as user_judge
+        from myty_dengmi_temp dm
+        left join myty_user u on u.user_id = dm.dm_author
+        left join myty_answer a on a.dm_id = dm.dm_temp_id
+        where dm.agenda_round_no = #{agenda_round_no}
+        group by dm.dm_temp_id
+        order by user_judge desc
+        limit 0, 10
+    </select>
+    <select id="getGoodSubjectByRoundNoCount" parameterType="com.hallth.domain.DengmiQueryBean" resultType="java.lang.Integer">
+        select
+        count(distinct dm.dm_temp_id)
+        from myty_dengmi_temp dm
+        left join myty_user u on u.user_id = dm.dm_author
+        left join myty_answer a on a.dm_id = dm.dm_temp_id
+        where dm.agenda_round_no = #{agenda_round_no}
+        order by user_judge desc
+        limit 0, 10
+    </select>
 </mapper>

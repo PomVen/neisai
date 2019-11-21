@@ -1,9 +1,6 @@
 package com.hallth.service.impl;
 
-import com.hallth.domain.MytyAgenda;
-import com.hallth.domain.MytyAnswerQueryBean;
-import com.hallth.domain.MytyDengmiTemp;
-import com.hallth.domain.SaikuangBean;
+import com.hallth.domain.*;
 import com.hallth.mapper.MytyDengmiTempMapper;
 import com.hallth.service.MytyDengmiTempService;
 import com.hallth.utils.DatabaseUtils;
@@ -136,6 +133,36 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         map.put("code", 0);
         map.put("msg", "");
         map.put("count",0);
+        map.put("data",list);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> getDengmiByRoundNo(Integer roundNo, int currentPage, int pageSize) {
+        DengmiQueryBean queryBean = new DengmiQueryBean();
+        queryBean.setAgenda_round_no(roundNo);
+        queryBean.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
+        queryBean.setPageSize(pageSize);
+        List<DengmiQueryBean> list = dengmiTempMapper.getDengmiByRoundNo(queryBean);
+        int total = dengmiTempMapper.getDengmiByRoundNoCount(queryBean);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count",total);
+        map.put("data",list);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> getGoodSubjectByRoundNo(int roundNo) {
+        DengmiQueryBean queryBean = new DengmiQueryBean();
+        queryBean.setAgenda_round_no(roundNo);
+        List<DengmiQueryBean> list = dengmiTempMapper.getGoodSubjectByRoundNo(queryBean);
+        int total = dengmiTempMapper.getGoodSubjectByRoundNoCount(queryBean);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count",total);
         map.put("data",list);
         return map;
     }

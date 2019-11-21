@@ -28,4 +28,8 @@ public interface MytyDengmiTempService {
     Map<String, Object> selectYidi(int roundNo, String loginUserId, int currentPage, int pageSize);
 
     Map<String, Object> getInputSubjectCounts(MytyAgenda agenda);
+
+    Map<String, Object> getDengmiByRoundNo(Integer roundNo, int currentPage, int pageSize);
+
+    Map<String, Object> getGoodSubjectByRoundNo(int roundNo);
 }
