@@ -39,7 +39,7 @@
             ,page: true //开启分页
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
-                {field: 'dm_mimian', title: '谜面',fixed: 'left', templet:'#mimianTemplet'}
+                {field: 'dm_mimian', title: '谜面',fixed: 'left', width: 500, templet:'#mimianTemplet'}
                 ,{field: 'dm_mimu', title: '谜目'}
                 ,{field: 'dm_midi', title: '谜底'}
                 ,{field: 'dm_mimianzhu', title: '谜面注'}

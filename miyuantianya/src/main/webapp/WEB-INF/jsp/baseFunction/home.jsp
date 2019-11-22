@@ -173,6 +173,20 @@
                         </c:forEach>
                     </dl>
                 </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">系统说明</a>
+                    <dl class="layui-nav-child">
+                        <c:forEach items="${menu}" var="item" varStatus="status">
+                            <c:if test="${item.menuType == 3}">
+                                <dd>
+                                    <a data-url="${item.menuPath}" data-id="${item.menuId}"
+                                       data-title="${item.menuName}" href="#" class="site-demo-active"
+                                       data-type="tabAdd">${item.menuName}</a>
+                                </dd>
+                            </c:if>
+                        </c:forEach>
+                    </dl>
+                </li>
             </ul>
         </div>
     </div>

@@ -40,7 +40,7 @@
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
                 {field: 'dm_author_name', title: '用户名',fixed: 'left'}
-                ,{field: 'user_subject_score', title: '制谜得分'}
+                ,{field: 'user_subject_score', sort: true, title: '制谜得分'}
             ]]
         });
 

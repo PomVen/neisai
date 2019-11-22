@@ -44,13 +44,13 @@
             ,limit: 10
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
-                {field: 'dm_mimian', title: '谜面',fixed: 'left', templet:'#mimianTemplet'}
+                {field: 'dm_mimian', title: '谜面',fixed: 'left', width: 500, templet:'#mimianTemplet'}
                 ,{field: 'dm_mimu', title: '谜目'}
                 ,{field: 'dm_midi', title: '谜底'}
                 ,{field: 'dm_mimianzhu', title: '谜面注'}
                 ,{field: 'dm_midizhu', title: '谜底注'}
                 ,{field: 'user_name', title: '作者'}
-                ,{field: 'user_judge', title: '评分'}
+                ,{field: 'user_judge', sort: true, title: '评分'}
             ]]
         });
 

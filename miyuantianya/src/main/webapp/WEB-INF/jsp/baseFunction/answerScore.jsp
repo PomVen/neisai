@@ -40,8 +40,8 @@
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
                 {field: 'user_name', title: '用户名',fixed: 'left'}
-                ,{field: 'right_count', title: '猜中数'}
-                ,{field: 'user_answer_score', title: '猜射得分'}
+                ,{field: 'right_count', sort: true, title: '猜中数'}
+                ,{field: 'user_answer_score', sort: true, title: '猜射得分'}
             ]]
         });
 

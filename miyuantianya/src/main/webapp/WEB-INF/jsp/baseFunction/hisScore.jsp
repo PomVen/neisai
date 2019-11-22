@@ -32,13 +32,13 @@
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
                 {field: 'user_name', title: '用户名',fixed: 'left'}
-                ,{field: 'times', title: '参与次数'}
-                ,{field: 'user_subject_score', title: '制谜总得分'}
-                ,{field: 'avg_subject_score', title: '制谜评均得分'}
-                ,{field: 'user_ans_score', title: '猜射总得分'}
-                ,{field: 'avg_answer_score', title: '猜射平均得分'}
-                ,{field: 'sum_score', title: '总得分'}
-                ,{field: 'avg_sum_score', title: '总平均得分'}
+                ,{field: 'times', sort: true, title: '参与次数'}
+                ,{field: 'user_subject_score', sort: true, title: '制谜总得分'}
+                ,{field: 'avg_subject_score', sort: true, title: '制谜评均得分'}
+                ,{field: 'user_ans_score', sort: true, title: '猜射总得分'}
+                ,{field: 'avg_answer_score', sort: true, title: '猜射平均得分'}
+                ,{field: 'sum_score', sort: true, title: '总得分'}
+                ,{field: 'avg_sum_score', sort: true, title: '总平均得分'}
             ]]
         });
     });

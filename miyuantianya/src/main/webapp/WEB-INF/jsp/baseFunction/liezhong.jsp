@@ -32,7 +32,7 @@
             ,limits: [5,10,20,50]
             ,limit: 10
             ,cols: [[ //表头
-                {field: 'dm_mimian', title: '谜面',fixed: 'left'}
+                {field: 'dm_mimian', title: '谜面', width: 500, fixed: 'left'}
                 ,{field: 'dm_mimu', title: '谜目'}
                 ,{field: 'dm_midi', title: '谜底'}
                 ,{field: 'user_answer', title: '异底'}

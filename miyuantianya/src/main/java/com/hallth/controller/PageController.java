@@ -61,14 +61,12 @@ public class PageController {
 
     @RequestMapping(value = "/toChangePassword", method = {RequestMethod.GET, RequestMethod.POST})
     public String toChangePassword(HttpServletRequest request, Model model) {
-        model.addAttribute("loginUserName", request.getSession().getAttribute("loginUserName"));
         return "baseFunction/changePassword";
     }
 
     @RequestMapping(value = "/toAddUser", method = {RequestMethod.GET, RequestMethod.POST})
     public String toAddUser(HttpServletRequest request, Model model) {
-        model.addAttribute("loginUserName", request.getSession().getAttribute("loginUserName"));
-        return "baseFunction/addUser";
+        return "managerFunction/addUser";
     }
 
     @RequestMapping(value="/toNewAgenda", method = {RequestMethod.GET, RequestMethod.POST})
@@ -80,8 +78,7 @@ public class PageController {
         } else {
             roundNo = agenda.getRoundNo() + 1;
         }
-        model.addAttribute("roundNo", roundNo);
-        return "agenda/newAgenda";
+        return "managerFunction/newAgenda";
     }
 
     @RequestMapping(value="/toMySubject", method = {RequestMethod.GET, RequestMethod.POST})
@@ -154,11 +151,16 @@ public class PageController {
 
     @RequestMapping(value="/userManage", method = {RequestMethod.GET, RequestMethod.POST})
     public String userManage(HttpServletRequest request, Model model){
-        return "baseFunction/userManage";
+        return "managerFunction/userManage";
     }
 
     @RequestMapping(value="/menuManage", method = {RequestMethod.GET, RequestMethod.POST})
     public String menuManage(HttpServletRequest request, Model model){
-        return "baseFunction/menuManage";
+        return "managerFunction/menuManage";
+    }
+
+    @RequestMapping(value="/toDevelopDetail", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toDevelopDetail(HttpServletRequest request, Model model){
+        return "developDetail/developDetail";
     }
 }

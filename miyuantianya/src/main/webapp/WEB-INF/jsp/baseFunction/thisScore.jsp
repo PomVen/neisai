@@ -40,9 +40,9 @@
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
                 {field: 'user_name', title: '用户名',fixed: 'left'}
-                ,{field: 'sum_score', title: '总积分'}
-                ,{field: 'user_answer_score', title: '猜射得分'}
-                ,{field: 'user_subject_score', title: '制谜得分'}
+                ,{field: 'sum_score', sort: true, title: '总积分'}
+                ,{field: 'user_answer_score', sort: true, title: '猜射得分'}
+                ,{field: 'user_subject_score', sort: true, title: '制谜得分'}
             ]]
         });
 
