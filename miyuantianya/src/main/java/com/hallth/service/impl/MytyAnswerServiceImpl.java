@@ -11,6 +11,7 @@ import com.hallth.utils.DatabaseUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +70,7 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
         scoreQueryBean.setAgenda_round_no(roundNo);
         scoreQueryBean.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
         scoreQueryBean.setPageSize(pageSize);
-        List<SaikuangBean> list = answerMapper.getAnswerScoreInfo(scoreQueryBean);
+        List<ScoreQueryBean> list = answerMapper.getAnswerScoreInfo(scoreQueryBean);
         int total = answerMapper.getAnswerScoreInfoCount(scoreQueryBean);
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
@@ -85,13 +86,72 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
         scoreQueryBean.setAgenda_round_no(roundNo);
         scoreQueryBean.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
         scoreQueryBean.setPageSize(pageSize);
-        List<SaikuangBean> list = answerMapper.getSubjectScoreInfo(scoreQueryBean);
+        List<ScoreQueryBean> list = answerMapper.getSubjectScoreInfo(scoreQueryBean);
         int total = answerMapper.getSubjectScoreInfoCount(scoreQueryBean);
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
         map.put("msg", "");
         map.put("count",total);
         map.put("data",list);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> getThisScoreInfo(int roundNo, int currentPage, int pageSize) {
+        ScoreQueryBean scoreQueryBean = new ScoreQueryBean();
+        scoreQueryBean.setAgenda_round_no(roundNo);
+        scoreQueryBean.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
+        scoreQueryBean.setPageSize(pageSize);
+        List<ScoreQueryBean> list = answerMapper.getThisScoreInfo(scoreQueryBean);
+        List<ScoreQueryBean> listReturn = new ArrayList<>();
+        for(ScoreQueryBean item : list){
+            int subjectScore = item.getUser_subject_score();
+            int answerScore = item.getUser_answer_score();
+            int sumScore = item.getSum_score();
+            if(sumScore == 0){
+                if(subjectScore > 0 || answerScore > 0){
+                    sumScore = subjectScore + answerScore;
+                }
+            }
+            item.setSum_score(sumScore);
+            listReturn.add(item);
+        }
+        int total = answerMapper.getThisScoreInfoCount(scoreQueryBean);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count",total);
+        map.put("data",listReturn);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> getCountScoreInfo(int currentPage, int pageSize) {
+        ScoreQueryBean scoreQueryBean = new ScoreQueryBean();
+        scoreQueryBean.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
+        scoreQueryBean.setPageSize(pageSize);
+        List<ScoreQueryBean> list = answerMapper.getCountScoreInfo(scoreQueryBean);
+        List<ScoreQueryBean> listReturn = new ArrayList<>();
+        for(ScoreQueryBean item : list){
+            int ansScore = item.getUser_ans_score();
+            int subjectScore = item.getUser_subject_score();
+            int sumScore = item.getSum_score();
+            int times = item.getTimes();
+            if(ansScore > 0 || subjectScore > 0){
+                sumScore = ansScore + subjectScore;
+            }
+            item.setSum_score(sumScore);
+            item.setAvg_sum_score(sumScore/times);
+            item.setAvg_answer_score(ansScore/times);
+            item.setAvg_subject_score(subjectScore/times);
+            listReturn.add(item);
+        }
+        int total = answerMapper.getCountScoreInfoCount(scoreQueryBean);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count",total);
+        map.put("data",listReturn);
         return map;
     }
 

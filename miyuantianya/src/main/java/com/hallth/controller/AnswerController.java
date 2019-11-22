@@ -136,4 +136,28 @@ public class AnswerController {
         Map<String, Object> map = answerService.getSubjectScoreInfo(roundNo, currentPage, pageSize);
         return map;
     }
+
+    @RequestMapping(value = "/getThisScoreInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> getThisScoreInfo(HttpServletRequest request, Model model) {
+        MytyAgenda agenda = agendaService.getNewAgenda();
+        int currentPage = Integer.parseInt(request.getParameter("page"));
+        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int roundNo = agenda.getRoundNo();
+        if(request.getParameter("roundNo") == null || request.getParameter("roundNo").equals("")){
+            roundNo = agenda.getRoundNo();
+        } else {
+            roundNo = Integer.parseInt(request.getParameter("roundNo"));
+        }
+        Map<String, Object> map = answerService.getThisScoreInfo(roundNo, currentPage, pageSize);
+        return map;
+    }
+
+    @RequestMapping(value = "/getCountScoreInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> getCountScoreInfo(HttpServletRequest request, Model model) {
+        MytyAgenda agenda = agendaService.getNewAgenda();
+        int currentPage = Integer.parseInt(request.getParameter("page"));
+        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        Map<String, Object> map = answerService.getCountScoreInfo(currentPage, pageSize);
+        return map;
+    }
 }

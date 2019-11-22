@@ -35,11 +35,19 @@ public interface MytyAnswerMapper {
 
     List<SaikuangBean> getJudgeCounts(MytyAgenda agenda);
 
-    List<SaikuangBean> getAnswerScoreInfo(ScoreQueryBean scoreQueryBean);
+    List<ScoreQueryBean> getAnswerScoreInfo(ScoreQueryBean scoreQueryBean);
 
     int getAnswerScoreInfoCount(ScoreQueryBean scoreQueryBean);
 
-    List<SaikuangBean> getSubjectScoreInfo(ScoreQueryBean scoreQueryBean);
+    List<ScoreQueryBean> getSubjectScoreInfo(ScoreQueryBean scoreQueryBean);
 
     int getSubjectScoreInfoCount(ScoreQueryBean scoreQueryBean);
+
+    int getThisScoreInfoCount(ScoreQueryBean scoreQueryBean);
+
+    List<ScoreQueryBean> getThisScoreInfo(ScoreQueryBean scoreQueryBean);
+
+    List<ScoreQueryBean> getCountScoreInfo(ScoreQueryBean scoreQueryBean);
+
+    int getCountScoreInfoCount(ScoreQueryBean scoreQueryBean);
 }

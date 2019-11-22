@@ -11,6 +11,51 @@ public class ScoreQueryBean {
     private int user_subject_score;
     private int dm_id;
     private int right_count;
+    private int times;
+    private float avg_sum_score;
+    private float avg_subject_score;
+    private float avg_answer_score;
+    private int user_ans_score;
+
+    public int getTimes() {
+        return times;
+    }
+
+    public void setTimes(int times) {
+        this.times = times;
+    }
+
+    public float getAvg_sum_score() {
+        return avg_sum_score;
+    }
+
+    public void setAvg_sum_score(float avg_sum_score) {
+        this.avg_sum_score = avg_sum_score;
+    }
+
+    public float getAvg_subject_score() {
+        return avg_subject_score;
+    }
+
+    public void setAvg_subject_score(float avg_subject_score) {
+        this.avg_subject_score = avg_subject_score;
+    }
+
+    public float getAvg_answer_score() {
+        return avg_answer_score;
+    }
+
+    public void setAvg_answer_score(float avg_answer_score) {
+        this.avg_answer_score = avg_answer_score;
+    }
+
+    public int getUser_ans_score() {
+        return user_ans_score;
+    }
+
+    public void setUser_ans_score(int user_ans_score) {
+        this.user_ans_score = user_ans_score;
+    }
 
     private int startRow;
     private int pageSize;

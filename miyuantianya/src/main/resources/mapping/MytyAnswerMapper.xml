@@ -162,4 +162,115 @@
         left join myty_user u2 on u2.user_id = dm.dm_author
         where a.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
     </select>
+
+    <select id="getThisScoreInfo" parameterType="com.hallth.domain.ScoreQueryBean" resultType="com.hallth.domain.ScoreQueryBean">
+        select t1.agenda_round_no, t1.user_id, t1.user_name, t1.right_count, t1.user_answer_score, t2.user_subject_score, t1.user_answer_score + t2.user_subject_score as sum_score
+        from (
+            select temp.agenda_round_no, temp.user_name,temp.user_id, sum(temp.answer_judge) as right_count, sum(answer_score) as user_answer_score
+            from (
+                select a.agenda_round_no, a.dm_id, u1.user_name as dm_author_name, u2.user_name,u2.user_id, a.user_answer, dm.dm_midi,
+                case when (a.user_answer = dm.dm_midi OR a.is_right = 1) then 1 else 0 end answer_judge,
+                case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end answer_score
+                from myty_dengmi_temp dm
+                left join myty_answer a on dm.agenda_round_no = a.agenda_round_no and dm.dm_temp_id = a.dm_id
+                left join myty_user u1 on u1.user_id = dm.dm_author
+                left join myty_user u2 on u2.user_id = a.user_id
+                where dm.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
+                order by a.user_id
+            ) temp
+            group by temp.user_name
+        ) t1
+        left join (
+            select u2.user_id, u2.user_name as dm_author_name, sum(a.user_judge) as user_subject_score
+            from myty_dengmi_temp dm
+            left join myty_answer a on a.agenda_round_no = dm.agenda_round_no and a.dm_id = dm.dm_temp_id
+            left join myty_user u2 on u2.user_id = dm.dm_author
+            where a.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
+            group by dm.dm_author
+            order by user_subject_score desc
+        ) t2 on t1.user_id = t2.user_id
+        where t1.user_id is not null
+        order by sum_score desc
+        limit #{startRow}, #{pageSize}
+    </select>
+
+    <select id="getThisScoreInfoCount" parameterType="com.hallth.domain.ScoreQueryBean" resultType="java.lang.Integer">
+        select count(*)
+        from
+        (select temp.agenda_round_no, temp.user_name,temp.user_id, sum(temp.answer_judge) as right_count, sum(answer_score) as user_answer_score
+        from (select a.agenda_round_no, a.dm_id, u1.user_name as dm_author_name, u2.user_name,u2.user_id, a.user_answer, dm.dm_midi,
+                     case when (a.user_answer = dm.dm_midi OR a.is_right = 1) then 1 else 0 end answer_judge,
+                     case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end answer_score
+              from myty_dengmi_temp dm
+                     left join myty_answer a on dm.agenda_round_no = a.agenda_round_no and dm.dm_temp_id = a.dm_id
+                     left join myty_user u1 on u1.user_id = dm.dm_author
+                     left join myty_user u2 on u2.user_id = a.user_id
+              where dm.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
+              order by a.user_id) temp
+        group by temp.user_name) t1
+        left join (
+                  select u2.user_id, u2.user_name as dm_author_name, sum(a.user_judge) as user_subject_score
+                  from myty_dengmi_temp dm
+                         left join myty_answer a on a.agenda_round_no = dm.agenda_round_no and a.dm_id = dm.dm_temp_id
+                         left join myty_user u2 on u2.user_id = dm.dm_author
+                  where a.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
+                  group by dm.dm_author
+                  order by user_subject_score desc
+            ) t2 on t1.user_id = t2.user_id
+            where t1.user_id is not null
+    </select>
+
+    <select id="getCountScoreInfo" parameterType="com.hallth.domain.ScoreQueryBean" resultType="com.hallth.domain.ScoreQueryBean">
+        select temp.user_id, u1.user_name, sum(temp.counts) as times, zhimi_tab.user_subject_score, caishe_tab.user_ans_score, zhimi_tab.user_subject_score + caishe_tab.user_ans_score as sum_score,
+               (zhimi_tab.user_subject_score + caishe_tab.user_ans_score)/sum(temp.counts) as avg_sum_score,
+               (zhimi_tab.user_subject_score)/sum(temp.counts) as avg_subject_score,
+               (caishe_tab.user_ans_score)/sum(temp.counts) as avg_answer_score
+        from (
+            select a.agenda_round_no as agenda_round_no, a.user_id as user_id, 1 as counts from myty_answer a group by a.agenda_round_no, a.user_id
+            union
+            select dm.agenda_round_no as agenda_round_no, dm.dm_author as user_id, 1 as counts from myty_dengmi_temp dm group by dm.agenda_round_no, dm.dm_author
+        ) temp
+        left join myty_user u1 on u1.user_id = temp.user_id
+        left join (select u3.user_id, u3.user_name, sum(a2.user_judge) as user_subject_score
+                   from myty_dengmi_temp dm2
+                          left join myty_answer a2 on a2.agenda_round_no = dm2.agenda_round_no and a2.dm_id = dm2.dm_temp_id
+                          left join myty_user u3 on u3.user_id = dm2.dm_author
+                   group by dm2.dm_author) zhimi_tab on zhimi_tab.user_id = temp.user_id
+        left join (select ans_tab.user_id, ans_tab.user_name, sum(answer_score) as user_ans_score
+                   from (select u2.user_id, u2.user_name,
+                                case when a3.user_answer = dm3.dm_midi then 3 when a3.is_right = 1 then 1 else 0 end answer_score
+                         from myty_dengmi_temp dm3
+                                left join myty_answer a3 on dm3.agenda_round_no = a3.agenda_round_no and dm3.dm_temp_id = a3.dm_id
+                                left join myty_user u2 on u2.user_id = a3.user_id
+                         order by a3.user_id) ans_tab
+                   where ans_tab.user_name is not null
+                   group by ans_tab.user_name) caishe_tab on caishe_tab.user_id = temp.user_id
+        group by temp.user_id
+        order by sum_score desc
+        limit #{startRow}, #{pageSize}
+    </select>
+
+    <select id="getCountScoreInfoCount" parameterType="com.hallth.domain.ScoreQueryBean" resultType="java.lang.Integer">
+        select count(distinct  temp.user_id)
+        from (
+        select a.agenda_round_no as agenda_round_no, a.user_id as user_id, 1 as counts from myty_answer a group by a.agenda_round_no, a.user_id
+        union
+        select dm.agenda_round_no as agenda_round_no, dm.dm_author as user_id, 1 as counts from myty_dengmi_temp dm group by dm.agenda_round_no, dm.dm_author
+        ) temp
+        left join myty_user u1 on u1.user_id = temp.user_id
+        left join (select u3.user_id, u3.user_name, sum(a2.user_judge) as user_subject_score
+                   from myty_dengmi_temp dm2
+                          left join myty_answer a2 on a2.agenda_round_no = dm2.agenda_round_no and a2.dm_id = dm2.dm_temp_id
+                          left join myty_user u3 on u3.user_id = dm2.dm_author
+                   group by dm2.dm_author) zhimi_tab on zhimi_tab.user_id = temp.user_id
+        left join (select ans_tab.user_id, ans_tab.user_name, sum(answer_score) as user_ans_score
+                   from (select u2.user_id, u2.user_name,
+                                case when a3.user_answer = dm3.dm_midi then 3 when a3.is_right = 1 then 1 else 0 end answer_score
+                         from myty_dengmi_temp dm3
+                                left join myty_answer a3 on dm3.agenda_round_no = a3.agenda_round_no and dm3.dm_temp_id = a3.dm_id
+                                left join myty_user u2 on u2.user_id = a3.user_id
+                         order by a3.user_id) ans_tab
+                   where ans_tab.user_name is not null
+                   group by ans_tab.user_name) caishe_tab on caishe_tab.user_id = temp.user_id
+    </select>
 </mapper>

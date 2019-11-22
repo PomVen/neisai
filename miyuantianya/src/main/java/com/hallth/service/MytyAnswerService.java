@@ -17,4 +17,8 @@ public interface MytyAnswerService {
     Map<String, Object> getAnswerScoreInfo(int roundNo, int currentPage, int pageSize);
 
     Map<String, Object> getSubjectScoreInfo(int roundNo, int currentPage, int pageSize);
+
+    Map<String, Object> getThisScoreInfo(int roundNo, int currentPage, int pageSize);
+
+    Map<String, Object> getCountScoreInfo(int currentPage, int pageSize);
 }

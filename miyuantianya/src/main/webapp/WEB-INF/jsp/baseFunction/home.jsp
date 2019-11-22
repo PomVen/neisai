@@ -127,7 +127,7 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有功能</a>
+                    <a class="" href="javascript:;">基本功能</a>
                     <dl class="layui-nav-child">
                         <c:forEach items="${menu}" var="item" varStatus="status">
                             <c:if test="${item.menuType == 1}">
@@ -216,7 +216,7 @@
                     content: '<iframe data-frameid="' + id + '" scrolling="auto" frameborder="0" src="' + url + '" style="width:100%;height:99%;"></iframe>',
                     id: id //规定好的id
                 })
-                CustomRightClick(id); //给tab绑定右击事件
+                // CustomRightClick(id); //给tab绑定右击事件
                 FrameWH();  //计算ifram层的大小
             },
             tabChange: function (id) {
