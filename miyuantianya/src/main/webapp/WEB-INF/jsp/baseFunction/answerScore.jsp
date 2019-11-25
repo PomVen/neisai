@@ -25,6 +25,9 @@
         <button class="layui-btn layui-btn-normal" onclick="return false;" data-type="reload" id="selectbyCondition" >搜索</button>
     </div>
 </form>
+<script type="text/html" id="userNameTemplet">
+    <a href="#" class="layui-table-link">{{d.user_name}}</a>
+</script>
 <div style="padding: 15px;">
     <table id="answerScore" lay-filter="test"></table>
 </div>
@@ -39,7 +42,7 @@
             ,page: true //开启分页
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
-                {field: 'user_name', title: '用户名',fixed: 'left'}
+                {field: 'user_name', title: '用户名',fixed: 'left', templet:'#userNameTemplet'}
                 ,{field: 'right_count', sort: true, title: '猜中数'}
                 ,{field: 'user_answer_score', sort: true, title: '猜射得分'}
             ]]

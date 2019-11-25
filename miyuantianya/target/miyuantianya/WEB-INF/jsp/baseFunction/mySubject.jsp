@@ -75,23 +75,6 @@
 </div>
 </body>
 <script>
-    // function getMySubjects(pageSize, currentPage) {
-    //     $.ajax({
-    //         //几个参数需要注意一下
-    //         type: "POST",//方法类型
-    //         dataType: "json",//预期服务器返回的数据类型
-    //         url: "/dengmiTemp/toMySubject/" + pageSize + "/" + currentPage,//url
-    //         data: $('#addUserForm').serialize(),
-    //         success: function (result) {
-    //
-    //         },
-    //         error: function () {
-    //             alert("异常！");
-    //         }
-    //     });
-    // }
-    // getMySubjects();
-    // setTimeout("getMySubjects(10,1)", 1);
     layui.use('table', function(){
         var table = layui.table;
 
@@ -103,9 +86,9 @@
             ,limits: [5,10,20,50]
             ,limit: 10
             ,cols: [[ //表头
-                {field: 'dmMimian', title: '谜面',  sort: true, fixed: 'left'}
+                {field: 'dmMimian', title: '谜面', width: 500, fixed: 'left'}
                 ,{field: 'dmMimu', title: '谜目'}
-                ,{field: 'dmMidi', title: '谜底',  sort: true}
+                ,{field: 'dmMidi', title: '谜底'}
                 ,{field: 'dmMimianzhu', title: '谜面注解'}
                 ,{field: 'dmMidizhu', title: '谜底注解'}
             ]]

@@ -28,6 +28,9 @@
 <div style="padding: 15px;">
     <table id="thisScore" lay-filter="test"></table>
 </div>
+<script type="text/html" id="userNameTemplet">
+    <a href="#" class="layui-table-link">{{d.user_name}}</a>
+</script>
 </body>
 <script>
     layui.use('table', function(){
@@ -39,7 +42,7 @@
             ,page: true //开启分页
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
-                {field: 'user_name', title: '用户名',fixed: 'left'}
+                {field: 'user_name', title: '用户名',fixed: 'left', templet:'#userNameTemplet'}
                 ,{field: 'sum_score', sort: true, title: '总积分'}
                 ,{field: 'user_answer_score', sort: true, title: '猜射得分'}
                 ,{field: 'user_subject_score', sort: true, title: '制谜得分'}

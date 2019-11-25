@@ -28,6 +28,9 @@
 <div style="padding: 15px;">
     <table id="goodSubject" lay-filter="test"></table>
 </div>
+<script type="text/html" id="mimianTemplet">
+    <a href="#" class="layui-table-link">{{d.dm_mimian}}</a>
+</script>
 </body>
 <script>
     layui.use('table', function(){
