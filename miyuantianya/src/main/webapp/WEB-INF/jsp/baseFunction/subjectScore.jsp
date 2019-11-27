@@ -26,7 +26,7 @@
     </div>
 </form>
 <script type="text/html" id="authorTemplet">
-    <a href="#" class="layui-table-link">{{d.dm_author_name}}</a>
+    <a lay-event="showDetail" class="layui-table-link">{{d.dm_author_name}}</a>
 </script>
 <div style="padding: 15px;">
     <table id="subjectScore" lay-filter="test"></table>
@@ -65,11 +65,44 @@
             }
         };
         //点击搜索按钮根据用户名称查询
-        $('#selectbyCondition').on('click',
-            function(){
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
-            });
+        $('#selectbyCondition').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        table.on('tool(test)', function(obj){
+            debugger;
+            var data = obj.data;
+            console.log(data);
+            //formData = data;
+            if(obj.event === 'showDetail'){
+                layer.open({
+                    //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                    type:1,
+                    title:"用户参赛信息",
+                    area: ['90%','90%'],
+                    content: '<div><table id="userCompetitionDetailTable"></table></div>',
+                    success : function(index, layero) {
+                        table.render({
+                            elem: '#userCompetitionDetailTable'
+                            ,url: '/util/userCompetitionDetail?userId='+data.dm_author_id + '&roundNo=' + data.agenda_round_no //数据接口
+                            ,page: true //开启分页
+                            ,cols: [[ //表头
+                                {field: 'dm_mimian', title: '谜面', width:400, fixed: 'left'}
+                                ,{field: 'dm_mimu', title: '谜目/谜格'}
+                                ,{field: 'dm_midi', title: '谜底'}
+                                ,{field: 'dm_mimianzhu', title: '谜面注解'}
+                                ,{field: 'dm_midizhu', title: '谜底注解'}
+                                ,{field: 'user_subject_score', title: '评分'}
+                                ,{field: 'right_proportion', title: '命中率'}
+                                ,{field: 'rownum', title: '名次'}
+                            ]]
+                        });
+
+                    },
+                });
+            }
+        });
     });
 </script>
 </html>

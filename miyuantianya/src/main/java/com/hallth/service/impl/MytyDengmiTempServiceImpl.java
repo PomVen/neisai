@@ -166,4 +166,21 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         map.put("data",list);
         return map;
     }
+
+    @Override
+    public Map<String, Object> userCompetitionDetail(int roundNo, String userId, int currentPage, int pageSize) {
+        ScoreQueryBean queryBean = new ScoreQueryBean();
+        queryBean.setAgenda_round_no(roundNo);
+        queryBean.setUser_id(userId);
+        queryBean.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
+        queryBean.setPageSize(pageSize);
+        List<ScoreQueryBean> list = dengmiTempMapper.userCompetitionDetail(queryBean);
+        int total = dengmiTempMapper.userCompetitionDetailCount(queryBean);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count",total);
+        map.put("data",list);
+        return map;
+    }
 }

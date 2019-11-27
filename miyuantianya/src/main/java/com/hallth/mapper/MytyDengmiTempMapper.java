@@ -60,4 +60,9 @@ public interface MytyDengmiTempMapper {
     List<DengmiQueryBean> getGoodSubjectByRoundNo(DengmiQueryBean queryBean);
 
     int getGoodSubjectByRoundNoCount(DengmiQueryBean queryBean);
+
+    List<ScoreQueryBean> userCompetitionDetail(ScoreQueryBean queryBean);
+
+    int userCompetitionDetailCount(ScoreQueryBean queryBean);
+
 }

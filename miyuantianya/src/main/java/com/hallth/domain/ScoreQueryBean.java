@@ -16,6 +16,70 @@ public class ScoreQueryBean {
     private float avg_subject_score;
     private float avg_answer_score;
     private int user_ans_score;
+    private String dm_mimian;
+    private String dm_mimu;
+    private String dm_midi;
+    private String dm_mimianzhu;
+    private String dm_midizhu;
+    private int rownum;
+    private float right_proportion;
+
+    public int getRownum() {
+        return rownum;
+    }
+
+    public void setRownum(int rownum) {
+        this.rownum = rownum;
+    }
+
+    public String getDm_mimian() {
+        return dm_mimian;
+    }
+
+    public void setDm_mimian(String dm_mimian) {
+        this.dm_mimian = dm_mimian;
+    }
+
+    public String getDm_mimu() {
+        return dm_mimu;
+    }
+
+    public void setDm_mimu(String dm_mimu) {
+        this.dm_mimu = dm_mimu;
+    }
+
+    public String getDm_midi() {
+        return dm_midi;
+    }
+
+    public void setDm_midi(String dm_midi) {
+        this.dm_midi = dm_midi;
+    }
+
+    public String getDm_mimianzhu() {
+        return dm_mimianzhu;
+    }
+
+    public void setDm_mimianzhu(String dm_mimianzhu) {
+        this.dm_mimianzhu = dm_mimianzhu;
+    }
+
+    public String getDm_midizhu() {
+        return dm_midizhu;
+    }
+
+    public void setDm_midizhu(String dm_midizhu) {
+        this.dm_midizhu = dm_midizhu;
+    }
+
+
+    public float getRight_proportion() {
+        return right_proportion;
+    }
+
+    public void setRight_proportion(float right_proportion) {
+        this.right_proportion = right_proportion;
+    }
 
     public int getTimes() {
         return times;

@@ -32,4 +32,6 @@ public interface MytyDengmiTempService {
     Map<String, Object> getDengmiByRoundNo(Integer roundNo, int currentPage, int pageSize);
 
     Map<String, Object> getGoodSubjectByRoundNo(int roundNo);
+
+    Map<String, Object> userCompetitionDetail(int roundNo, String userId, int currentPage, int pageSize);
 }

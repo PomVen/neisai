@@ -145,7 +145,7 @@
     </select>
 
     <select id="getSubjectScoreInfo" parameterType="com.hallth.domain.ScoreQueryBean" resultType="com.hallth.domain.ScoreQueryBean">
-        select u2.user_name as dm_author_name, sum(a.user_judge) as user_subject_score
+        select u2.user_name as dm_author_name, u2.user_id as dm_author_id, sum(a.user_judge) as user_subject_score, dm.agenda_round_no
         from myty_dengmi_temp dm
         left join myty_answer a on a.agenda_round_no = dm.agenda_round_no and a.dm_id = dm.dm_temp_id
         left join myty_user u2 on u2.user_id = dm.dm_author
