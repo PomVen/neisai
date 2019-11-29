@@ -71,7 +71,6 @@
         });
 
         table.on('tool(test)', function(obj){
-            debugger;
             var data = obj.data;
             console.log(data);
             //formData = data;
