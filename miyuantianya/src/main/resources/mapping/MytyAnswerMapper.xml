@@ -273,4 +273,36 @@
                    where ans_tab.user_name is not null
                    group by ans_tab.user_name) caishe_tab on caishe_tab.user_id = temp.user_id
     </select>
+
+    <select id="userScoreDetailTable" parameterType="com.hallth.domain.ScoreQueryBean" resultType="com.hallth.domain.ScoreQueryBean">
+select * from (
+select * from
+(select dm2.dm_author, u2.user_name as dm_author_name,SUM(a1.user_judge) as user_subject_score
+from myty_answer a1
+       left join myty_dengmi_temp dm2 on dm2.dm_temp_id = a1.dm_id
+       left join myty_user u2 on u2.user_id = dm2.dm_author
+group by dm2.dm_author
+order by user_subject_score desc) sub_tab
+left join (select a.user_id, u1.user_name, SUM(case when a.is_right = 1 then 1 when a.user_answer = dm.dm_midi then 3 else 0 end) as user_answer_score
+from myty_answer a
+left join myty_user u1 on u1.user_id = a.user_id
+left join myty_dengmi_temp dm on dm.dm_temp_id = a.dm_id
+group by a.user_id
+order by user_answer_score desc) ans_tab on ans_tab.user_id = sub_tab.dm_author
+union
+select * from
+(select dm2.dm_author, u2.user_name as dm_author_name,SUM(a1.user_judge) as user_subject_score
+from myty_answer a1
+left join myty_dengmi_temp dm2 on dm2.dm_temp_id = a1.dm_id
+left join myty_user u2 on u2.user_id = dm2.dm_author
+group by dm2.dm_author
+order by user_subject_score desc) sub_tab
+right join (select a.user_id, u1.user_name, SUM(case when a.is_right = 1 then 1 when a.user_answer = dm.dm_midi then 3 else 0 end) as user_answer_score
+from myty_answer a
+left join myty_user u1 on u1.user_id = a.user_id
+left join myty_dengmi_temp dm on dm.dm_temp_id = a.dm_id
+group by a.user_id
+order by user_answer_score desc) ans_tab on ans_tab.user_id = sub_tab.dm_author) tt
+where tt.user_id = #{dm_author_id, jdbcType=VARCHAR}
+    </select>
 </mapper>

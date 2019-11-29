@@ -50,4 +50,6 @@ public interface MytyAnswerMapper {
     List<ScoreQueryBean> getCountScoreInfo(ScoreQueryBean scoreQueryBean);
 
     int getCountScoreInfoCount(ScoreQueryBean scoreQueryBean);
+
+    List<ScoreQueryBean> userScoreDetailTable(ScoreQueryBean scoreQueryBean);
 }

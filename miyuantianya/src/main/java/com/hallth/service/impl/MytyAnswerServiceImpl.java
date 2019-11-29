@@ -155,4 +155,20 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
         return map;
     }
 
+    @Override
+    public Map<String, Object> userScoreDetailTable(String userId) {
+        ScoreQueryBean scoreQueryBean = new ScoreQueryBean();
+        scoreQueryBean.setDm_author_id(userId);
+        List<ScoreQueryBean> list = answerMapper.userScoreDetailTable(scoreQueryBean);
+        List<ScoreQueryBean> listReturn = new ArrayList<>();
+        for(ScoreQueryBean item : list){
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count",1);
+        map.put("data",list);
+        return map;
+    }
+
 }

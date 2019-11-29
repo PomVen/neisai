@@ -81,8 +81,18 @@
                     type:1,
                     title:"用户参赛信息",
                     area: ['90%','90%'],
-                    content: '<div><table id="userCompetitionDetailTable"></table></div>',
+                    content: '<div><table id="userScoreDetailTable"></table><table id="userCompetitionDetailTable"></table></div>',
                     success : function(index, layero) {
+                        table.render({
+                            elem: '#userScoreDetailTable'
+                            ,url: '/util/userScoreDetailTable?userId=' + data.dm_author_id //数据接口
+                            ,page: true //开启分页
+                            ,cols: [[ //表头
+                                {field: 'dm_author_name', title: '用户名', width:400, fixed: 'left'}
+                                ,{field: 'user_subject_score', title: '制谜总分'}
+                                ,{field: 'user_answer_score', title: '猜射总分'}
+                            ]]
+                        });
                         table.render({
                             elem: '#userCompetitionDetailTable'
                             ,url: '/util/userCompetitionDetail?userId='+data.dm_author_id + '&roundNo=' + data.agenda_round_no //数据接口
