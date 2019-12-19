@@ -4,8 +4,10 @@ public class ScoreQueryBean {
     private int agenda_round_no;
     private String user_id;
     private String user_name;
+    private String user_answer;
     private String dm_author_id;
     private String dm_author_name;
+    private int user_judge;
     private int sum_score;
     private int user_answer_score;
     private int user_subject_score;
@@ -23,6 +25,31 @@ public class ScoreQueryBean {
     private String dm_midizhu;
     private int rownum;
     private float right_proportion;
+    private String result;
+
+    public int getUser_judge() {
+        return user_judge;
+    }
+
+    public void setUser_judge(int user_judge) {
+        this.user_judge = user_judge;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getUser_answer() {
+        return user_answer;
+    }
+
+    public void setUser_answer(String user_answer) {
+        this.user_answer = user_answer;
+    }
 
     public int getRownum() {
         return rownum;

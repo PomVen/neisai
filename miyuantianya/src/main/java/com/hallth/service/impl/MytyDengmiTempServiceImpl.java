@@ -183,4 +183,17 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         map.put("data",list);
         return map;
     }
+
+    @Override
+    public Map<String, Object> dengmiDetailTable(int dmId) {
+        DengmiQueryBean dengmiQueryBean = new DengmiQueryBean();
+        dengmiQueryBean.setDm_temp_id(dmId);
+        List<DengmiQueryBean> list = dengmiTempMapper.dengmiDetailTable(dengmiQueryBean);
+        Map <String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", list.size());
+        map.put("data",list);
+        return map;
+    }
 }

@@ -38,4 +38,30 @@ public class UtilsController {
         Map<String, Object> map = answerService.userScoreDetailTable(userId);
         return map;
     }
+
+    @RequestMapping(value = "/userAnswerDetailTable", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> userAnswerDetailTable(HttpServletRequest request, Model model) {
+        String userId = request.getParameter("userId");
+        int roundNo = Integer.parseInt(request.getParameter("roundNo"));
+        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int currentPage = Integer.parseInt(request.getParameter("page"));
+        Map<String, Object> map = answerService.userAnswerDetailTable(userId, roundNo, currentPage, pageSize);
+        return map;
+    }
+
+    @RequestMapping(value = "/dengmiAnswerDetailTable", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> dengmiAnswerDetailTable(HttpServletRequest request, Model model) {
+        int dmId = Integer.parseInt(request.getParameter("dmId"));
+        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int currentPage = Integer.parseInt(request.getParameter("page"));
+        Map<String, Object> map = answerService.dengmiAnswerDetailTable(dmId, currentPage, pageSize);
+        return map;
+    }
+
+    @RequestMapping(value = "/dengmiDetailTable", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> dengmiDetailTable(HttpServletRequest request, Model model) {
+        int dmId = Integer.parseInt(request.getParameter("dmId"));
+        Map<String, Object> map = dengmiTempService.dengmiDetailTable(dmId);
+        return map;
+    }
 }

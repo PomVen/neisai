@@ -305,4 +305,14 @@ group by dm.agenda_round_no,dm.dm_temp_id
 order by user_subject_score desc) L, (SELECT @rownum := 0) AS rn) temp
 where temp.user_id = #{user_id} and temp.agenda_round_no = #{agenda_round_no}
     </select>
+
+    <select id="dengmiDetailTable" parameterType="com.hallth.domain.DengmiQueryBean" resultType="com.hallth.domain.DengmiQueryBean">
+      select dm.dm_temp_id,dm.dm_mimian,dm.dm_mimianzhu,dm.dm_mimu,dm.dm_midi,u.user_name,
+       dm.dm_midizhu,dm.dm_author,SUM(a.user_judge) as user_judge
+from myty_dengmi_temp dm
+       left join myty_answer a on a.dm_id = dm.dm_temp_id
+       left join myty_user u on u.user_id = dm.dm_author
+       where dm.dm_temp_id = #{dm_temp_id, jdbcType=INTEGER}
+group by a.dm_id
+    </select>
 </mapper>

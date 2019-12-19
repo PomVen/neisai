@@ -25,8 +25,8 @@
         <button class="layui-btn layui-btn-normal" onclick="return false;" data-type="reload" id="selectbyCondition" >搜索</button>
     </div>
 </form>
-<script type="text/html" id="userNameTemplet">
-    <a href="#" class="layui-table-link">{{d.user_name}}</a>
+<script type="text/html" id="answerTemplet">
+    <a lay-event="showDetail" class="layui-table-link">{{d.user_name}}</a>
 </script>
 <div style="padding: 15px;">
     <table id="answerScore" lay-filter="test"></table>
@@ -38,13 +38,14 @@
         //第一个实例
         table.render({
             elem: '#answerScore'
-            ,url: '/answer/getAnswerScoreInfo' //数据接口
+            ,url: '/answer/getScoreInfo' //数据接口
             ,page: true //开启分页
+            ,limits: [5,10,20,50]
+            ,limit: 10
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
-                {field: 'user_name', title: '用户名',fixed: 'left', templet:'#userNameTemplet'}
-                ,{field: 'right_count', sort: true, title: '猜中数'}
-                ,{field: 'user_answer_score', sort: true, title: '猜射得分'}
+                {field: 'user_name', title: '用户名',fixed: 'left', templet:'#answerTemplet'}
+                ,{field: 'userAnsScore', sort: true, title: '猜射得分'}
             ]]
         });
 
@@ -66,11 +67,54 @@
             }
         };
         //点击搜索按钮根据用户名称查询
-        $('#selectbyCondition').on('click',
-            function(){
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
-            });
+        $('#selectbyCondition').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            console.log(data);
+            //formData = data;
+            if(obj.event === 'showDetail'){
+                layer.open({
+                    //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                    type:1,
+                    title:"用户参赛信息",
+                    area: ['90%','90%'],
+                    content: '<div><table id="userScoreDetailTable"></table><table id="userAnswerDetailTable"></table></div>',
+                    success : function(index, layero) {
+                        table.render({
+                            elem: '#userScoreDetailTable'
+                            ,url: '/util/userScoreDetailTable?userId=' + data.userId //数据接口
+                            ,page: true //开启分页
+                            ,cols: [[ //表头
+                                {field: 'dm_author_name', title: '用户名', fixed: 'left'}
+                                ,{field: 'user_subject_score', title: '制谜总分'}
+                                ,{field: 'user_answer_score', title: '猜射总分'}
+                            ]]
+                        });
+                        var userName = data.user_name;
+                        table.render({
+                            elem: '#userAnswerDetailTable'
+                            ,url: '/util/userAnswerDetailTable?userId='+data.userId + '&roundNo=' + data.agendaRoundNo //数据接口
+                            ,page: true //开启分页
+                            ,cols: [[ //表头
+                                {field: 'dm_mimian', title: '谜面', width:400, fixed: 'left'}
+                                ,{field: 'dm_mimu', title: '谜目/谜格',width:200}
+                                ,{field: 'dm_midi', title: '谜底',width:200}
+                                ,{field: 'dm_mimianzhu', title: '谜面注解',width:200}
+                                ,{field: 'dm_midizhu', title: '谜底注解',width:200}
+                                ,{field: 'dm_author_name', title: '作者',width:80}
+                                ,{field: 'user_answer', title: userName+'猜射',width:100}
+                                ,{field: 'user_answer_score', title: '猜射得分',width:100, fixed: 'right'}
+                            ]]
+                        });
+
+                    },
+                });
+            }
+        });
     });
 </script>
 </html>

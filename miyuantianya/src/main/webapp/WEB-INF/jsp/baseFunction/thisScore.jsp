@@ -38,14 +38,14 @@
         //第一个实例
         table.render({
             elem: '#thisScore'
-            ,url: '/answer/getThisScoreInfo' //数据接口
+            ,url: '/answer/getScoreInfo' //数据接口
             ,page: true //开启分页
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
                 {field: 'user_name', title: '用户名',fixed: 'left', templet:'#authorTemplet'}
-                ,{field: 'sum_score', sort: true, title: '总积分'}
-                ,{field: 'user_answer_score', sort: true, title: '猜射得分'}
-                ,{field: 'user_subject_score', sort: true, title: '制谜得分'}
+                ,{field: 'sumScore', sort: true, title: '总积分'}
+                ,{field: 'userAnsScore', sort: true, title: '猜射得分'}
+                ,{field: 'userSubScore', sort: true, title: '制谜得分'}
             ]]
         });
 
@@ -86,7 +86,7 @@
                     success : function(index, layero) {
                         table.render({
                             elem: '#userScoreDetailTable'
-                            ,url: '/util/userScoreDetailTable?userId=' + data.user_id //数据接口
+                            ,url: '/util/userScoreDetailTable?userId=' + data.userId //数据接口
                             ,page: true //开启分页
                             ,cols: [[ //表头
                                 {field: 'dm_author_name', title: '用户名', width:400, fixed: 'left'}
@@ -96,7 +96,7 @@
                         });
                         table.render({
                             elem: '#userCompetitionDetailTable'
-                            ,url: '/util/userCompetitionDetail?userId='+data.user_id + '&roundNo=' + data.agenda_round_no //数据接口
+                            ,url: '/util/userCompetitionDetail?userId='+data.userId + '&roundNo=' + data.agendaRoundNo //数据接口
                             ,page: true //开启分页
                             ,cols: [[ //表头
                                 {field: 'dm_mimian', title: '谜面', width:400, fixed: 'left'}

@@ -65,4 +65,5 @@ public interface MytyDengmiTempMapper {
 
     int userCompetitionDetailCount(ScoreQueryBean queryBean);
 
+    List<DengmiQueryBean> dengmiDetailTable(DengmiQueryBean dengmiQueryBean);
 }

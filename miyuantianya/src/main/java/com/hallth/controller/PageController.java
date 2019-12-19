@@ -78,6 +78,7 @@ public class PageController {
         } else {
             roundNo = agenda.getRoundNo() + 1;
         }
+        model.addAttribute("roundNo", roundNo);
         return "managerFunction/newAgenda";
     }
 

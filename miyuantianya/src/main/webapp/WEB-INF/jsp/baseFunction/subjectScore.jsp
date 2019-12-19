@@ -26,7 +26,7 @@
     </div>
 </form>
 <script type="text/html" id="authorTemplet">
-    <a lay-event="showDetail" class="layui-table-link">{{d.dm_author_name}}</a>
+    <a lay-event="showDetail" class="layui-table-link">{{d.user_name}}</a>
 </script>
 <div style="padding: 15px;">
     <table id="subjectScore" lay-filter="test"></table>
@@ -38,12 +38,12 @@
         //第一个实例
         table.render({
             elem: '#subjectScore'
-            ,url: '/answer/getSubjectScoreInfo' //数据接口
+            ,url: '/answer/getScoreInfo' //数据接口
             ,page: true //开启分页
             ,id: 'dengmiTableReload'
             ,cols: [[ //表头
-                {field: 'dm_author_name', title: '用户名',fixed: 'left', templet:'#authorTemplet'}
-                ,{field: 'user_subject_score', sort: true, title: '制谜得分'}
+                {field: 'user_name', title: '用户名',fixed: 'left', templet:'#authorTemplet'}
+                ,{field: 'userSubScore', sort: true, title: '制谜得分'}
             ]]
         });
 
@@ -84,7 +84,7 @@
                     success : function(index, layero) {
                         table.render({
                             elem: '#userScoreDetailTable'
-                            ,url: '/util/userScoreDetailTable?userId=' + data.dm_author_id //数据接口
+                            ,url: '/util/userScoreDetailTable?userId=' + data.userId //数据接口
                             ,page: true //开启分页
                             ,cols: [[ //表头
                                 {field: 'dm_author_name', title: '用户名', width:400, fixed: 'left'}
@@ -94,7 +94,7 @@
                         });
                         table.render({
                             elem: '#userCompetitionDetailTable'
-                            ,url: '/util/userCompetitionDetail?userId='+data.dm_author_id + '&roundNo=' + data.agenda_round_no //数据接口
+                            ,url: '/util/userCompetitionDetail?userId='+data.userId + '&roundNo=' + data.agendaRoundNo //数据接口
                             ,page: true //开启分页
                             ,cols: [[ //表头
                                 {field: 'dm_mimian', title: '谜面', width:400, fixed: 'left'}

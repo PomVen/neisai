@@ -107,7 +107,7 @@ public class AnswerController {
         return  map;
     }
 
-    @RequestMapping(value = "/getAnswerScoreInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/getScoreInfo", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> getAnswerScoreInfo(HttpServletRequest request, Model model) {
         MytyAgenda agenda = agendaService.getNewAgenda();
         int currentPage = Integer.parseInt(request.getParameter("page"));
@@ -118,7 +118,7 @@ public class AnswerController {
         } else {
             roundNo = Integer.parseInt(request.getParameter("roundNo"));
         }
-        Map<String, Object> map = answerService.getAnswerScoreInfo(roundNo, currentPage, pageSize);
+        Map<String, Object> map = answerService.getScoreInfo(roundNo, currentPage, pageSize);
         return map;
     }
 

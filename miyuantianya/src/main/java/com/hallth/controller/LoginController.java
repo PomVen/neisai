@@ -48,6 +48,15 @@ public class LoginController {
                           HttpServletRequest request, Model model){
         logger.info("用户【" + userName + "】登录校验");
         MytyAgenda agenda = agendaService.getNewAgenda();
+        if(agenda == null){
+            agenda = new MytyAgenda();
+            agenda.setRoundNo(1);
+            agenda.setEndTime(new Date());
+            agenda.setStartTime(new Date());
+            agenda.setDoTime(new Date());
+            agenda.setJudgeTime(new Date());
+            agenda.setInputCount(0);
+        }
         if(userName.trim().isEmpty() || userPassword.trim().isEmpty()){
             logger.info("用户名或密码为空");
             model.addAttribute("errMsg","用户名或密码为空！");

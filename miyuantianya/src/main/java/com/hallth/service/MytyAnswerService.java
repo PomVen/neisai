@@ -14,7 +14,7 @@ public interface MytyAnswerService {
 
     Map<String, Object> getJudgeCounts(MytyAgenda agenda);
 
-    Map<String, Object> getAnswerScoreInfo(int roundNo, int currentPage, int pageSize);
+    Map<String, Object> getScoreInfo(int roundNo, int currentPage, int pageSize);
 
     Map<String, Object> getSubjectScoreInfo(int roundNo, int currentPage, int pageSize);
 
@@ -23,4 +23,8 @@ public interface MytyAnswerService {
     Map<String, Object> getCountScoreInfo(int currentPage, int pageSize);
 
     Map<String, Object> userScoreDetailTable(String userId);
+
+    Map<String, Object> userAnswerDetailTable(String userId, int roundNo, int currentPage, int pageSize);
+
+    Map<String, Object> dengmiAnswerDetailTable(int dmId, int currentPage, int pageSize);
 }

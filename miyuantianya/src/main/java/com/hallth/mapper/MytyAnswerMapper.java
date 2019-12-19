@@ -1,9 +1,6 @@
 package com.hallth.mapper;
 
-import com.hallth.domain.MytyAgenda;
-import com.hallth.domain.MytyAnswer;
-import com.hallth.domain.SaikuangBean;
-import com.hallth.domain.ScoreQueryBean;
+import com.hallth.domain.*;
 
 import java.util.List;
 
@@ -52,4 +49,18 @@ public interface MytyAnswerMapper {
     int getCountScoreInfoCount(ScoreQueryBean scoreQueryBean);
 
     List<ScoreQueryBean> userScoreDetailTable(ScoreQueryBean scoreQueryBean);
+
+    List<ScoreQueryBean> userAnswerDetailTable(ScoreQueryBean scoreQueryBean);
+
+    int userAnswerDetailTableCount(ScoreQueryBean scoreQueryBean);
+
+    List<DengmiQueryBean> dengmiAnswerDetailTable(ScoreQueryBean dengmiQueryBean);
+
+    int dengmiAnswerDetailTableCount(ScoreQueryBean dengmiQueryBean);
+
+    List<ScoreQueryBean> getPlayerAnswerDetails(MytyLog log);
+
+    List<String> getAllPlayers(MytyLog log);
+
+    List<MytyScore> getUserSubjectScoreDetail(MytyLog log);
 }

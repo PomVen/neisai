@@ -1,13 +1,12 @@
 package com.hallth.service.impl;
 
-import com.hallth.domain.MytyAgenda;
-import com.hallth.domain.MytyAnswer;
-import com.hallth.domain.SaikuangBean;
-import com.hallth.domain.ScoreQueryBean;
+import com.hallth.domain.*;
 import com.hallth.mapper.MytyAnswerMapper;
+import com.hallth.mapper.MytyUserMapper;
 import com.hallth.service.MytyAgendaService;
 import com.hallth.service.MytyAnswerService;
 import com.hallth.utils.DatabaseUtils;
+import com.hallth.utils.UserScoreUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +21,11 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
 
     @Resource
     private MytyAnswerMapper answerMapper;
+    @Resource
+    private MytyUserMapper userMapper;
+
+    @Resource
+    private UserScoreUtils userScoreUtils;
 
     @Override
     public int saveMyAnswer(MytyAnswer answer, String flag) {
@@ -65,18 +69,18 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
     }
 
     @Override
-    public Map<String, Object> getAnswerScoreInfo(int roundNo, int currentPage, int pageSize) {
-        ScoreQueryBean scoreQueryBean = new ScoreQueryBean();
-        scoreQueryBean.setAgenda_round_no(roundNo);
+    public Map<String, Object> getScoreInfo(int roundNo, int currentPage, int pageSize) {
+        MytyScore scoreQueryBean = new MytyScore();
+        scoreQueryBean.setAgendaRoundNo(roundNo);
         scoreQueryBean.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
         scoreQueryBean.setPageSize(pageSize);
-        List<ScoreQueryBean> list = answerMapper.getAnswerScoreInfo(scoreQueryBean);
-        int total = answerMapper.getAnswerScoreInfoCount(scoreQueryBean);
+        List<MytyScore> userAnswerScoreList = userScoreUtils.getUserScoreList(scoreQueryBean);
+        int total = userScoreUtils.getUserScoreListCount(scoreQueryBean);
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
         map.put("msg", "");
         map.put("count",total);
-        map.put("data",list);
+        map.put("data",userAnswerScoreList);
         return map;
     }
 
@@ -131,27 +135,12 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
         scoreQueryBean.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
         scoreQueryBean.setPageSize(pageSize);
         List<ScoreQueryBean> list = answerMapper.getCountScoreInfo(scoreQueryBean);
-        List<ScoreQueryBean> listReturn = new ArrayList<>();
-        for(ScoreQueryBean item : list){
-            int ansScore = item.getUser_ans_score();
-            int subjectScore = item.getUser_subject_score();
-            int sumScore = item.getSum_score();
-            int times = item.getTimes();
-            if(ansScore > 0 || subjectScore > 0){
-                sumScore = ansScore + subjectScore;
-            }
-            item.setSum_score(sumScore);
-            item.setAvg_sum_score(sumScore/times);
-            item.setAvg_answer_score(ansScore/times);
-            item.setAvg_subject_score(subjectScore/times);
-            listReturn.add(item);
-        }
         int total = answerMapper.getCountScoreInfoCount(scoreQueryBean);
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
         map.put("msg", "");
         map.put("count",total);
-        map.put("data",listReturn);
+        map.put("data",list);
         return map;
     }
 
@@ -168,4 +157,36 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
         return map;
     }
 
+    @Override
+    public Map<String, Object> userAnswerDetailTable(String userId, int roundNo, int currentPage, int pageSize) {
+        ScoreQueryBean scoreQueryBean = new ScoreQueryBean();
+        scoreQueryBean.setUser_id(userId);
+        scoreQueryBean.setAgenda_round_no(roundNo);
+        scoreQueryBean.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
+        scoreQueryBean.setPageSize(pageSize);
+        List<ScoreQueryBean> list = answerMapper.userAnswerDetailTable(scoreQueryBean);
+        int total = answerMapper.userAnswerDetailTableCount(scoreQueryBean);
+        Map <String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", total);
+        map.put("data",list);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> dengmiAnswerDetailTable(int dmId, int currentPage, int pageSize) {
+        ScoreQueryBean param = new ScoreQueryBean();
+        param.setDm_id(dmId);
+        param.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
+        param.setPageSize(pageSize);
+        List<DengmiQueryBean> list = answerMapper.dengmiAnswerDetailTable(param);
+        int total = answerMapper.dengmiAnswerDetailTableCount(param);
+        Map <String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", total);
+        map.put("data",list);
+        return map;
+    }
 }
