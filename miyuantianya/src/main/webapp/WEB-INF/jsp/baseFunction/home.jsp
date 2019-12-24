@@ -168,7 +168,8 @@
                         <c:forEach items="${menu}" var="item" varStatus="status">
                             <c:if test="${item.menuType == 2}">
                                 <dd>
-                                    <a href="${item.menuPath}" target="_blank">${item.menuName}</a></dd>
+                                    <a href="${item.menuPath}" target="_blank">${item.menuName}</a>
+                                </dd>
                             </c:if>
                         </c:forEach>
                     </dl>

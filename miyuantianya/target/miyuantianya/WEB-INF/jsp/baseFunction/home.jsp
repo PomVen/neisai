@@ -105,16 +105,16 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> ${loginUserName}
+                    欢迎您， ${loginUserName}
                 </a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="">基本资料</a>
-                    </dd>
-                    <dd>
-                        <a href="">安全设置</a>
-                    </dd>
-                </dl>
+                <%--<dl class="layui-nav-child">--%>
+                    <%--<dd>--%>
+                        <%--<a href="">基本资料</a>--%>
+                    <%--</dd>--%>
+                    <%--<dd>--%>
+                        <%--<a href="">安全设置</a>--%>
+                    <%--</dd>--%>
+                <%--</dl>--%>
             </li>
             <li class="layui-nav-item">
                 <a href="/login/loginOut">退出登录</a>
@@ -168,7 +168,8 @@
                         <c:forEach items="${menu}" var="item" varStatus="status">
                             <c:if test="${item.menuType == 2}">
                                 <dd>
-                                    <a href="${item.menuPath}" target="_blank">${item.menuName}</a></dd>
+                                    <a href="${item.menuPath}" target="_blank">${item.menuName}</a>
+                                </dd>
                             </c:if>
                         </c:forEach>
                     </dl>

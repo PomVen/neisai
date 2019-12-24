@@ -41,6 +41,7 @@
             ,url: '/dengmiTemp/goodSubject' //数据接口
             ,page: true //开启分页
             ,id: 'dengmiTableReload'
+            ,toolbar: true
             ,cols: [[ //表头
                 {field: 'dm_mimian', title: '谜面',fixed: 'left', templet:'#mimianTemplet'}
                 ,{field: 'dm_mimu', title: '谜目'}

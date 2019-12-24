@@ -1418,13 +1418,13 @@
     </column>
     <column id="335" parent="288" name="user_score">
       <Position>3</Position>
-      <Comment>得分</Comment>
+      <Comment>得分,暂不使用该字段</Comment>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="336" parent="288" name="score_type">
       <Position>4</Position>
-      <Comment>得分类型：1-猜射得分；2-制谜得分</Comment>
+      <Comment>得分类型：1-猜射得分；2-制谜得分；暂不使用该字段</Comment>
       <DataType>varchar(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>

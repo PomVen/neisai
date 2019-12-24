@@ -43,6 +43,7 @@
             ,limits: [5,10,20,50]
             ,limit: 10
             ,id: 'dengmiTableReload'
+            ,toolbar: true
             ,cols: [[ //表头
                 {field: 'dm_mimian', title: '谜面',fixed: 'left', width: 500, templet:'#mimianTemplet'}
                 ,{field: 'dm_mimu', title: '谜目'}
