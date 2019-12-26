@@ -94,7 +94,7 @@
     <select id="getAllAgenda" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from myty_agenda
+        from myty_agenda where end_time &lt; current_timestamp
         order by round_no desc
     </select>
 </mapper>
