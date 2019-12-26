@@ -64,6 +64,11 @@ public class PageController {
         return "baseFunction/changePassword";
     }
 
+    @RequestMapping(value = "/toReadMe", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toReadMe(HttpServletRequest request, Model model) {
+        return "baseFunction/readMe";
+    }
+
     @RequestMapping(value = "/toAddUser", method = {RequestMethod.GET, RequestMethod.POST})
     public String toAddUser(HttpServletRequest request, Model model) {
         return "managerFunction/addUser";
