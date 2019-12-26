@@ -100,21 +100,18 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">谜苑天涯内赛系统</div>
+        <div class="layui-logo">
+            <img src="/img/logo3.png"/>
+        </div>
+        <div class="myty-top">
+            谜苑天涯灯谜联赛${saiji}赛季
+        </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     欢迎您， ${loginUserName}
                 </a>
-                <%--<dl class="layui-nav-child">--%>
-                    <%--<dd>--%>
-                        <%--<a href="">基本资料</a>--%>
-                    <%--</dd>--%>
-                    <%--<dd>--%>
-                        <%--<a href="">安全设置</a>--%>
-                    <%--</dd>--%>
-                <%--</dl>--%>
             </li>
             <li class="layui-nav-item">
                 <a href="/login/loginOut">退出登录</a>
@@ -122,7 +119,7 @@
         </ul>
     </div>
 
-    <div class="layui-side layui-bg-black">
+    <div class="layui-side layui-bg-orange">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
@@ -207,7 +204,7 @@
     </div>
     <div class="layui-footer">
         谜苑天涯灯谜联赛 Ver 1.0.0
-        Copyright 2008-2010谜苑天涯
+        Copyright 2008-${saiji}谜苑天涯
     </div>
 </div>
 <script src="/layui/layui.all.js"></script>

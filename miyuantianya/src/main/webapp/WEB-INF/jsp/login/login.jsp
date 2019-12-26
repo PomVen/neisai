@@ -84,6 +84,8 @@
         //选择id为time的标签
         var element = document.getElementById("showTime");
         element.innerHTML = year+"-"+month+"-"+day+" "+"星期"+week+"	"+hour+":"+minute+":"+second;
+        var element2 = document.getElementById("copyright");
+        element2.innerHTML = "Copyright 2008-" + year + "谜苑天涯";
     }
     show();
     //每间隔1000毫秒执行一次程序，保证时间动态显示

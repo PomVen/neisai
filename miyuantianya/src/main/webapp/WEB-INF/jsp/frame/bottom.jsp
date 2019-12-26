@@ -18,7 +18,7 @@
 <body>
 <div class="layui-row loginDiv">
     谜苑天涯灯谜联赛 Ver 1.0.0<br/>
-    Copyright 2008-2010谜苑天涯
+    <span id="copyright"></span>
 </div>
 </body>
 </html>

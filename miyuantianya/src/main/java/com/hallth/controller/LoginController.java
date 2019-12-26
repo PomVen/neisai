@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -98,6 +99,9 @@ public class LoginController {
             model.addAttribute("menu", menuList);
             model.addAttribute("actived", 0);
             model.addAttribute("loginUser",loginUser);
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            model.addAttribute("saiji",year);
             return "baseFunction/home";
         } else {
             logger.info("用户【" + userName + "】不存在或密码错误！");

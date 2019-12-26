@@ -5,11 +5,29 @@
     background-image: url('/img/top.jpg') ;
 }
 
+img{
+    width: 200px;
+    height: 60px;
+}
+
 .topWord{
     color: white;
     font-family: "Adobe 黑体 Std R";
     /*font-weight: bolder;*/
     /*font-size: larger;*/
+}
+
+.myty-top{
+    position: absolute;
+    left: 500px;
+    top: 0;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 40px;
+    font-family: 方正舒体;
+    font-weight: bolder;
 }
 
 .loginDiv{

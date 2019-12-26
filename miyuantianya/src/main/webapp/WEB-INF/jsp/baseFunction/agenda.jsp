@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="layui-row">
-    <div class="borderColor loginDiv height-300">
+    <div class="${!isLogined ? 'borderColor' : ''} loginDiv height-300">
         <div class="centerDiv height-120">
             <table class="layui-table">
                 <colgroup>
@@ -54,30 +54,8 @@
         </div>
     </div>
 </div>
-<jsp:include page="../frame/bottom.jsp"></jsp:include>
-<%--<div style="padding: 15px;">--%>
-    <%--<table id="demo" lay-filter="test"></table>--%>
-<%--</div>--%>
+<c:if test="${!isLogined}">
+    <jsp:include page="../frame/bottom.jsp"></jsp:include>
+</c:if>
 </body>
-<script>
-    // layui.use('table', function(){
-    //     var table = layui.table;
-    //
-    //     //第一个实例
-    //     table.render({
-    //         elem: '#demo'
-    //         ,url: '/dengmiTemp/toMySubject' //数据接口
-    //         ,page: true //开启分页
-    //         ,limits: [5,10,20,50]
-    //         ,limit: 10
-    //         ,cols: [[ //表头
-    //             {field: 'startTime', title: '开始时间', fixed: 'left'}
-    //             ,{field: 'doTime', title: '猜射时间'}
-    //             ,{field: 'judgeTime', title: '评分列中时间'}
-    //             ,{field: 'endTime', title: '结束时间'}
-    //         ]]
-    //     });
-    //
-    // });
-</script>
 </html>
