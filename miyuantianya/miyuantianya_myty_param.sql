@@ -1,0 +1,1 @@
+INSERT INTO miyuantianya.myty_param (param_id, param_value, param_desc) VALUES ('jiamishu', '15', '佳谜数');

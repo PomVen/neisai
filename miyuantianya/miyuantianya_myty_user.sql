@@ -1,0 +1,1 @@
+INSERT INTO miyuantianya.myty_user (user_id, user_name, user_role, user_password, is_developer) VALUES ('MYTY_001', 'root', '1', '123456', 0);
