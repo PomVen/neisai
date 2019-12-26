@@ -22,10 +22,6 @@
         <label class="layui-form-label">轮次</label>
         <div class="layui-input-block" style="width: 300px;">
             <select id="roundNo" name="roundNo" lay-verify="required" lay-filter="brickType">
-                <option value=""></option>
-                <option value="1">第1轮</option>
-                <option value="2">第2轮</option>
-                <option value="3">第3轮</option>
             </select>
         </div>
     </div>
@@ -38,6 +34,25 @@
 </script>
 </body>
 <script>
+    $.ajax({
+        url : "/agenda/getAllAgenda",
+        data : {},
+        dataType : "json",
+        success : function(resultData) {
+            $("#roundNo").empty();
+            if(resultData.code == 0){
+                console.log('轮次',resultData.data);
+                $("#roundNo").append(new Option("请选择轮次", ""));
+                $.each(resultData.data, function(index, item) {
+                    console.log('item',item);
+                    $('#roundNo').append(new Option("第" + item.roundNo + "轮", item.roundNo));
+                });
+            }else{
+                $("#roundNo").append(new Option("暂无数据", ""));
+            }
+            layui.form.render("select");
+        }
+    });
     layui.use(['table','form'], function(){
         var table = layui.table,
             form=layui.form;

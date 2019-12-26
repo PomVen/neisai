@@ -23,4 +23,9 @@ public class MytyAgendaServiceImpl implements MytyAgendaService {
     public int insert(MytyAgenda agenda) {
         return agendaMapper.insert(agenda);
     }
+
+    @Override
+    public List<MytyAgenda> getAllAgenda() {
+        return agendaMapper.getAllAgenda();
+    }
 }

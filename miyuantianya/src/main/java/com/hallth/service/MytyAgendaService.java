@@ -8,4 +8,7 @@ public interface MytyAgendaService {
     MytyAgenda getNewAgenda();
 
     int insert(MytyAgenda agenda);
+
+    List<MytyAgenda> getAllAgenda();
+
 }

@@ -91,5 +91,10 @@
         where round_no = #{roundNo,jdbcType=INTEGER}
     </select>
 
-
+    <select id="getAllAgenda" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from myty_agenda
+        order by round_no desc
+    </select>
 </mapper>

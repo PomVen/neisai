@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -55,6 +56,22 @@ public class AgendaController {
             map.put("result", false );
             map.put("msg", "时间转换失败！");
 
+        }
+        return map;
+    }
+
+    @RequestMapping(value="/getAllAgenda", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map getAllAgenda(HttpServletRequest request, Model model){
+        Map map = new HashMap<>();
+        List<MytyAgenda> list = agendaService.getAllAgenda();
+        if(list != null && list.size() > 0){
+            map.put("code", 0);
+            map.put("msg", "");
+            map.put("count", list.size());
+            map.put("data", list);
+        } else {
+            map.put("code", -1);
+            map.put("msg", "暂无数据");
         }
         return map;
     }
