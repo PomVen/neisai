@@ -2,6 +2,7 @@ package com.hallth.service.impl;
 
 import com.hallth.domain.*;
 import com.hallth.mapper.MytyDengmiTempMapper;
+import com.hallth.mapper.MytyParamMapper;
 import com.hallth.service.MytyDengmiTempService;
 import com.hallth.utils.DatabaseUtils;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
 
     @Resource
     private MytyDengmiTempMapper dengmiTempMapper;
+    @Resource
+    private MytyParamMapper paramMapper;
 
     @Override
     public List<MytyDengmiTemp> selectByUserId(String loginUserId) {
@@ -157,6 +160,7 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
     public Map<String, Object> getGoodSubjectByRoundNo(int roundNo) {
         DengmiQueryBean queryBean = new DengmiQueryBean();
         queryBean.setAgenda_round_no(roundNo);
+        queryBean.setPageSize(Integer.parseInt(paramMapper.getValue("jiamishu")));
         List<DengmiQueryBean> list = dengmiTempMapper.getGoodSubjectByRoundNo(queryBean);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 0);
