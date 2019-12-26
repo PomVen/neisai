@@ -27,4 +27,6 @@ public interface MytyMenuMapper {
     List<MytyUser> getAllMenuInfo(MytyMenu menu);
 
     int getAllMenuInfoCount(MytyMenu menu);
+
+    int deleteMenu(MytyMenu menu);
 }

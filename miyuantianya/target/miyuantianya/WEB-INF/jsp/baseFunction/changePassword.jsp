@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <input class="layui-btn layui-btn-fluid" type="button" value="新增" onclick="addUser()">
+            <input class="layui-btn layui-btn-fluid" type="button" value="修改" onclick="changePassword()">
         </div>
     </form>
 </div>
@@ -62,7 +62,7 @@
         });
     });
 
-    function addUser() {
+    function changePassword() {
         console.log($('#changePasswordForm').serialize());
         $.ajax({
             //几个参数需要注意一下
@@ -79,8 +79,11 @@
                     });
                 });
             },
-            error: function () {
-                alert("异常！");
+            error: function (response, ajaxOptions, thrownError) {
+                console.log("异常！");
+                console.log('response',response);
+                console.log('ajaxOptions',ajaxOptions);
+                console.log('thrownError',thrownError);
             }
         });
     }

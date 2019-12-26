@@ -47,4 +47,14 @@ public class MytyMenuServiceImpl implements MytyMenuService {
         map.put("data", list);
         return map;
     }
+
+    @Override
+    public int addMenu(MytyMenu menu) {
+        return menuMapper.insert(menu);
+    }
+
+    @Override
+    public int deleteMenu(MytyMenu menu) {
+        return menuMapper.deleteMenu(menu);
+    }
 }

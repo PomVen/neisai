@@ -20,10 +20,21 @@
 <div style="padding: 15px;">
     <table id="userManage" lay-filter="test"></table>
 </div>
+<script type="text/html" id="barDemo">
+    <input class="layui-btn layui-btn-fluid" type="button" value="重置密码">
+</script>
+<script type="text/html" id="setDev">
+    {{# if (d.isDeveloper == 1) { }}
+    <input type="checkbox" value="{{d.isDeveloper}}" lay-filter="setDeveloper" lay-skin="switch" lay-text="是|否" checked >
+    {{# } else { }}
+    <input type="checkbox" value="{{d.isDeveloper}}" lay-filter="setDeveloper" lay-skin="switch" lay-text="是|否" >
+    {{# } }}
+</script>
 </body>
 <script>
-    layui.use('table', function(){
-        var table = layui.table;
+    var isDev;
+    layui.use(['table','form'], function(){
+        var table = layui.table, form = layui.form;
 
         //第一个实例
         table.render({
@@ -35,7 +46,35 @@
             ,cols: [[ //表头
                 {field: 'userName', title: '用户名',fixed: 'left'}
                 ,{field: 'userRole', title: '用户角色'}
+                ,{field: 'isDeveloper', event: 'developer', title: '是否开发', templet: '#setDev'}
+                ,{title: '操作', event:'operation', fixed: 'right', toolbar: '#barDemo'}
             ]]
+        });
+
+        table.on('tool(test)',function (obj) {
+            var data = obj.data;
+            if(obj.event === 'developer'){
+                $.post("/user/asDeveloper", {userId: data.userId, isDeveloper: isDev ? 1 : 0}, function (data) {
+                    if (!data.result) {
+                        layer.msg(data.msg);
+                    }
+                });
+            } else if(obj.event === 'operation'){
+                var userName = data.userName;
+                $.post("/user/resetPassword", {userId: data.userId}, function (data) {
+                    if (!data.result) {
+                        layer.msg(data.msg);
+                    } else {
+                        layer.msg('用户【' + userName + '】的密码重置为123456', {
+                            time: 2000 //2s后自动关闭
+                        });
+                    }
+                });
+            }
+        });
+
+        form.on('switch(setDeveloper)', function(obj){
+            isDev = obj.elem.checked;
         });
     });
 </script>

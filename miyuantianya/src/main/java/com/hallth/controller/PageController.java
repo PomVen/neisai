@@ -69,6 +69,11 @@ public class PageController {
         return "managerFunction/addUser";
     }
 
+    @RequestMapping(value = "/toAddMenu", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toAddMenu(HttpServletRequest request, Model model) {
+        return "managerFunction/addMenu";
+    }
+
     @RequestMapping(value="/toNewAgenda", method = {RequestMethod.GET, RequestMethod.POST})
     public String toNewAgenda(HttpServletRequest request, Model model){
         MytyAgenda agenda = agendaService.getNewAgenda();

@@ -52,4 +52,20 @@ public class MytyUserServiceImpl implements MytyUserService {
         map.put("data", list);
         return map;
     }
+
+    @Override
+    public int resetPassword(String userId) {
+        MytyUser user = new MytyUser();
+        user.setUserId(userId);
+        user.setUserPassword("123456");
+        return userMapper.resetPassword(user);
+    }
+
+    @Override
+    public int asDeveloper(String userId, int flag) {
+        MytyUser user = new MytyUser();
+        user.setUserId(userId);
+        user.setIsDeveloper(flag);
+        return userMapper.asDeveloper(user);
+    }
 }

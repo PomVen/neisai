@@ -10,4 +10,8 @@ public interface MytyMenuService {
     List<MytyMenu> getMenuListByUserRole(MytyMenu menu);
 
     Map getAllMenu(int currentPage, int pageSize);
+
+    int addMenu(MytyMenu menu);
+
+    int deleteMenu(MytyMenu menu);
 }

@@ -15,4 +15,7 @@ public interface MytyUserService {
 
     Map getAllUserInfo(int currentPage, int pageSize);
 
+    int resetPassword(String userId);
+
+    int asDeveloper(String userId, int flag);
 }

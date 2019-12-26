@@ -20,6 +20,13 @@
 <div style="padding: 15px;">
     <table id="menuManage" lay-filter="test"></table>
 </div>
+<script type="text/html" id="barDemo">
+    {{#  if(d.menuType == 2){ }}
+    <input class="layui-btn layui-btn-fluid" type="button" value="删除">
+    {{#  } else { }}
+    <input class="layui-btn layui-btn-fluid" type="button" value="删除" disabled>
+    {{#  } }}
+</script>
 </body>
 <script>
     layui.use('table', function(){
@@ -32,11 +39,34 @@
             ,page: true //开启分页
             ,limits: [5,10,20,50]
             ,limit: 10
+            ,id:'menuTable'
             ,cols: [[ //表头
                 {field: 'menuName', title: '菜单名',fixed: 'left'}
                 ,{field: 'menuPath', title: '菜单路径'}
                 ,{field: 'menuRole', title: '菜单权限'}
+                ,{title: '操作', event:'deleteMenu', fixed: 'right', toolbar: '#barDemo'}
             ]]
+        });
+
+        table.on('tool(test)',function (obj) {
+            var data = obj.data;
+            if(obj.event === 'deleteMenu'){
+                var menuName = data.menuName;
+                $.post("/menu/deleteMenu", {menuId: data.menuId}, function (data) {
+                    if (!data.status) {
+                        layer.msg(data.msg);
+                    } else {
+                        table.reload('menuTable', {
+                            page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                        });
+                        layer.msg('友情链接【' + menuName + '】已删除', {
+                            time: 2000 //2s后自动关闭
+                        });
+                    }
+                });
+            }
         });
     });
 </script>

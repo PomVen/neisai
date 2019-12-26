@@ -162,32 +162,36 @@
                         </c:forEach>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">友情链接</a>
-                    <dl class="layui-nav-child">
-                        <c:forEach items="${menu}" var="item" varStatus="status">
-                            <c:if test="${item.menuType == 2}">
-                                <dd>
-                                    <a href="${item.menuPath}" target="_blank">${item.menuName}</a>
-                                </dd>
-                            </c:if>
-                        </c:forEach>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">系统说明</a>
-                    <dl class="layui-nav-child">
-                        <c:forEach items="${menu}" var="item" varStatus="status">
-                            <c:if test="${item.menuType == 3}">
-                                <dd>
-                                    <a data-url="${item.menuPath}" data-id="${item.menuId}"
-                                       data-title="${item.menuName}" href="#" class="site-demo-active"
-                                       data-type="tabAdd">${item.menuName}</a>
-                                </dd>
-                            </c:if>
-                        </c:forEach>
-                    </dl>
-                </li>
+                <c:if test="${loginUser.userRole == 0}">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">友情链接</a>
+                        <dl class="layui-nav-child">
+                            <c:forEach items="${menu}" var="item" varStatus="status">
+                                <c:if test="${item.menuType == 2}">
+                                    <dd>
+                                        <a href="${item.menuPath}" target="_blank">${item.menuName}</a>
+                                    </dd>
+                                </c:if>
+                            </c:forEach>
+                        </dl>
+                    </li>
+                </c:if>
+                <c:if test="${loginUser.isDeveloper == 1}">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">系统说明</a>
+                        <dl class="layui-nav-child">
+                            <c:forEach items="${menu}" var="item" varStatus="status">
+                                <c:if test="${item.menuType == 3}">
+                                    <dd>
+                                        <a data-url="${item.menuPath}" data-id="${item.menuId}"
+                                           data-title="${item.menuName}" href="#" class="site-demo-active"
+                                           data-type="tabAdd">${item.menuName}</a>
+                                    </dd>
+                                </c:if>
+                            </c:forEach>
+                        </dl>
+                    </li>
+                </c:if>
             </ul>
         </div>
     </div>
@@ -201,13 +205,6 @@
         <div class="layui-tab-content">
         </div>
     </div>
-    <%--<div class="layui-body">--%>
-    <%--<!-- 内容主体区域 -->--%>
-    <%--<div style="padding: 15px;">--%>
-    <%--<table id="demo" lay-filter="test"></table>--%>
-    <%--</div>--%>
-    <%--<iframe frameborder="0" scrolling="yes" style="width:100%;height:100%" src="" id="aa"></iframe>--%>
-    <%--</div>--%>
     <div class="layui-footer">
         谜苑天涯灯谜联赛 Ver 1.0.0
         Copyright 2008-2010谜苑天涯
@@ -230,7 +227,7 @@
                     title: name,
                     content: '<iframe data-frameid="' + id + '" scrolling="auto" frameborder="0" src="' + url + '" style="width:100%;height:99%;"></iframe>',
                     id: id //规定好的id
-                })
+                });
                 // CustomRightClick(id); //给tab绑定右击事件
                 FrameWH();  //计算ifram层的大小
             },

@@ -17,14 +17,7 @@ public class SeqCreate {
         MytySeq seq = new MytySeq();
         seq.setSeqName("user_id");
         int nextUserId = seqService.getNextId(seq);
-        String userIdStr = "MYTY_";
-        if(nextUserId < 10){
-            userIdStr = userIdStr + "00" + nextUserId;
-        } else if(nextUserId < 100 && nextUserId >= 10){
-            userIdStr = userIdStr + "0" + nextUserId;
-        } else {
-            userIdStr = userIdStr + nextUserId;
-        }
+        String userIdStr = initId(nextUserId, "MYTY_");
         seq.setNextId(nextUserId+1);
         seqService.updateNextId(seq);
         return userIdStr;
@@ -37,5 +30,26 @@ public class SeqCreate {
         seq.setNextId(nextUserId+1);
         seqService.updateNextId(seq);
         return nextUserId;
+    }
+
+    public String getNextMenuId() {
+        MytySeq seq = new MytySeq();
+        seq.setSeqName("menu_id");
+        int nextMenuId = seqService.getNextId(seq);
+        String menuIdStr = initId(nextMenuId, "menu_");
+        seq.setNextId(nextMenuId+1);
+        seqService.updateNextId(seq);
+        return menuIdStr;
+    }
+
+    private String initId(int id, String idStr){
+        if(id < 10){
+            idStr = idStr + "00" + id;
+        } else if(id < 100 && id >= 10){
+            idStr = idStr + "0" + id;
+        } else {
+            idStr = idStr + id;
+        }
+        return idStr;
     }
 }

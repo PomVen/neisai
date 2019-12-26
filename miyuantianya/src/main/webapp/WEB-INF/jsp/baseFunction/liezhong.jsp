@@ -20,10 +20,20 @@
 <div style="padding: 15px;">
     <table id="liezhong" lay-filter="test"></table>
 </div>
+
+<script type="text/html" id="switchTpl">
+    {{# if (d.is_right == 1) { }}
+    <input type="checkbox" name="{{d.dm_temp_id}}" value="{{d.is_right}}" lay-filter="setLiezhong" lay-skin="switch" lay-text="列中|不中" checked >
+    {{# } else { }}
+    <input type="checkbox" name="{{d.dm_temp_id}}" value="{{d.is_right}}" lay-filter="setLiezhong" lay-skin="switch" lay-text="列中|不中" >
+    {{# } }}
+</script>
 </body>
 <script>
-    layui.use('table', function(){
-        var table = layui.table;
+    var liezhongOrNot;
+    layui.use(['table','form'], function(){
+        var table = layui.table,
+            form = layui.form;
         //第一个实例
         table.render({
             elem: '#liezhong'
@@ -36,19 +46,23 @@
                 ,{field: 'dm_mimu', title: '谜目'}
                 ,{field: 'dm_midi', title: '谜底'}
                 ,{field: 'user_answer', title: '异底'}
-                ,{field: 'is_right',edit: 'text', title: '列中'}
+                ,{field: 'is_right',event:'liezhong', title: '列中', templet: '#switchTpl'}
             ]]
         });
 
-        table.on('edit(test)', function (obj) { //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
-            var value = obj.value //得到修改后的值
-                , data = obj.data //得到所在行所有键值
-                , field = obj.field; //得到字段
-            $.post("/answer/saveIsright", {dmTempId: data.dm_temp_id, isRight: value, userId: data.user_id}, function (data) {
-                if (!data.result) {
-                    layer.msg(data.msg);
-                }
-            });
+        table.on('tool(test)',function (obj) {
+            var data = obj.data;
+            if(obj.event === 'liezhong'){
+                $.post("/answer/saveIsright", {dmTempId: data.dm_temp_id, isRight: liezhongOrNot ? 1 : 0, userId: data.user_id}, function (data) {
+                    if (!data.result) {
+                        layer.msg(data.msg);
+                    }
+                });
+            }
+        });
+
+        form.on('switch(setLiezhong)', function(obj){
+            liezhongOrNot = obj.elem.checked;
         });
     });
 </script>

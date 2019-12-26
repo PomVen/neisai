@@ -62,4 +62,8 @@ public interface MytyUserMapper {
     List<MytyUser> getAllUserInfo(MytyUser user);
 
     int getAllUserInfoCount(MytyUser user);
+
+    int resetPassword(MytyUser user);
+
+    int asDeveloper(MytyUser user);
 }

@@ -110,4 +110,7 @@
         from myty_menu
     </select>
 
+    <delete id="deleteMenu" parameterType="com.hallth.domain.MytyMenu">
+        delete from myty_menu where menu_id = #{menuId,jdbcType=VARCHAR}
+    </delete>
 </mapper>

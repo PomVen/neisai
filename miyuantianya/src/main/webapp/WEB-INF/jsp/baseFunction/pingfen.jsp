@@ -48,11 +48,18 @@
             var value = obj.value //得到修改后的值
                 , data = obj.data //得到所在行所有键值
                 , field = obj.field; //得到字段
-            $.post("/answer/saveMyJudge", {dmTempId: data.dm_temp_id, judge: value}, function (data) {
-                if (!data.result) {
-                    layer.msg(data.msg);
-                }
-            });
+            if(value > 10 || value < 0){
+                layer.msg('请输入0-10的评分', {
+                    time: 2000, //2s后自动关闭
+                    btn: ['明白了']
+                });
+            } else {
+                $.post("/answer/saveMyJudge", {dmTempId: data.dm_temp_id, judge: value}, function (data) {
+                    if (!data.result) {
+                        layer.msg(data.msg);
+                    }
+                });
+            }
         });
     });
 </script>

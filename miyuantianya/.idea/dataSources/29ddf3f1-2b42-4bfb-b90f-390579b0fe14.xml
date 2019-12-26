@@ -1154,8 +1154,7 @@
     </column>
     <column id="293" parent="281" name="start_time">
       <Position>2</Position>
-      <Comment>开始时间
-</Comment>
+      <Comment>开始时间</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
@@ -1486,31 +1485,38 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="345" parent="290" name="user_id_UNIQUE">
+    <column id="345" parent="290" name="is_developer">
+      <Position>5</Position>
+      <Comment>是否开发者：0-否；1-是</Comment>
+      <DataType>int(11)|0s</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="346" parent="290" name="user_id_UNIQUE">
       <ColNames>user_id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="346" parent="290" name="PRIMARY">
+    <key id="347" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="347" parent="290" name="user_id_UNIQUE">
+    <key id="348" parent="290" name="user_id_UNIQUE">
       <ColNames>user_id</ColNames>
       <UnderlyingIndexName>user_id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="348" parent="291" name="id">
+    <column id="349" parent="291" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="349" parent="291" name="name">
+    <column id="350" parent="291" name="name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="350" parent="291" name="age">
+    <column id="351" parent="291" name="age">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>

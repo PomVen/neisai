@@ -90,9 +90,14 @@ public class LoginController {
                 mytyMenu.setMenuOrder("0000");
             }
             List<MytyMenu> menuList = menuService.getMenuListByUserRole(mytyMenu);
+            if(loginUser.getIsDeveloper() == 1){
+                mytyMenu.setMenuRole("2");
+                menuList.addAll(menuService.getMenuListByUserRole(mytyMenu)); // 获取开发者菜单
+            }
             session.setAttribute("userMenuList", menuList);
             model.addAttribute("menu", menuList);
             model.addAttribute("actived", 0);
+            model.addAttribute("loginUser",loginUser);
             return "baseFunction/home";
         } else {
             logger.info("用户【" + userName + "】不存在或密码错误！");

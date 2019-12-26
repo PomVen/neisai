@@ -18,11 +18,16 @@
 </head>
 <body>
 <form class="layui-form" action="">
-    <div class="layui-form-item" style="margin-left:350px;">
-        <div class="layui-inline">
-            <input type="text" id="roundNo" name="roundNo" required lay-verify="required" placeholder="轮次" autocomplete="off" class="layui-input">
+    <div class="layui-form-item  layui-inline">
+        <label class="layui-form-label">轮次</label>
+        <div class="layui-input-block" style="width: 300px;">
+            <select id="roundNo" name="roundNo" lay-verify="required" lay-filter="brickType">
+                <option value=""></option>
+                <option value="1">第1轮</option>
+                <option value="2">第2轮</option>
+                <option value="3">第3轮</option>
+            </select>
         </div>
-        <button class="layui-btn layui-btn-normal" onclick="return false;" data-type="reload" id="selectbyCondition" >搜索</button>
     </div>
 </form>
 <div style="padding: 15px;">
@@ -33,8 +38,9 @@
     <a lay-event="showDetail" class="layui-table-link">{{d.dm_mimian}}</a>
 </script>
 <script>
-    layui.use('table', function(){
-        var table = layui.table;
+    layui.use(['table','form'], function(){
+        var table = layui.table,
+            form = layui.form;
         //第一个实例
         table.render({
             elem: '#allSubject'
@@ -55,27 +61,19 @@
             ]]
         });
 
-        //根据条件查询表格数据重新加载
-        var $ = layui.$, active = {
-            reload: function(){
-                //获取用户名
-                var demoReload = $('#roundNo');
-                //执行重载
-                table.reload('dengmiTableReload', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                    //根据条件查询
-                    ,where: {
-                        roundNo:demoReload.val()
-                    }
-                });
-            }
-        };
-        //点击搜索按钮根据用户名称查询
-        $('#selectbyCondition').on('click', function(){
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
+        form.on('select(brickType)', function(data){
+            console.log(data);
+            var demoReload = $('#roundNo');
+            //执行重载
+            table.reload('dengmiTableReload', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                //根据条件查询
+                ,where: {
+                    roundNo:demoReload.val()
+                }
+            });
         });
 
         table.on('tool(test)', function(obj){
