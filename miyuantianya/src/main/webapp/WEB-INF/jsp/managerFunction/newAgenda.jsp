@@ -76,21 +76,25 @@
         laydate.render({
             elem: '#startTime'
             , type: 'datetime'
+            , calendar: true
         });
         //日期时间选择器
         laydate.render({
             elem: '#doTime'
             , type: 'datetime'
+            , calendar: true
         });
         //日期时间选择器
         laydate.render({
             elem: '#judgeTime'
             , type: 'datetime'
+            , calendar: true
         });
         //日期时间选择器
         laydate.render({
             elem: '#endTime'
             , type: 'datetime'
+            , calendar: true
         });
     });
 
