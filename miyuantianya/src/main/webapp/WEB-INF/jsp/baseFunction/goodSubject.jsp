@@ -60,7 +60,7 @@
         table.render({
             elem: '#goodSubject'
             ,url: '/dengmiTemp/goodSubject' //数据接口
-            ,page: true //开启分页
+            ,page: false //开启分页
             ,id: 'dengmiTableReload'
             ,toolbar: true
             ,cols: [[ //表头
@@ -80,11 +80,8 @@
             var demoReload = $('#roundNo');
             //执行重载
             table.reload('dengmiTableReload', {
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                }
                 //根据条件查询
-                ,where: {
+                where: {
                     roundNo:demoReload.val()
                 }
             });

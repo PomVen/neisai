@@ -258,7 +258,7 @@
         where dm.agenda_round_no = #{agenda_round_no}
         group by dm.dm_temp_id
         order by user_judge desc
-        limit 0, 10
+        limit 0, 15
     </select>
     <select id="getGoodSubjectByRoundNoCount" parameterType="com.hallth.domain.DengmiQueryBean" resultType="java.lang.Integer">
         select

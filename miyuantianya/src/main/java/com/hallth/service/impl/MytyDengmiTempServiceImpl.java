@@ -158,11 +158,10 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         DengmiQueryBean queryBean = new DengmiQueryBean();
         queryBean.setAgenda_round_no(roundNo);
         List<DengmiQueryBean> list = dengmiTempMapper.getGoodSubjectByRoundNo(queryBean);
-        int total = dengmiTempMapper.getGoodSubjectByRoundNoCount(queryBean);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count",total);
+        map.put("count",list.size());
         map.put("data",list);
         return map;
     }
