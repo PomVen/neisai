@@ -157,7 +157,7 @@ public class MytyDengmiTempController {
         int pageSize = Integer.parseInt(request.getParameter("limit"));
         int roundNo = agenda.getRoundNo();
         if(request.getParameter("roundNo") == null || request.getParameter("roundNo").equals("")){
-            roundNo = agenda.getRoundNo();
+            roundNo = agenda.getEndTime().getTime() > System.currentTimeMillis() ? (agenda.getRoundNo() - 1) : agenda.getRoundNo();
         } else {
             roundNo = Integer.parseInt(request.getParameter("roundNo"));
         }
@@ -170,7 +170,7 @@ public class MytyDengmiTempController {
         MytyAgenda agenda = agendaService.getNewAgenda();
         int roundNo = agenda.getRoundNo();
         if(request.getParameter("roundNo") == null || request.getParameter("roundNo").equals("")){
-            roundNo = agenda.getRoundNo();
+            roundNo = agenda.getEndTime().getTime() > System.currentTimeMillis() ? (agenda.getRoundNo() - 1) : agenda.getRoundNo();
         } else {
             roundNo = Integer.parseInt(request.getParameter("roundNo"));
         }

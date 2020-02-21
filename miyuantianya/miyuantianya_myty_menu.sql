@@ -25,3 +25,4 @@ INSERT INTO miyuantianya.myty_menu (menu_id, menu_name, menu_path, menu_role, me
 INSERT INTO miyuantianya.myty_menu (menu_id, menu_name, menu_path, menu_role, menu_type, parent_menu, has_children, menu_order) VALUES ('menu_025', '新增友情链接', '/page/toAddMenu', '1', 1, '0', 0, '0000');
 INSERT INTO miyuantianya.myty_menu (menu_id, menu_name, menu_path, menu_role, menu_type, parent_menu, has_children, menu_order) VALUES ('menu_026', '参数管理', '/page/toParamManage', '1', 1, '0', 0, '0000');
 INSERT INTO miyuantianya.myty_menu (menu_id, menu_name, menu_path, menu_role, menu_type, parent_menu, has_children, menu_order) VALUES ('menu_027', '新增参数', '/page/toAddParam', '1', 1, '0', 0, '0000');
+INSERT INTO miyuantianya.myty_menu (menu_id, menu_name, menu_path, menu_role, menu_type, parent_menu, has_children, menu_order) VALUES ('menu_028', '使用帮助', '/page/toReadMe', '0', 1, '0', 0, '0000');
